@@ -98,14 +98,14 @@
       "claim": "Delta-soundness bound (Theorem 2): explicit bound relating solver delta to eigenvalue gap",
       "evidence_type": "theorem",
       "evidence": "Proof in tool_paper.tex. Implementation in smt/delta_bound.py. Verified by Z3 in smt/z3_verifier.py. Unit-tested.",
-      "source_files": ["phase_cartographer/smt/delta_bound.py", "phase_cartographer/smt/z3_verifier.py", "tool_paper.tex"],
+      "source_files": ["phase_cartographer/smt/delta_bound.py", "phase_cartographer/smt/z3_verifier.py", "docs/paper/tool_paper.tex"],
       "reproducible": true
     },
     {
       "claim": "Certificate composition soundness (Theorem 3)",
       "evidence_type": "theorem",
       "evidence": "Proof in tool_paper.tex. Implementation in atlas/composition.py. Tested in tests/test_composition.py.",
-      "source_files": ["phase_cartographer/atlas/composition.py", "tests/test_composition.py", "tool_paper.tex"],
+      "source_files": ["phase_cartographer/atlas/composition.py", "tests/test_composition.py", "docs/paper/tool_paper.tex"],
       "reproducible": true
     },
     {

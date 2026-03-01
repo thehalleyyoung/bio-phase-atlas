@@ -92,7 +92,7 @@ entry = trace.add_entry(
 ### `atlas.confidence`
 ```python
 from phase_cartographer.atlas.confidence import (
-    compute_cell_confidence, compute_atlas_confidence,
+    compute_cell_confidence, atlas_confidence_summary,
     eigenvalue_gap_confidence, krawczyk_margin_confidence,
 )
 # Cell-level confidence score (0 to 1)
@@ -100,7 +100,7 @@ conf = compute_cell_confidence(eigenvalue_gap=0.5, contraction_factor=0.7)
 # conf.composite: float, conf.eigenvalue_gap_conf, conf.krawczyk_margin_conf
 
 # Atlas-level summary
-summary = compute_atlas_confidence(cells)
+summary = atlas_confidence_summary(cells)
 # summary.mean_confidence, summary.min_confidence, summary.near_bifurcation_count
 ```
 

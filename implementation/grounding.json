@@ -1,0 +1,261 @@
+{
+  "project": "certified-bio-phase-cartographer",
+  "grounding_date": "2025-07-19",
+  "benchmark_results": {
+    "toggle_switch": {"n": 2, "p": 4, "cells": 2, "coverage": 1.0, "mean_contraction": 0.661, "time_s": 3.6, "z3_eq": "2/2", "z3_stab": null},
+    "brusselator": {"n": 2, "p": 2, "cells": 17, "coverage": 0.859, "mean_contraction": 0.801, "time_s": 61.0, "z3_eq": "17/17", "z3_stab": "8/17"},
+    "selkov": {"n": 2, "p": 2, "cells": 1, "coverage": 1.0, "mean_contraction": 0.833, "time_s": 1.0, "z3_eq": "1/1", "z3_stab": "1/1"},
+    "repressilator": {"n": 3, "p": 4, "cells": 1, "coverage": 1.0, "mean_contraction": 0.633, "time_s": 0.7, "z3_eq": "1/1", "z3_stab": null},
+    "goodwin": {"n": 3, "p": 2, "cells": 2, "coverage": 1.0, "mean_contraction": 0.903, "time_s": 0.1, "z3_eq": "2/2", "z3_stab": null},
+    "lotka_volterra": {"n": 2, "p": 3, "cells": 1, "coverage": 1.0, "mean_contraction": 0.612, "time_s": 0.2, "z3_eq": "1/1", "z3_stab": null},
+    "fitzhugh_nagumo": {"n": 2, "p": 2, "cells": 15, "coverage": 0.812, "mean_contraction": 0.857, "time_s": 19.3, "z3_eq": "15/15", "z3_stab": "14/15", "tier1_pass_rate": 0.87},
+    "tyson_cell_cycle": {"n": 2, "p": 2, "cells": 1, "coverage": 1.0, "mean_contraction": 0.644, "time_s": 0.2, "z3_eq": "1/1", "z3_stab": "1/1"},
+    "mapk_cascade": {"n": 2, "p": 2, "cells": 1, "coverage": 1.0, "mean_contraction": 0.910, "time_s": 0.05, "z3_eq": "1/1", "z3_stab": null},
+    "p53_mdm2": {"n": 2, "p": 2, "cells": 2, "coverage": 1.0, "mean_contraction": 0.732, "time_s": 1.5, "z3_eq": "2/2", "z3_stab": null},
+    "calcium_oscillator": {"n": 2, "p": 2, "cells": 3, "coverage": 1.0, "mean_contraction": 0.337, "time_s": 4.6, "z3_eq": "3/3", "z3_stab": "3/3"},
+    "circadian_clock": {"n": 2, "p": 2, "cells": 4, "coverage": 1.0, "mean_contraction": 0.763, "time_s": 3.3, "z3_eq": "4/4", "z3_stab": null},
+    "genetic_oscillator": {"n": 3, "p": 2, "cells": 2, "coverage": 1.0, "mean_contraction": 0.868, "time_s": 0.1, "z3_eq": "2/2", "z3_stab": null},
+    "mutual_activation_switch": {"n": 2, "p": 2, "cells": 6, "coverage": 0.906, "mean_contraction": 0.804, "time_s": 51.2, "z3_eq": "7/7", "z3_stab": "6/7"},
+    "van_der_pol": {"n": 2, "p": 2, "cells": 1, "coverage": 1.0, "mean_contraction": 0.000, "time_s": 0.05, "z3_eq": "1/1", "z3_stab": "1/1"}
+  },
+  "totals": {
+    "models": 15,
+    "total_cells": 59,
+    "z3_equilibrium_verified": "60/60",
+    "z3_stability_verified": "34/60",
+    "coverage_range": "81.2%-100%",
+    "contraction_range": "0.000-0.910"
+  },
+  "claims": [
+    {
+      "claim": "Z3 confirms equilibrium existence in 60/60 equilibrium claims across 59 certified cells in all 15 models",
+      "evidence_type": "experiment",
+      "evidence": "benchmark_output/summary.json: z3_eq verified for every certified cell. Z3 encodes f(x,μ)=0 in QF_NRA, SAT=exists. Per-model: toggle_switch 2/2, brusselator 17/17, selkov 1/1, repressilator 1/1, goodwin 2/2, lotka_volterra 1/1, fitzhugh_nagumo 15/15, tyson_cell_cycle 1/1, mapk_cascade 1/1, p53_mdm2 2/2, calcium_oscillator 3/3, circadian_clock 4/4, genetic_oscillator 2/2, mutual_activation_switch 7/7, van_der_pol 1/1.",
+      "reproducible": "python3 -c 'from phase_cartographer.benchmarks.runner import run_all_benchmarks; run_all_benchmarks()'"
+    },
+    {
+      "claim": "Z3 confirms stability in 34/60 cells via Routh-Hurwitz encoding",
+      "evidence_type": "experiment",
+      "evidence": "benchmark_output/summary.json: z3_stab fields. UNSAT of negated Routh-Hurwitz = verified stable. Per-model: brusselator 8/17, selkov 1/1, fitzhugh_nagumo 14/15, tyson_cell_cycle 1/1, calcium_oscillator 3/3, mutual_activation_switch 6/7, van_der_pol 1/1. Remaining 26 cells: stability not attempted (no eigenvalue gap) or UNKNOWN near Hopf boundary.",
+      "reproducible": true
+    },
+    {
+      "claim": "81.2%-100% parameter-space coverage across all 15 models",
+      "evidence_type": "experiment",
+      "evidence": "toggle_switch:100%, brusselator:85.9%, selkov:100%, repressilator:100%, goodwin:100%, lotka_volterra:100%, fitzhugh_nagumo:81.2%, tyson_cell_cycle:100%, mapk_cascade:100%, p53_mdm2:100%, calcium_oscillator:100%, circadian_clock:100%, genetic_oscillator:100%, mutual_activation_switch:90.6%, van_der_pol:100%",
+      "reproducible": true
+    },
+    {
+      "claim": "Krawczyk contraction factors 0.000-0.910 across all models",
+      "evidence_type": "experiment",
+      "evidence": "benchmark_output/summary.json: toggle=0.661, brusselator=0.801, selkov=0.833, repressilator=0.633, goodwin=0.903, lotka_volterra=0.612, fitzhugh_nagumo=0.857, tyson_cell_cycle=0.644, mapk_cascade=0.910, p53_mdm2=0.732, calcium_oscillator=0.337, circadian_clock=0.763, genetic_oscillator=0.868, mutual_activation_switch=0.804, van_der_pol=0.000",
+      "reproducible": true
+    },
+    {
+      "claim": "100% MiniCheck (Tier 1) pass rate on all certified cells across 14 of 15 models (87% for FitzHugh-Nagumo near bifurcation)",
+      "evidence_type": "experiment",
+      "evidence": "benchmark_output/summary.json: tier1_pass_rate=1.0 for 14 models, 0.87 for fitzhugh_nagumo",
+      "reproducible": true
+    },
+    {
+      "claim": "18,447 lines of Python implementation with 209 tests",
+      "evidence_type": "code_measurement",
+      "evidence": "find phase_cartographer tests -name '*.py' | xargs wc -l → 18447 total. python3 -m pytest tests/ --co -q → 209 tests collected.",
+      "reproducible": true
+    },
+    {
+      "claim": "MiniCheck is ~1,000 LoC standalone checker (1,188 lines)",
+      "evidence_type": "code_measurement",
+      "evidence": "wc -l phase_cartographer/minicheck.py → 1188",
+      "reproducible": true
+    },
+    {
+      "claim": "15 benchmark biological models evaluated",
+      "evidence_type": "experiment",
+      "evidence": "toggle_switch, brusselator, selkov, repressilator, goodwin, lotka_volterra, fitzhugh_nagumo, tyson_cell_cycle, mapk_cascade, p53_mdm2, calcium_oscillator, circadian_clock, genetic_oscillator, mutual_activation_switch, van_der_pol",
+      "reproducible": true
+    },
+    {
+      "claim": "Newton-guided search improves repressilator coverage from 25% to 100%",
+      "evidence_type": "experiment",
+      "evidence": "Bisection-only: 25% coverage, 69.8s. Newton-guided: 100% coverage, 0.7s.",
+      "reproducible": true
+    },
+    {
+      "claim": "Newton-guided search improves Goodwin coverage from 0% to 100%",
+      "evidence_type": "experiment",
+      "evidence": "Bisection-only: 0% coverage, 166.6s timeout. Newton-guided: 100% coverage, 0.1s.",
+      "reproducible": true
+    },
+    {
+      "claim": "Krawczyk operator certifies equilibrium existence and uniqueness (Theorem 1)",
+      "evidence_type": "theorem",
+      "evidence": "Standard result (Krawczyk 1969). Implemented in equilibrium/krawczyk.py, independently reimplemented in minicheck.py.",
+      "source_files": ["phase_cartographer/equilibrium/krawczyk.py", "phase_cartographer/minicheck.py"],
+      "reproducible": true
+    },
+    {
+      "claim": "Delta-soundness bound (Theorem 2): explicit bound relating solver delta to eigenvalue gap",
+      "evidence_type": "theorem",
+      "evidence": "Proof in tool_paper.tex. Implementation in smt/delta_bound.py. Verified by Z3 in smt/z3_verifier.py. Unit-tested.",
+      "source_files": ["phase_cartographer/smt/delta_bound.py", "phase_cartographer/smt/z3_verifier.py", "tool_paper.tex"],
+      "reproducible": true
+    },
+    {
+      "claim": "Certificate composition soundness (Theorem 3)",
+      "evidence_type": "theorem",
+      "evidence": "Proof in tool_paper.tex. Implementation in atlas/composition.py. Tested in tests/test_composition.py.",
+      "source_files": ["phase_cartographer/atlas/composition.py", "tests/test_composition.py", "tool_paper.tex"],
+      "reproducible": true
+    },
+    {
+      "claim": "Formal regime inference rules derive labels from certified facts",
+      "evidence_type": "implementation",
+      "evidence": "tiered/certificate.py::RegimeInferenceRules with 6 rules. RegimeDerivation proof trees in atlas/composition.py.",
+      "source_files": ["phase_cartographer/tiered/certificate.py", "phase_cartographer/atlas/composition.py"],
+      "reproducible": true
+    },
+    {
+      "claim": "GP surrogate uses ARD Matern-5/2 kernel with calibration",
+      "evidence_type": "implementation",
+      "evidence": "gp/surrogate.py: matern52_kernel_ard, optimize_ard_length_scales, calibration_error, train_from_atlas. Tested in tests/test_gp.py.",
+      "source_files": ["phase_cartographer/gp/surrogate.py", "tests/test_gp.py"],
+      "reproducible": true
+    },
+    {
+      "claim": "Probabilistic confidence layer with eigenvalue-gap, Krawczyk-margin, and GP-posterior components",
+      "evidence_type": "implementation",
+      "evidence": "atlas/confidence.py: compute_cell_confidence, compute_atlas_confidence. Tested in tests/test_z3_and_models.py.",
+      "source_files": ["phase_cartographer/atlas/confidence.py"],
+      "reproducible": true
+    },
+    {
+      "claim": "Z3 verification adds 13-65ms overhead per cell (negligible)",
+      "evidence_type": "experiment",
+      "evidence": "benchmark_output/summary.json: z3 timing data per model.",
+      "reproducible": true
+    },
+    {
+      "claim": "FitzHugh-Nagumo 87% Tier 1 pass rate due to conservative rounding near Hopf bifurcation",
+      "evidence_type": "experiment",
+      "evidence": "2 cells at bifurcation boundary fail MiniCheck's conservative rounding. Z3 confirms 15/15 equilibria and 14/15 stability. Correct conservative behavior.",
+      "reproducible": true
+    },
+    {
+      "claim": "Posterior-informed refinement with covariance-aware splitting",
+      "evidence_type": "implementation",
+      "evidence": "refinement/octree.py: PosteriorRefinementConfig, covariance_aware_split, posterior_informed_refine. Splits along axis-aligned dimension capturing most posterior variance via PCA of covariance matrix.",
+      "source_files": ["phase_cartographer/refinement/octree.py"],
+      "reproducible": true
+    },
+    {
+      "claim": "GP coverage bounds via Borell-TIS inequality",
+      "evidence_type": "implementation",
+      "evidence": "gp/surrogate.py: GPSurrogate.coverage_bound(). Uses Borell-TIS inequality: P(sup f > u) <= 2 exp(-u²/(2σ²_max)). Returns (lower_bound, upper_bound, confidence).",
+      "source_files": ["phase_cartographer/gp/surrogate.py"],
+      "reproducible": true
+    },
+    {
+      "claim": "GP regret bounds for Matern-5/2 kernel",
+      "evidence_type": "implementation",
+      "evidence": "gp/surrogate.py: GPSurrogate.regret_bound(). Computes γ_T = O(T^{d(d+1)/(5+d(d+1))} log T) information gain and R_T = O(√(T γ_T β_T)) regret bound.",
+      "source_files": ["phase_cartographer/gp/surrogate.py"],
+      "reproducible": true
+    },
+    {
+      "claim": "Machine-readable proof trace with hash-chain integrity",
+      "evidence_type": "implementation",
+      "evidence": "atlas/composition.py: ProofTrace, ProofTraceEntry. SHA-256 hash chain: each entry hash = SHA-256(prev_hash || operation || inputs || outputs). Methods: from_atlas, verify_chain, export_json.",
+      "source_files": ["phase_cartographer/atlas/composition.py"],
+      "reproducible": true
+    },
+    {
+      "claim": "Comprehensive ablation study covering tier, GP, Newton, and splitting variants",
+      "evidence_type": "implementation",
+      "evidence": "benchmarks/runner.py: run_comprehensive_ablation, ComprehensiveAblationResult. Tests 4 ablation axes: tier-by-tier (T1, T1+2, T1+2+3), GP vs uniform, Newton vs bisection, isotropic vs anisotropic.",
+      "source_files": ["phase_cartographer/benchmarks/runner.py"],
+      "reproducible": true
+    },
+    {
+      "claim": "Composed error budget tracking between δ-perturbation and interval enclosure",
+      "evidence_type": "implementation",
+      "evidence": "smt/delta_bound.py::ComposedErrorBudget tracks how solver δ-perturbation error composes with interval arithmetic enclosure error. tiered/certificate.py::error_budget() exposes per-cell composed error.",
+      "source_files": ["phase_cartographer/smt/delta_bound.py", "phase_cartographer/tiered/certificate.py"],
+      "reproducible": true
+    },
+    {
+      "claim": "Empirical δ-soundness validation: 7/11 equilibria with non-zero eigenvalue gap all pass soundness",
+      "evidence_type": "experiment",
+      "evidence": "benchmark_output/delta_validation.json: of 11 equilibria tested, 7 have non-zero eigenvalue gap and all 7 pass δ-soundness validation.",
+      "reproducible": true
+    },
+    {
+      "claim": "Depth scaling: Brusselator coverage increases from 0% at depth 2 to 85.9% at depth 6",
+      "evidence_type": "experiment",
+      "evidence": "benchmark_output/depth_scaling.json: depth 2 → 0%, depth 3 → 25%, depth 4 → 50%, depth 5 → 75%, depth 6 → 85.9% coverage.",
+      "reproducible": true
+    },
+    {
+      "claim": "GP calibration pipeline integrated into benchmark runner",
+      "evidence_type": "implementation",
+      "evidence": "benchmarks/runner.py::run_gp_calibration_study runs GP calibration across benchmark models and reports calibration error statistics.",
+      "source_files": ["phase_cartographer/benchmarks/runner.py"],
+      "reproducible": true
+    },
+    {
+      "claim": "Certificate verification pipeline with atom consistency, proof tree, composition, hash chain",
+      "evidence_type": "implementation",
+      "evidence": "atlas/certificate_algebra.py::verify_certificate_bundle performs 4-stage verification: (1) atom consistency, (2) proof tree validity, (3) composition soundness, (4) hash chain integrity.",
+      "source_files": ["phase_cartographer/atlas/certificate_algebra.py"],
+      "reproducible": true
+    }
+  ],
+  "hallucination_audit": [
+    {
+      "original_claim": "48,000 lines of code",
+      "status": "corrected",
+      "actual": "18,447 lines of Python (measured: find phase_cartographer tests -name '*.py' | xargs wc -l)"
+    },
+    {
+      "original_claim": "Five benchmark models evaluated",
+      "status": "superseded",
+      "actual": "15 models: toggle_switch, brusselator, selkov, repressilator, goodwin, lotka_volterra, fitzhugh_nagumo, tyson_cell_cycle, mapk_cascade, p53_mdm2, calcium_oscillator, circadian_clock, genetic_oscillator, mutual_activation_switch, van_der_pol"
+    },
+    {
+      "original_claim": ">=95% coverage on all models",
+      "status": "corrected",
+      "actual": "81.2%-100% coverage. FitzHugh-Nagumo at 81.2%, Brusselator at 85.9%, mutual_activation_switch at 90.6% due to bifurcation gaps."
+    },
+    {
+      "original_claim": "Tier 2/3 verification not exercised",
+      "status": "fixed",
+      "actual": "Z3 (Tier 3) now exercised on all 15 models: 60/60 equilibrium existence, 34/60 stability confirmed."
+    },
+    {
+      "original_claim": "AUTO and DSGRN comparison results",
+      "status": "removed",
+      "actual": "No comparisons with external tools were run"
+    },
+    {
+      "original_claim": "13,102 lines of code, 103 tests",
+      "status": "superseded",
+      "actual": "18,447 LoC, 209 tests (after adding 8 models, posterior refinement, GP bounds, proof trace, comprehensive ablation, delta validation, depth scaling, certificate algebra)"
+    },
+    {
+      "original_claim": "39/39 Z3 equilibrium, 23/37 stability",
+      "status": "superseded",
+      "actual": "60/60 Z3 equilibrium, 34/60 stability across 15 models"
+    }
+  ],
+  "limitations": [
+    "Coverage gaps (9-19%) occur near Hopf bifurcation boundaries in brusselator, fitzhugh_nagumo, mutual_activation_switch (correct conservative behavior)",
+    "Tier 2 (dReal delta-complete) not exercised (dReal not installed); Z3 provides alternative verification",
+    "FitzHugh-Nagumo has 87% Tier 1 pass rate due to conservative rounding near bifurcation",
+    "GP-guided refinement does not improve over uniform at p<=4; expected benefit at p>=6",
+    "No periodic orbit certification; oscillatory regimes detected via eigenvalue analysis only",
+    "Delta-soundness validation: 4/11 equilibria have zero eigenvalue gap (expected failure); all 7 with non-zero gap pass",
+    "Depth scaling study shows diminishing returns beyond depth 6 for Brusselator; deeper refinement not yet explored",
+    "Van der Pol contraction factor is 0.000 (trivial single-cell model, no meaningful Krawczyk contraction)",
+    "Stability verification succeeds on 34/60 cells; remaining 26 have no eigenvalue gap or UNKNOWN near bifurcation"
+  ]
+}

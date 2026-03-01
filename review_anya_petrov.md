@@ -1,0 +1,15 @@
+# Review: Certified Phase Atlases for Biological ODE Models
+
+**Reviewer:** Prof. Anya Petrov (Applied Mathematics & Computational Science, ETH Zürich)
+**Score: 8/10**
+**Expertise Weight: 0.9** (strong alignment with validated numerics, dynamical systems, bifurcation theory)
+
+---
+
+This proposal addresses a genuine and important gap in computational dynamical systems: the absence of machine-checkable certificates for regime classification in biological ODE models. The mathematical foundations are sound and appropriate.
+
+**Strengths.** The Taylor-model interval arithmetic for rational biological RHS (A1) is a careful specialization of known techniques that exploits positivity of biological state variables to avoid division-by-zero singularities — a non-trivial but well-motivated technical contribution. The parameter-dependent Krawczyk theorem (A2) extends existing interval Newton methods to the parameter-fiber setting, which is the correct mathematical framework for uniform equilibrium certificates. The adaptive refinement strategy based on eigenvalue sensitivity is mathematically well-motivated: eigenvalue sensitivity identifies parameter directions along which qualitative behavior changes, and concentrating refinement along these directions is provably more efficient than uniform refinement when phase boundaries are lower-dimensional manifolds. The convergence theorem (C1) under piecewise-smooth boundary assumptions is a standard but necessary result. The radii-polynomial approach for periodic orbits (optional A3) follows the Lessard-van den Berg program and extends it to biological nonlinearities — this is technically demanding but builds on well-understood foundations.
+
+**Weaknesses.** The dimensional limitations are the primary concern from a computational mathematics perspective. For equilibrium certification, n ≤ 6 is reasonable (Krawczyk scales as O(n³) per box), but many biological models of interest have 10–20+ state variables. For periodic orbits, n ≤ 3 is very restrictive — the Goodwin oscillator at n = 3 is barely within scope, and more complex oscillators (circadian clocks at n = 10+) are out of reach. The Conley index computation is limited to n ≤ 4 by cubical homology complexity — this is an inherent algorithmic limitation, not a design flaw, but it should be stated more prominently. The moment-closure extension (D1) is appropriately scoped as future work. The computational budget estimate of 2–5 days on a 6-core laptop for 5 benchmark models seems optimistic for the Krawczyk computation at n = 6 with p = 4 parameter dimensions, given the number of parameter boxes that must be processed. I would expect closer to 1–2 weeks for full coverage at the claimed ≥95% target.
+
+**Verdict.** Mathematically rigorous and computationally well-scoped within its dimensional limitations. The certified phase atlas is a genuinely new scientific artifact. The benchmark selection (toggle switch, repressilator, Goodwin, Brusselator, Sel'kov) covers the right range of qualitative behaviors. This is a solid 2–3 paper research program with clear venue targets.

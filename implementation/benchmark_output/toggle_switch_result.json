@@ -1,0 +1,100 @@
+{
+  "model_name": "toggle_switch",
+  "n_states": 2,
+  "n_params": 4,
+  "rhs_type": "hill",
+  "total_cells": 2,
+  "certified_cells": 2,
+  "coverage_fraction": 1.0,
+  "regime_counts": {
+    "inconclusive": 2
+  },
+  "tier1_pass_rate": 1.0,
+  "max_depth": 1,
+  "total_time_s": 3.48,
+  "cells_per_second": 0.58,
+  "mean_contraction": 0.6609,
+  "certification_time_breakdown": null,
+  "n_inconclusive": 2,
+  "n_boundary_pairs": 0,
+  "uniform_coverage": 0.0,
+  "uniform_time_s": 0.0,
+  "gp_ece": 0.0,
+  "gp_loo_error": 0.0,
+  "gp_training_time_s": 0.0,
+  "tier3_verified": 2,
+  "tier3_total": 2,
+  "tier3_time_s": 0.072,
+  "tier2_verified": 0,
+  "tier2_total": 2,
+  "tier2_time_s": 0.072,
+  "z3_results": {
+    "cell_0": {
+      "eq_0_existence": {
+        "verified": true,
+        "tier": "tier3_exact",
+        "status": "sat",
+        "time_s": 0.0523,
+        "message": "Z3 confirmed equilibrium exists in enclosure",
+        "counterexample": {
+          "x0": 2.7446918466,
+          "x1": 0.2911112548,
+          "mu0": 2.9772928506,
+          "mu1": 2.4841493748,
+          "mu2": 2.0,
+          "mu3": 2.0
+        }
+      },
+      "eq_0_stability": {
+        "verified": false,
+        "tier": "tier3_exact",
+        "status": "sat",
+        "time_s": 0.0057,
+        "message": "Z3 found counterexample to unstable stability",
+        "counterexample": {
+          "x0": 2.75,
+          "x1": 0.28125,
+          "mu0": 3.0,
+          "mu1": 2.5,
+          "mu2": 2.0,
+          "mu3": 2.0
+        }
+      }
+    },
+    "cell_1": {
+      "eq_0_existence": {
+        "verified": true,
+        "tier": "tier3_exact",
+        "status": "sat",
+        "time_s": 0.0055,
+        "message": "Z3 confirmed equilibrium exists in enclosure",
+        "counterexample": {
+          "x0": 0.2581988897,
+          "x1": 3.261343839,
+          "mu0": 3.0044961716,
+          "mu1": 3.4787667616,
+          "mu2": 2.0,
+          "mu3": 2.0
+        }
+      },
+      "eq_0_stability": {
+        "verified": false,
+        "tier": "tier3_exact",
+        "status": "sat",
+        "time_s": 0.0037,
+        "message": "Z3 found counterexample to unstable stability",
+        "counterexample": {
+          "x0": 0.25,
+          "x1": 3.25,
+          "mu0": 3.0,
+          "mu1": 3.5,
+          "mu2": 2.0,
+          "mu3": 2.0
+        }
+      }
+    }
+  },
+  "mean_eigenvalue_gap": 0.0,
+  "min_eigenvalue_gap": 0.0,
+  "n_near_bifurcation": 2
+}

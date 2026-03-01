@@ -1,0 +1,119 @@
+{
+  "selkov": {
+    "model_name": "selkov",
+    "n_cells": 1,
+    "n_equilibria": 1,
+    "n_with_delta": 0,
+    "n_sound": 0,
+    "n_unsound": 0,
+    "min_eigenvalue_gap": 0.0,
+    "max_delta_required": 0.0,
+    "all_sound": false,
+    "details": []
+  },
+  "brusselator": {
+    "model_name": "brusselator",
+    "n_cells": 5,
+    "n_equilibria": 5,
+    "n_with_delta": 3,
+    "n_sound": 3,
+    "n_unsound": 0,
+    "min_eigenvalue_gap": 0.10444721,
+    "max_delta_required": 0.2096831,
+    "all_sound": true,
+    "details": [
+      {
+        "eigenvalue_gap": 0.41936621,
+        "delta_required": 0.2096831,
+        "is_sound": true,
+        "contraction": 0.859155
+      },
+      {
+        "eigenvalue_gap": 0.10444721,
+        "delta_required": 0.05222361,
+        "is_sound": true,
+        "contraction": 0.958359
+      },
+      {
+        "eigenvalue_gap": 0.1372286,
+        "delta_required": 0.0686143,
+        "is_sound": true,
+        "contraction": 0.672137
+      }
+    ]
+  },
+  "toggle_switch": {
+    "model_name": "toggle_switch",
+    "n_cells": 2,
+    "n_equilibria": 2,
+    "n_with_delta": 0,
+    "n_sound": 0,
+    "n_unsound": 0,
+    "min_eigenvalue_gap": 0.0,
+    "max_delta_required": 0.0,
+    "all_sound": false,
+    "details": []
+  },
+  "calcium_oscillator": {
+    "model_name": "calcium_oscillator",
+    "n_cells": 3,
+    "n_equilibria": 3,
+    "n_with_delta": 3,
+    "n_sound": 3,
+    "n_unsound": 0,
+    "min_eigenvalue_gap": 0.64015846,
+    "max_delta_required": 0.58155588,
+    "all_sound": true,
+    "details": [
+      {
+        "eigenvalue_gap": 1.16311177,
+        "delta_required": 0.58155588,
+        "is_sound": true,
+        "contraction": 0.172081
+      },
+      {
+        "eigenvalue_gap": 0.64015846,
+        "delta_required": 0.32007923,
+        "is_sound": true,
+        "contraction": 0.479911
+      },
+      {
+        "eigenvalue_gap": 0.90667392,
+        "delta_required": 0.45333696,
+        "is_sound": true,
+        "contraction": 0.358801
+      }
+    ]
+  },
+  "fitzhugh_nagumo": {
+    "model_name": "fitzhugh_nagumo",
+    "n_cells": 3,
+    "n_equilibria": 3,
+    "n_with_delta": 1,
+    "n_sound": 1,
+    "n_unsound": 0,
+    "min_eigenvalue_gap": 0.08252378,
+    "max_delta_required": 0.04126189,
+    "all_sound": true,
+    "details": [
+      {
+        "eigenvalue_gap": 0.08252378,
+        "delta_required": 0.04126189,
+        "is_sound": true,
+        "contraction": 0.984972
+      }
+    ]
+  },
+  "van_der_pol": {
+    "model_name": "van_der_pol",
+    "n_cells": 1,
+    "n_equilibria": 1,
+    "n_with_delta": 0,
+    "n_sound": 0,
+    "n_unsound": 0,
+    "min_eigenvalue_gap": 0.0,
+    "max_delta_required": 0.0,
+    "all_sound": false,
+    "details": []
+  }
+}

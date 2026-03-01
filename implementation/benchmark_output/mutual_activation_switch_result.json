@@ -1,0 +1,195 @@
+{
+  "model_name": "mutual_activation_switch",
+  "n_states": 2,
+  "n_params": 2,
+  "rhs_type": "hill",
+  "total_cells": 9,
+  "certified_cells": 6,
+  "coverage_fraction": 0.90625,
+  "regime_counts": {
+    "inconclusive": 4,
+    "monostable": 2
+  },
+  "tier1_pass_rate": 1.0,
+  "max_depth": 5,
+  "total_time_s": 53.83,
+  "cells_per_second": 0.11,
+  "mean_contraction": 0.8045,
+  "certification_time_breakdown": null,
+  "n_inconclusive": 4,
+  "n_boundary_pairs": 4,
+  "uniform_coverage": 0.0,
+  "uniform_time_s": 0.0,
+  "gp_ece": 0.0,
+  "gp_loo_error": 0.0,
+  "gp_training_time_s": 0.0,
+  "tier3_verified": 7,
+  "tier3_total": 7,
+  "tier3_time_s": 8.06,
+  "tier2_verified": 6,
+  "tier2_total": 7,
+  "tier2_time_s": 8.06,
+  "z3_results": {
+    "cell_0": {
+      "eq_0_existence": {
+        "verified": true,
+        "tier": "tier3_exact",
+        "status": "sat",
+        "time_s": 0.0125,
+        "message": "Z3 confirmed equilibrium exists in enclosure",
+        "counterexample": {
+          "x0": 0.28125,
+          "x1": 0.28125,
+          "mu0": 2.0,
+          "mu1": 1.8368055555
+        }
+      },
+      "eq_0_stability": {
+        "verified": true,
+        "tier": "tier3_exact",
+        "status": "unsat",
+        "time_s": 0.9033,
+        "message": "Z3 confirmed unstable stability for all (x,\u03bc) in enclosure"
+      }
+    },
+    "cell_1": {
+      "eq_0_existence": {
+        "verified": true,
+        "tier": "tier3_exact",
+        "status": "sat",
+        "time_s": 0.0049,
+        "message": "Z3 confirmed equilibrium exists in enclosure",
+        "counterexample": {
+          "x0": 0.390625,
+          "x1": 0.390625,
+          "mu0": 1.5,
+          "mu1": 1.450625
+        }
+      },
+      "eq_0_stability": {
+        "verified": true,
+        "tier": "tier3_exact",
+        "status": "unsat",
+        "time_s": 1.2077,
+        "message": "Z3 confirmed unstable stability for all (x,\u03bc) in enclosure"
+      }
+    },
+    "cell_2": {
+      "eq_0_existence": {
+        "verified": true,
+        "tier": "tier3_exact",
+        "status": "sat",
+        "time_s": 0.0078,
+        "message": "Z3 confirmed equilibrium exists in enclosure",
+        "counterexample": {
+          "x0": 3.390625,
+          "x1": 3.390625,
+          "mu0": 2.0,
+          "mu1": 1.6855558755
+        }
+      },
+      "eq_0_stability": {
+        "verified": true,
+        "tier": "tier3_exact",
+        "status": "unsat",
+        "time_s": 0.6683,
+        "message": "Z3 confirmed stable stability for all (x,\u03bc) in enclosure"
+      }
+    },
+    "cell_3": {
+      "eq_0_existence": {
+        "verified": true,
+        "tier": "tier3_exact",
+        "status": "sat",
+        "time_s": 0.004,
+        "message": "Z3 confirmed equilibrium exists in enclosure",
+        "counterexample": {
+          "x0": 0.375,
+          "x1": 0.375,
+          "mu0": 2.0,
+          "mu1": 1.0416666666
+        }
+      },
+      "eq_0_stability": {
+        "verified": true,
+        "tier": "tier3_exact",
+        "status": "unsat",
+        "time_s": 3.5871,
+        "message": "Z3 confirmed unstable stability for all (x,\u03bc) in enclosure"
+      },
+      "eq_1_existence": {
+        "verified": true,
+        "tier": "tier3_exact",
+        "status": "sat",
+        "time_s": 0.004,
+        "message": "Z3 confirmed equilibrium exists in enclosure",
+        "counterexample": {
+          "x0": 2.765625,
+          "x1": 2.765625,
+          "mu0": 2.0,
+          "mu1": 1.1272069209
+        }
+      },
+      "eq_1_stability": {
+        "verified": true,
+        "tier": "tier3_exact",
+        "status": "unsat",
+        "time_s": 0.7283,
+        "message": "Z3 confirmed stable stability for all (x,\u03bc) in enclosure"
+      }
+    },
+    "cell_4": {
+      "eq_0_existence": {
+        "verified": true,
+        "tier": "tier3_exact",
+        "status": "sat",
+        "time_s": 0.0146,
+        "message": "Z3 confirmed equilibrium exists in enclosure",
+        "counterexample": {
+          "x0": 3.1875,
+          "x1": 3.1875,
+          "mu0": 2.25,
+          "mu1": 1.2512254901
+        }
+      },
+      "eq_0_stability": {
+        "verified": false,
+        "tier": "tier3_exact",
+        "status": "sat",
+        "time_s": 0.0068,
+        "message": "Z3 found counterexample to unstable stability",
+        "counterexample": {
+          "x0": 3.1875,
+          "x1": 3.1875,
+          "mu0": 2.25,
+          "mu1": 1.25
+        }
+      }
+    },
+    "cell_5": {
+      "eq_0_existence": {
+        "verified": true,
+        "tier": "tier3_exact",
+        "status": "sat",
+        "time_s": 0.0043,
+        "message": "Z3 confirmed equilibrium exists in enclosure",
+        "counterexample": {
+          "x0": 0.51171875,
+          "x1": 0.51171875,
+          "mu0": 1.25,
+          "mu1": 1.2159172232
+        }
+      },
+      "eq_0_stability": {
+        "verified": true,
+        "tier": "tier3_exact",
+        "status": "unsat",
+        "time_s": 0.896,
+        "message": "Z3 confirmed unstable stability for all (x,\u03bc) in enclosure"
+      }
+    }
+  },
+  "mean_eigenvalue_gap": 0.070384,
+  "min_eigenvalue_gap": 0.0,
+  "n_near_bifurcation": 5
+}

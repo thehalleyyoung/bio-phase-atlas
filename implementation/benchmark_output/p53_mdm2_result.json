@@ -1,0 +1,92 @@
+{
+  "model_name": "p53_mdm2",
+  "n_states": 2,
+  "n_params": 2,
+  "rhs_type": "rational",
+  "total_cells": 2,
+  "certified_cells": 2,
+  "coverage_fraction": 1.0,
+  "regime_counts": {
+    "inconclusive": 2
+  },
+  "tier1_pass_rate": 1.0,
+  "max_depth": 1,
+  "total_time_s": 1.32,
+  "cells_per_second": 1.51,
+  "mean_contraction": 0.7315,
+  "certification_time_breakdown": null,
+  "n_inconclusive": 2,
+  "n_boundary_pairs": 0,
+  "uniform_coverage": 0.0,
+  "uniform_time_s": 0.0,
+  "gp_ece": 0.0,
+  "gp_loo_error": 0.0,
+  "gp_training_time_s": 0.0,
+  "tier3_verified": 2,
+  "tier3_total": 2,
+  "tier3_time_s": 0.015,
+  "tier2_verified": 0,
+  "tier2_total": 2,
+  "tier2_time_s": 0.015,
+  "z3_results": {
+    "cell_0": {
+      "eq_0_existence": {
+        "verified": true,
+        "tier": "tier3_exact",
+        "status": "sat",
+        "time_s": 0.003,
+        "message": "Z3 confirmed equilibrium exists in enclosure",
+        "counterexample": {
+          "x0": 2.09375,
+          "x1": 2.09375,
+          "mu0": 1.4169823232,
+          "mu1": 1.0
+        }
+      },
+      "eq_0_stability": {
+        "verified": false,
+        "tier": "tier3_exact",
+        "status": "sat",
+        "time_s": 0.0041,
+        "message": "Z3 found counterexample to unstable stability",
+        "counterexample": {
+          "x0": 2.09375,
+          "x1": 2.09375,
+          "mu0": 1.0,
+          "mu1": 1.0
+        }
+      }
+    },
+    "cell_1": {
+      "eq_0_existence": {
+        "verified": true,
+        "tier": "tier3_exact",
+        "status": "sat",
+        "time_s": 0.0025,
+        "message": "Z3 confirmed equilibrium exists in enclosure",
+        "counterexample": {
+          "x0": 1.34375,
+          "x1": 1.34375,
+          "mu0": 1.155625,
+          "mu1": 1.5
+        }
+      },
+      "eq_0_stability": {
+        "verified": false,
+        "tier": "tier3_exact",
+        "status": "sat",
+        "time_s": 0.0033,
+        "message": "Z3 found counterexample to unstable stability",
+        "counterexample": {
+          "x0": 1.34375,
+          "x1": 1.34375,
+          "mu0": 1.0,
+          "mu1": 1.5
+        }
+      }
+    }
+  },
+  "mean_eigenvalue_gap": 0.0,
+  "min_eigenvalue_gap": 0.0,
+  "n_near_bifurcation": 2
+}

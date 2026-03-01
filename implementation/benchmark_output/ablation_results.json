@@ -1,0 +1,132 @@
+{
+  "gp_vs_uniform": {
+    "toggle_switch": {
+      "model_name": "toggle_switch",
+      "uniform_coverage": 1.0,
+      "uniform_cells": 2,
+      "uniform_time_s": 3.34,
+      "gp_coverage": 1.0,
+      "gp_cells": 2,
+      "gp_time_s": 3.17,
+      "gp_ece": 0.0,
+      "gp_loo_error": 0.001698,
+      "gp_training_time_s": 0.0006
+    },
+    "brusselator": {
+      "model_name": "brusselator",
+      "uniform_coverage": 0.37500000000000006,
+      "uniform_cells": 3,
+      "uniform_time_s": 22.58,
+      "gp_coverage": 0.37500000000000006,
+      "gp_cells": 3,
+      "gp_time_s": 21.74,
+      "gp_ece": 0.0,
+      "gp_loo_error": 0.0,
+      "gp_training_time_s": 0.0004
+    },
+    "selkov": {
+      "model_name": "selkov",
+      "uniform_coverage": 1.0,
+      "uniform_cells": 1,
+      "uniform_time_s": 0.88,
+      "gp_coverage": 1.0,
+      "gp_cells": 1,
+      "gp_time_s": 0.86,
+      "gp_ece": 0.0,
+      "gp_loo_error": 25.0,
+      "gp_training_time_s": 0.0002
+    },
+    "fitzhugh_nagumo": {
+      "model_name": "fitzhugh_nagumo",
+      "uniform_coverage": 0.5,
+      "uniform_cells": 1,
+      "uniform_time_s": 4.48,
+      "gp_coverage": 0.5,
+      "gp_cells": 1,
+      "gp_time_s": 4.4,
+      "gp_ece": 0.0,
+      "gp_loo_error": 25.0,
+      "gp_training_time_s": 0.0002
+    },
+    "tyson_cell_cycle": {
+      "model_name": "tyson_cell_cycle",
+      "uniform_coverage": 1.0,
+      "uniform_cells": 1,
+      "uniform_time_s": 0.19,
+      "gp_coverage": 1.0,
+      "gp_cells": 1,
+      "gp_time_s": 0.2,
+      "gp_ece": 0.0,
+      "gp_loo_error": 0.0,
+      "gp_training_time_s": 0.0002
+    },
+    "mapk_cascade": {
+      "model_name": "mapk_cascade",
+      "uniform_coverage": 1.0,
+      "uniform_cells": 1,
+      "uniform_time_s": 0.03,
+      "gp_coverage": 1.0,
+      "gp_cells": 1,
+      "gp_time_s": 0.03,
+      "gp_ece": 0.0,
+      "gp_loo_error": 25.0,
+      "gp_training_time_s": 0.0002
+    },
+    "calcium_oscillator": {
+      "model_name": "calcium_oscillator",
+      "uniform_coverage": 1.0,
+      "uniform_cells": 3,
+      "uniform_time_s": 4.98,
+      "gp_coverage": 1.0,
+      "gp_cells": 3,
+      "gp_time_s": 4.53,
+      "gp_ece": 0.0,
+      "gp_loo_error": 0.0,
+      "gp_training_time_s": 0.0004
+    },
+    "mutual_activation_switch": {
+      "model_name": "mutual_activation_switch",
+      "uniform_coverage": 0.75,
+      "uniform_cells": 3,
+      "uniform_time_s": 31.81,
+      "gp_coverage": 0.75,
+      "gp_cells": 3,
+      "gp_time_s": 30.45,
+      "gp_ece": 0.0,
+      "gp_loo_error": 9.350784,
+      "gp_training_time_s": 0.0004
+    },
+    "van_der_pol": {
+      "model_name": "van_der_pol",
+      "uniform_coverage": 1.0,
+      "uniform_cells": 1,
+      "uniform_time_s": 0.01,
+      "gp_coverage": 1.0,
+      "gp_cells": 1,
+      "gp_time_s": 0.01,
+      "gp_ece": 0.0,
+      "gp_loo_error": 25.0,
+      "gp_training_time_s": 0.0002
+    }
+  },
+  "newton_vs_bisection": {
+    "repressilator": {
+      "newton_coverage": 1.0,
+      "newton_time_s": 0.03,
+      "bisection_coverage": 0.25,
+      "bisection_time_s": 18.505
+    },
+    "goodwin": {
+      "newton_coverage": 1.0,
+      "newton_time_s": 0.049,
+      "bisection_coverage": 0.0,
+      "bisection_time_s": 32.395
+    },
+    "genetic_oscillator": {
+      "newton_coverage": 1.0,
+      "newton_time_s": 0.051,
+      "bisection_coverage": 0.5,
+      "bisection_time_s": 17.878
+    }
+  }
+}

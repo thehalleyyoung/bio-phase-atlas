@@ -21,7 +21,9 @@ sc = StabilityClassifier(rhs)
 stab_type, eig_enc = sc.classify(x_enclosure, mu)
 ```
 - Returns `StabilityType` enum and `EigenvalueEnclosure`
-- Methods: Gershgorin disks, Bauer-Fike perturbation bounds, Routh-Hurwitz
+- 4-stage cascade: Routh-Hurwitz → Bauer-Fike → midpoint refinement → center manifold
+- `eig_enc.classification_method`: which stage resolved the classification
+- Methods: `routh_hurwitz_check()`, `compute_eigenvalue_enclosure()`, `_try_midpoint_refinement()`, `_try_center_manifold()`
 
 ### `tiered.certificate.CertifiedCell`
 ```python
@@ -212,6 +214,30 @@ regret, info_gain = gp.regret_bound(n_observed=50, domain_volume=2.0)
 ```
 
 ### `gp.AcquisitionOptimizer`
+
+### `gp.kernel_verification`
+```python
+from phase_cartographer.gp.kernel_verification import (
+    verify_kernel_regularity,
+    compute_composed_delta_error,
+    KernelVerificationResult,
+)
+# Verify GP kernel satisfies Borell-TIS conditions
+result = verify_kernel_regularity(
+    kernel_name="matern52", nu=2.5, dimension=2,
+    domain_bounds=[(0.0, 1.0), (0.0, 2.0)],
+    length_scales=[0.5, 0.5],
+)
+# result.borell_tis_applicable: bool
+# result.expected_supremum_bound: float
+# result.regularity_class: str ("C^2" for Matérn-5/2)
+
+# Compute composed delta-error across atlas cells
+error = compute_composed_delta_error(atlas, rhs, state_domain)
+# error: dict with max_composed_delta, soundness_rate, per-cell breakdown
+```
+
+### `gp.AcquisitionOptimizer`
 ```python
 from phase_cartographer.gp.acquisition import AcquisitionOptimizer, phase_boundary_score
 opt = AcquisitionOptimizer(gp, acquisition="boundary_uncertainty")
@@ -267,6 +293,23 @@ result = verify_atlas(cells, domain)     # Atlas-level
 
 ## Benchmarks
 
+### Numerical Continuation Baseline
+```python
+from phase_cartographer.benchmarks.numerical_baseline import (
+    NumericalContinuationBaseline,
+    run_full_baseline_comparison,
+)
+# Compare numerical continuation vs certified results
+results = run_full_baseline_comparison(output_dir="benchmark_output/")
+# Per-model: numerical eq count, certified eq count, agreement rate, errors caught
+
+# Single-model comparison
+baseline = NumericalContinuationBaseline(rhs, parameter_domain, state_domain)
+num_result = baseline.run_continuation(n_points=80)
+# num_result: n_equilibria_found, n_bifurcations, bifurcation_types
+```
+
+### Benchmark Runner
 ```python
 from phase_cartographer.benchmarks.runner import (
     run_benchmark, run_all_benchmarks, run_ablation,

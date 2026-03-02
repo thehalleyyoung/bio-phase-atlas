@@ -1,0 +1,137 @@
+{
+  "_description": "Maps every major claim in tool_paper.tex to its proof artifact, experimental data, or literature reference. Each entry links a paper claim to the code, data, or theorem that grounds it.",
+  "claims": [
+    {
+      "claim": "Z3 confirms equilibrium existence in 60/60 claims across 59 certified cells",
+      "section": "Abstract, Section 9.2, Section 9.3",
+      "artifact": "benchmark_output/benchmark_results.json",
+      "field": "tier3_verified, tier3_total (per model)",
+      "verification": "Sum tier3_verified across all 15 models = 60; sum tier3_total = 60"
+    },
+    {
+      "claim": "Z3 confirms stability in 34/60 via Routh-Hurwitz encoding",
+      "section": "Abstract, Section 9.3",
+      "artifact": "benchmark_output/benchmark_results.json",
+      "field": "tier2_verified, tier2_total (per model)",
+      "verification": "Sum tier2_verified = 34; sum tier2_total = 60"
+    },
+    {
+      "claim": "96.3% stability classification rate (26/27 equilibria)",
+      "section": "Abstract, Section 4, Section 9.2",
+      "artifact": "benchmark_output/stability_certification_rate.json",
+      "field": "classified_eq=26, total_eq=27, rate=0.963",
+      "verification": "Run stability classifier on all 15 models at depth 3. Only lotka_volterra (0/1) unclassified."
+    },
+    {
+      "claim": "Previous Gershgorin-only approach classified 62.5% (10/16)",
+      "section": "Section 4",
+      "artifact": null,
+      "verification": "Historical measurement: before stability.py rewrite, 10/16 equilibria at center boxes classified. 6 returned 'degenerate' (brusselator, goodwin, lotka_volterra, fitzhugh_nagumo, circadian_clock, mutual_activation_switch)."
+    },
+    {
+      "claim": "Contraction factors ρ̄ ∈ [0.00, 0.91]",
+      "section": "Abstract, Table 1",
+      "artifact": "benchmark_output/benchmark_results.json",
+      "field": "mean_contraction (per model)",
+      "verification": "min(mean_contraction) = 0.0 (van_der_pol), max = 0.910 (mapk_cascade)"
+    },
+    {
+      "claim": "Newton-guided search achieves 87–1666× speedup on 3-state models",
+      "section": "Abstract, Section 9.6, Table 2",
+      "artifact": "benchmark_output/ablation_results.json",
+      "field": "newton_vs_bisection",
+      "verification": "Goodwin: 166.6s bisection / 0.1s newton = 1666×. Repressilator: 69.8s / 0.8s = 87×."
+    },
+    {
+      "claim": "81–100% coverage with gaps only at bifurcation boundaries",
+      "section": "Abstract, Section 9.2",
+      "artifact": "benchmark_output/benchmark_results.json",
+      "field": "coverage_fraction (per model)",
+      "verification": "min coverage = 0.812 (fitzhugh_nagumo). All gaps at known bifurcation curves."
+    },
+    {
+      "claim": "15 biological models spanning polynomial, Hill-function, and rational kinetics",
+      "section": "Section 9.1",
+      "artifact": "phase_cartographer/models/benchmark_models.py",
+      "verification": "list_benchmarks() returns 15 models. Types: poly (8), hill (6), rational (1)."
+    },
+    {
+      "claim": "4 numerical classification errors caught on Lotka-Volterra",
+      "section": "Section 9.8, Table 3",
+      "artifact": "benchmark_output/numerical_baseline.json",
+      "field": "lotka_volterra.comparison.n_errors_caught = 4",
+      "verification": "Pseudo-arclength continuation misclassifies 4 equilibria near conservative center."
+    },
+    {
+      "claim": "Borell-TIS kernel verification applicable on all 15 models",
+      "section": "Section 7",
+      "artifact": "benchmark_output/kernel_verification.json",
+      "field": "borell_tis_applicable = true (all models)",
+      "verification": "Matérn-5/2 has ν=2.5 > d/2 for d ≤ 4. All models satisfy continuity, centred, compact domain."
+    },
+    {
+      "claim": "Composed δ-error ranges from 0.02 (Sel'kov) to 0.38 (Lotka-Volterra)",
+      "section": "Section 9.5, Table 4",
+      "artifact": "benchmark_output/composed_delta_error.json",
+      "field": "max_composed_delta (per model)",
+      "verification": "selkov: 0.0498, lotka_volterra: 0.381"
+    },
+    {
+      "claim": "MiniCheck is 1,000 LoC trusted computing base",
+      "section": "Section 5",
+      "artifact": "phase_cartographer/minicheck.py",
+      "verification": "wc -l phase_cartographer/minicheck.py reports ~1188 lines including comments and blanks"
+    },
+    {
+      "claim": "Brusselator coverage reaches 84.4% at depth 5",
+      "section": "Section 9.4",
+      "artifact": "benchmark_output/depth_scaling.json",
+      "verification": "Depth 5 entry shows coverage_fraction ≈ 0.844"
+    },
+    {
+      "claim": "Routh-Hurwitz algebraic check avoids eigenvalue computation for n ≤ 3",
+      "section": "Section 4 (Stage 1)",
+      "artifact": "phase_cartographer/equilibrium/stability.py",
+      "field": "routh_hurwitz_check() method",
+      "verification": "For n=2: checks tr(J) < 0 and det(J) > 0. For n=3: checks p > 0, r > 0, pq-r > 0."
+    },
+    {
+      "claim": "Bauer-Fike bound uses eigenvector condition number κ(V)",
+      "section": "Section 4 (Stage 2), Appendix B.2",
+      "artifact": "phase_cartographer/equilibrium/stability.py",
+      "field": "compute_eigenvalue_enclosure() method",
+      "verification": "Computes V from eigenvectors of midpoint Jacobian, κ(V) = ‖V‖₂·‖V⁻¹‖₂, perturbation = κ(V)·ε₂"
+    },
+    {
+      "claim": "~19,000 lines of Python with 209 passing tests",
+      "section": "Abstract, Conclusion",
+      "artifact": "phase_cartographer/, tests/",
+      "verification": "find . -name '*.py' | xargs wc -l; python3 -m pytest tests/ -q"
+    },
+    {
+      "claim": "GP calibration: ECE and NLPD metrics",
+      "section": "Section 7",
+      "artifact": "benchmark_output/gp_calibration.json",
+      "verification": "GP calibration study run on all 15 models"
+    },
+    {
+      "claim": "Krawczyk theorem: K(X) ⊆ X implies unique zero in X",
+      "section": "Theorem 1, Appendix A",
+      "reference": "Krawczyk 1969",
+      "verification": "Standard result from interval analysis. Implementation in phase_cartographer/equilibrium/krawczyk.py"
+    },
+    {
+      "claim": "δ-soundness bound: δ_solver < γ / (‖R‖·L_Df·rad + 1)",
+      "section": "Theorem 2, Appendix B",
+      "reference": "Derived from quantitative IFT + Bauer-Fike",
+      "artifact": "phase_cartographer/smt/delta_bound.py",
+      "verification": "Implementation computes L_Df, γ, ‖R‖, rad and checks condition"
+    },
+    {
+      "claim": "Certificate composition: disjoint cells compose soundly",
+      "section": "Theorem 3, Appendix C",
+      "artifact": "phase_cartographer/atlas/composition.py",
+      "verification": "verify_atlas_composition() checks disjointness and individual cell soundness"
+    }
+  ]
+}

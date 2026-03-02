@@ -1,0 +1,485 @@
+{
+  "toggle_switch": {
+    "numerical": {
+      "n_equilibria_found": 61,
+      "n_bifurcations": 0,
+      "bifurcation_types": {},
+      "continuation_time_s": 0.1182
+    },
+    "certified": {
+      "n_cells": 10,
+      "n_equilibria": 11
+    },
+    "comparison": {
+      "n_comparisons": 10,
+      "n_agreements": 10,
+      "n_disagreements": 0,
+      "agreement_rate": 1.0,
+      "disagreement_details": [],
+      "numerical_errors_caught": [],
+      "n_errors_caught": 0
+    },
+    "total_time_s": 8.81
+  },
+  "brusselator": {
+    "numerical": {
+      "n_equilibria_found": 80,
+      "n_bifurcations": 1,
+      "bifurcation_types": {
+        "hopf": 1
+      },
+      "continuation_time_s": 0.1152
+    },
+    "certified": {
+      "n_cells": 0,
+      "n_equilibria": 0
+    },
+    "comparison": {
+      "n_comparisons": 0,
+      "n_agreements": 0,
+      "n_disagreements": 0,
+      "agreement_rate": 0.0,
+      "disagreement_details": [],
+      "numerical_errors_caught": [],
+      "n_errors_caught": 0
+    },
+    "total_time_s": 19.59
+  },
+  "selkov": {
+    "numerical": {
+      "n_equilibria_found": 80,
+      "n_bifurcations": 1,
+      "bifurcation_types": {
+        "hopf": 1
+      },
+      "continuation_time_s": 0.0928
+    },
+    "certified": {
+      "n_cells": 10,
+      "n_equilibria": 10
+    },
+    "comparison": {
+      "n_comparisons": 10,
+      "n_agreements": 10,
+      "n_disagreements": 0,
+      "agreement_rate": 1.0,
+      "disagreement_details": [],
+      "numerical_errors_caught": [],
+      "n_errors_caught": 0
+    },
+    "total_time_s": 8.34
+  },
+  "repressilator": {
+    "numerical": {
+      "n_equilibria_found": 80,
+      "n_bifurcations": 0,
+      "bifurcation_types": {},
+      "continuation_time_s": 0.2707
+    },
+    "certified": {
+      "n_cells": 10,
+      "n_equilibria": 10
+    },
+    "comparison": {
+      "n_comparisons": 10,
+      "n_agreements": 10,
+      "n_disagreements": 0,
+      "agreement_rate": 1.0,
+      "disagreement_details": [],
+      "numerical_errors_caught": [],
+      "n_errors_caught": 0
+    },
+    "total_time_s": 0.44
+  },
+  "goodwin": {
+    "numerical": {
+      "n_equilibria_found": 80,
+      "n_bifurcations": 0,
+      "bifurcation_types": {},
+      "continuation_time_s": 0.1705
+    },
+    "certified": {
+      "n_cells": 10,
+      "n_equilibria": 10
+    },
+    "comparison": {
+      "n_comparisons": 10,
+      "n_agreements": 10,
+      "n_disagreements": 0,
+      "agreement_rate": 1.0,
+      "disagreement_details": [],
+      "numerical_errors_caught": [],
+      "n_errors_caught": 0
+    },
+    "total_time_s": 0.34
+  },
+  "lotka_volterra": {
+    "numerical": {
+      "n_equilibria_found": 80,
+      "n_bifurcations": 0,
+      "bifurcation_types": {},
+      "continuation_time_s": 0.0804
+    },
+    "certified": {
+      "n_cells": 10,
+      "n_equilibria": 10
+    },
+    "comparison": {
+      "n_comparisons": 10,
+      "n_agreements": 0,
+      "n_disagreements": 10,
+      "agreement_rate": 0.0,
+      "disagreement_details": [
+        {
+          "parameter_mid": 0.6,
+          "numerical_stability": "center",
+          "certified_stabilities": [
+            "unstable_focus"
+          ],
+          "certified_regime": "inconclusive"
+        },
+        {
+          "parameter_mid": 0.6888888888888889,
+          "numerical_stability": "center",
+          "certified_stabilities": [
+            "stable_focus"
+          ],
+          "certified_regime": "monostable"
+        },
+        {
+          "parameter_mid": 0.7777777777777778,
+          "numerical_stability": "center",
+          "certified_stabilities": [
+            "stable_focus"
+          ],
+          "certified_regime": "monostable"
+        },
+        {
+          "parameter_mid": 0.8666666666666667,
+          "numerical_stability": "center",
+          "certified_stabilities": [
+            "unstable_focus"
+          ],
+          "certified_regime": "inconclusive"
+        },
+        {
+          "parameter_mid": 0.9555555555555555,
+          "numerical_stability": "center",
+          "certified_stabilities": [
+            "unstable_focus"
+          ],
+          "certified_regime": "inconclusive"
+        },
+        {
+          "parameter_mid": 1.0444444444444445,
+          "numerical_stability": "center",
+          "certified_stabilities": [
+            "stable_focus"
+          ],
+          "certified_regime": "monostable"
+        },
+        {
+          "parameter_mid": 1.1333333333333333,
+          "numerical_stability": "center",
+          "certified_stabilities": [
+            "stable_focus"
+          ],
+          "certified_regime": "monostable"
+        },
+        {
+          "parameter_mid": 1.2222222222222223,
+          "numerical_stability": "center",
+          "certified_stabilities": [
+            "unstable_focus"
+          ],
+          "certified_regime": "inconclusive"
+        },
+        {
+          "parameter_mid": 1.3111111111111111,
+          "numerical_stability": "center",
+          "certified_stabilities": [
+            "unstable_focus"
+          ],
+          "certified_regime": "inconclusive"
+        },
+        {
+          "parameter_mid": 1.4,
+          "numerical_stability": "center",
+          "certified_stabilities": [
+            "unstable_focus"
+          ],
+          "certified_regime": "inconclusive"
+        }
+      ],
+      "numerical_errors_caught": [
+        {
+          "type": "false_center",
+          "description": "Numerical method classifies as center due to near-zero eigenvalues; certified method resolves sign via interval arithmetic",
+          "parameter_mid": 0.6888888888888889,
+          "numerical_stability": "center",
+          "certified_stabilities": [
+            "stable_focus"
+          ],
+          "certified_regime": "monostable"
+        },
+        {
+          "type": "false_center",
+          "description": "Numerical method classifies as center due to near-zero eigenvalues; certified method resolves sign via interval arithmetic",
+          "parameter_mid": 0.7777777777777778,
+          "numerical_stability": "center",
+          "certified_stabilities": [
+            "stable_focus"
+          ],
+          "certified_regime": "monostable"
+        },
+        {
+          "type": "false_center",
+          "description": "Numerical method classifies as center due to near-zero eigenvalues; certified method resolves sign via interval arithmetic",
+          "parameter_mid": 1.0444444444444445,
+          "numerical_stability": "center",
+          "certified_stabilities": [
+            "stable_focus"
+          ],
+          "certified_regime": "monostable"
+        },
+        {
+          "type": "false_center",
+          "description": "Numerical method classifies as center due to near-zero eigenvalues; certified method resolves sign via interval arithmetic",
+          "parameter_mid": 1.1333333333333333,
+          "numerical_stability": "center",
+          "certified_stabilities": [
+            "stable_focus"
+          ],
+          "certified_regime": "monostable"
+        }
+      ],
+      "n_errors_caught": 4
+    },
+    "total_time_s": 1.41
+  },
+  "fitzhugh_nagumo": {
+    "numerical": {
+      "n_equilibria_found": 80,
+      "n_bifurcations": 1,
+      "bifurcation_types": {
+        "hopf": 1
+      },
+      "continuation_time_s": 0.0639
+    },
+    "certified": {
+      "n_cells": 3,
+      "n_equilibria": 3
+    },
+    "comparison": {
+      "n_comparisons": 3,
+      "n_agreements": 3,
+      "n_disagreements": 0,
+      "agreement_rate": 1.0,
+      "disagreement_details": [],
+      "numerical_errors_caught": [],
+      "n_errors_caught": 0
+    },
+    "total_time_s": 4.2
+  },
+  "tyson_cell_cycle": {
+    "numerical": {
+      "n_equilibria_found": 80,
+      "n_bifurcations": 0,
+      "bifurcation_types": {},
+      "continuation_time_s": 0.0981
+    },
+    "certified": {
+      "n_cells": 10,
+      "n_equilibria": 10
+    },
+    "comparison": {
+      "n_comparisons": 10,
+      "n_agreements": 10,
+      "n_disagreements": 0,
+      "agreement_rate": 1.0,
+      "disagreement_details": [],
+      "numerical_errors_caught": [],
+      "n_errors_caught": 0
+    },
+    "total_time_s": 1.79
+  },
+  "mapk_cascade": {
+    "numerical": {
+      "n_equilibria_found": 80,
+      "n_bifurcations": 0,
+      "bifurcation_types": {},
+      "continuation_time_s": 0.0923
+    },
+    "certified": {
+      "n_cells": 10,
+      "n_equilibria": 10
+    },
+    "comparison": {
+      "n_comparisons": 10,
+      "n_agreements": 10,
+      "n_disagreements": 0,
+      "agreement_rate": 1.0,
+      "disagreement_details": [],
+      "numerical_errors_caught": [],
+      "n_errors_caught": 0
+    },
+    "total_time_s": 0.24
+  },
+  "p53_mdm2": {
+    "numerical": {
+      "n_equilibria_found": 80,
+      "n_bifurcations": 0,
+      "bifurcation_types": {},
+      "continuation_time_s": 0.1168
+    },
+    "certified": {
+      "n_cells": 0,
+      "n_equilibria": 0
+    },
+    "comparison": {
+      "n_comparisons": 0,
+      "n_agreements": 0,
+      "n_disagreements": 0,
+      "agreement_rate": 0.0,
+      "disagreement_details": [],
+      "numerical_errors_caught": [],
+      "n_errors_caught": 0
+    },
+    "total_time_s": 6.09
+  },
+  "calcium_oscillator": {
+    "numerical": {
+      "n_equilibria_found": 80,
+      "n_bifurcations": 0,
+      "bifurcation_types": {},
+      "continuation_time_s": 0.0951
+    },
+    "certified": {
+      "n_cells": 5,
+      "n_equilibria": 5
+    },
+    "comparison": {
+      "n_comparisons": 5,
+      "n_agreements": 5,
+      "n_disagreements": 0,
+      "agreement_rate": 1.0,
+      "disagreement_details": [],
+      "numerical_errors_caught": [],
+      "n_errors_caught": 0
+    },
+    "total_time_s": 10.56
+  },
+  "circadian_clock": {
+    "numerical": {
+      "n_equilibria_found": 80,
+      "n_bifurcations": 0,
+      "bifurcation_types": {},
+      "continuation_time_s": 0.1031
+    },
+    "certified": {
+      "n_cells": 8,
+      "n_equilibria": 8
+    },
+    "comparison": {
+      "n_comparisons": 8,
+      "n_agreements": 8,
+      "n_disagreements": 0,
+      "agreement_rate": 1.0,
+      "disagreement_details": [],
+      "numerical_errors_caught": [],
+      "n_errors_caught": 0
+    },
+    "total_time_s": 4.39
+  },
+  "genetic_oscillator": {
+    "numerical": {
+      "n_equilibria_found": 80,
+      "n_bifurcations": 0,
+      "bifurcation_types": {},
+      "continuation_time_s": 0.1697
+    },
+    "certified": {
+      "n_cells": 10,
+      "n_equilibria": 10
+    },
+    "comparison": {
+      "n_comparisons": 10,
+      "n_agreements": 10,
+      "n_disagreements": 0,
+      "agreement_rate": 1.0,
+      "disagreement_details": [],
+      "numerical_errors_caught": [],
+      "n_errors_caught": 0
+    },
+    "total_time_s": 0.33
+  },
+  "mutual_activation_switch": {
+    "numerical": {
+      "n_equilibria_found": 80,
+      "n_bifurcations": 0,
+      "bifurcation_types": {},
+      "continuation_time_s": 0.2596
+    },
+    "certified": {
+      "n_cells": 3,
+      "n_equilibria": 3
+    },
+    "comparison": {
+      "n_comparisons": 3,
+      "n_agreements": 0,
+      "n_disagreements": 3,
+      "agreement_rate": 0.0,
+      "disagreement_details": [
+        {
+          "parameter_mid": 1.95,
+          "numerical_stability": "stable",
+          "certified_stabilities": [
+            "saddle"
+          ],
+          "certified_regime": "inconclusive"
+        },
+        {
+          "parameter_mid": 2.083333333333333,
+          "numerical_stability": "stable",
+          "certified_stabilities": [
+            "saddle"
+          ],
+          "certified_regime": "inconclusive"
+        },
+        {
+          "parameter_mid": 2.216666666666667,
+          "numerical_stability": "stable",
+          "certified_stabilities": [
+            "saddle"
+          ],
+          "certified_regime": "inconclusive"
+        }
+      ],
+      "numerical_errors_caught": [],
+      "n_errors_caught": 0
+    },
+    "total_time_s": 31.34
+  },
+  "van_der_pol": {
+    "numerical": {
+      "n_equilibria_found": 80,
+      "n_bifurcations": 0,
+      "bifurcation_types": {},
+      "continuation_time_s": 0.112
+    },
+    "certified": {
+      "n_cells": 10,
+      "n_equilibria": 10
+    },
+    "comparison": {
+      "n_comparisons": 10,
+      "n_agreements": 10,
+      "n_disagreements": 0,
+      "agreement_rate": 1.0,
+      "disagreement_details": [],
+      "numerical_errors_caught": [],
+      "n_errors_caught": 0
+    },
+    "total_time_s": 0.19
+  }
+}

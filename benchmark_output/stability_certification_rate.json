@@ -1,0 +1,82 @@
+{
+  "total_eq": 27,
+  "classified_eq": 26,
+  "rate": 0.9629629629629629,
+  "per_model": {
+    "toggle_switch": {
+      "n_eq": 2,
+      "n_classified": 2,
+      "rate": 1.0
+    },
+    "brusselator": {
+      "n_eq": 3,
+      "n_classified": 3,
+      "rate": 1.0
+    },
+    "selkov": {
+      "n_eq": 1,
+      "n_classified": 1,
+      "rate": 1.0
+    },
+    "repressilator": {
+      "n_eq": 1,
+      "n_classified": 1,
+      "rate": 1.0
+    },
+    "goodwin": {
+      "n_eq": 2,
+      "n_classified": 2,
+      "rate": 1.0
+    },
+    "lotka_volterra": {
+      "n_eq": 1,
+      "n_classified": 0,
+      "rate": 0.0
+    },
+    "fitzhugh_nagumo": {
+      "n_eq": 1,
+      "n_classified": 1,
+      "rate": 1.0
+    },
+    "tyson_cell_cycle": {
+      "n_eq": 1,
+      "n_classified": 1,
+      "rate": 1.0
+    },
+    "mapk_cascade": {
+      "n_eq": 1,
+      "n_classified": 1,
+      "rate": 1.0
+    },
+    "p53_mdm2": {
+      "n_eq": 2,
+      "n_classified": 2,
+      "rate": 1.0
+    },
+    "calcium_oscillator": {
+      "n_eq": 3,
+      "n_classified": 3,
+      "rate": 1.0
+    },
+    "circadian_clock": {
+      "n_eq": 3,
+      "n_classified": 3,
+      "rate": 1.0
+    },
+    "genetic_oscillator": {
+      "n_eq": 2,
+      "n_classified": 2,
+      "rate": 1.0
+    },
+    "mutual_activation_switch": {
+      "n_eq": 3,
+      "n_classified": 3,
+      "rate": 1.0
+    },
+    "van_der_pol": {
+      "n_eq": 1,
+      "n_classified": 1,
+      "rate": 1.0
+    }
+  }
+}

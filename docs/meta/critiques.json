@@ -1,0 +1,153 @@
+{
+  "project": "PhaseCartographer",
+  "title": "Certified Phase Diagrams for Parameterized Biological ODE Models",
+  "date": "2026-03-02",
+  "reviewers": [
+    {
+      "name": "Cesar Sanchez",
+      "affiliation": "IMDEA Software Institute",
+      "persona": "formal_verification_AI_researcher"
+    },
+    {
+      "name": "Roderick Bloem",
+      "affiliation": "TU Graz",
+      "persona": "machine_learning_specification_safety_researcher"
+    },
+    {
+      "name": "Vasco Vasconcelos",
+      "affiliation": "University of Lisbon",
+      "persona": "probabilistic_models_and_formal_methods_expert"
+    }
+  ],
+  "consensus_recommendation": "weak_accept",
+  "synthesis": {
+    "summary": "All three reviewers agree that PhaseCartographer makes a solid contribution by combining interval arithmetic, tiered SMT verification, and GP-guided refinement into a coherent certified phase-diagram tool for biological ODEs. The Krawczyk operator application, the three-tiered certification architecture, and the MiniCheck independent checker are consistently praised as well-engineered. However, significant concerns emerge around: (1) incomplete certification coverage—the 57% stability certification rate and 81% minimum parameter-space coverage leave substantial gaps in precisely the parameter regimes of greatest interest; (2) the absence of limit cycle and global dynamics certification, which undermines the tool's relevance for oscillatory biological systems; (3) missing baselines against established bifurcation tools; and (4) unresolved formal questions about δ-error accumulation across cell boundaries and GP kernel regularity assumptions. The consensus is a weak accept contingent on the authors addressing the most critical formal gaps in revision.",
+    "agreed_strengths": [
+      {
+        "point": "Three-tiered certification architecture is well-designed",
+        "detail": "The separation of fast interval recomputation (MiniCheck/Tier 1), δ-complete SMT verification (Tier 2), and exact QF_NRA reasoning (Tier 3) provides a principled spectrum of assurance levels. The compositional design allows pragmatic deployment where practitioners choose their desired assurance level without sacrificing soundness at any tier.",
+        "reviewers": ["Cesar Sanchez", "Roderick Bloem", "Vasco Vasconcelos"]
+      },
+      {
+        "point": "MiniCheck TCB minimization is a genuine auditability contribution",
+        "detail": "The 1,188 LoC independent checker that verifies interval containment for equilibrium existence claims provides a credibly small trusted computing base. All three reviewers noted this as a sound engineering decision, though Sanchez raised valid concerns about MiniCheck's scope being limited to Tier 1 claims only.",
+        "reviewers": ["Cesar Sanchez", "Roderick Bloem", "Vasco Vasconcelos"]
+      },
+      {
+        "point": "Krawczyk operator application is technically correct and well-formalized",
+        "detail": "Theorem 1 correctly formalizes the classical K(X) ⊂ X criterion for existence and uniqueness. The interval arithmetic implementation with proper outward rounding is noted as careful. The Newton-guided speedup (87–1666×) demonstrates practical value beyond theoretical correctness.",
+        "reviewers": ["Cesar Sanchez", "Vasco Vasconcelos"]
+      },
+      {
+        "point": "Model selection spans meaningful dynamical diversity",
+        "detail": "The 15 biological models cover planar through higher-dimensional systems, classical benchmarks and biologically realistic networks, and multiple dynamical regimes (bistability, oscillations, excitability). This breadth strengthens the evaluation's ecological validity.",
+        "reviewers": ["Cesar Sanchez", "Vasco Vasconcelos", "Roderick Bloem"]
+      }
+    ],
+    "agreed_weaknesses": [
+      {
+        "point": "Limit cycles and global dynamics are not certified",
+        "detail": "The tool certifies equilibrium existence and local stability but provides no formal guarantees about periodic orbits, basins of attraction, homoclinic bifurcations, or chaotic dynamics. For oscillatory biological models (Brusselator, FitzHugh-Nagumo, Van der Pol, Repressilator), the biologically relevant dynamics are precisely the limit cycles that the tool cannot certify. Bloem and Vasconcelos both emphasize this as a fundamental gap in the certification story.",
+        "severity": "high",
+        "reviewers": ["Roderick Bloem", "Vasco Vasconcelos"]
+      },
+      {
+        "point": "δ-error accumulation across composed cells is not formally bounded",
+        "detail": "Sanchez identifies that Theorem 2 bounds per-cell δ_solver but does not analyze how δ propagates through the composition of adjacent cells (Theorem 3). Vasconcelos raises a related concern about boundary measure-theoretic imprecision. The compositional certification guarantee may be weaker than stated without a formal bound on total accumulated error across an entire atlas.",
+        "severity": "high",
+        "reviewers": ["Cesar Sanchez", "Vasco Vasconcelos"]
+      },
+      {
+        "point": "Stability certification failure rate (43%) is underemphasized",
+        "detail": "Only 34/60 equilibria receive stability certification via Routh-Hurwitz + Z3. The 26 failures are not adequately explained—whether they arise from non-hyperbolicity near bifurcation boundaries or from engineering limitations (Z3 timeouts, encoding gaps). This distinction critically affects the tool's practical utility.",
+        "severity": "high",
+        "reviewers": ["Cesar Sanchez", "Roderick Bloem"]
+      },
+      {
+        "point": "No comparison against existing bifurcation analysis tools",
+        "detail": "The paper claims to be 'the first' certified tool but provides no comparison against MATCONT, AUTO, or XPPAUT—mature tools that produce (uncertified) parameter-space partitions. Without such comparison, it is impossible to assess whether formal certification catches meaningful errors or merely adds overhead to already-correct numerical results.",
+        "severity": "medium",
+        "reviewers": ["Roderick Bloem"]
+      },
+      {
+        "point": "GP kernel assumptions for Borell-TIS coverage bounds are unverified",
+        "detail": "Vasconcelos notes that the Borell-TIS inequality requires almost surely bounded GP sample paths, which holds for squared exponential but may not hold for Matérn kernels with small smoothness parameter. The paper does not specify the kernel or verify regularity conditions, potentially invalidating the coverage guarantee.",
+        "severity": "medium",
+        "reviewers": ["Vasco Vasconcelos"]
+      },
+      {
+        "point": "Scalability to higher-dimensional parameter spaces is unaddressed",
+        "detail": "All 15 models appear to use 2D parameter slices, but realistic biological models have 10–50 parameters. The octree refinement scales as 2^d per split and the GP surrogate suffers from the curse of dimensionality. No experiments beyond 2D are reported.",
+        "severity": "medium",
+        "reviewers": ["Roderick Bloem"]
+      }
+    ],
+    "divergent_opinions": [
+      {
+        "topic": "Novelty of the Krawczyk operator application",
+        "positions": {
+          "Cesar Sanchez": "Considers the systematic application to biological ODE equilibria across parameterized families a genuine contribution, noting correct formalization and careful implementation.",
+          "Roderick Bloem": "Views the Krawczyk operator itself as well-established in validated numerics (Tucker 2011, CAPD library) and considers the novelty to lie primarily in the integration with SMT verification and GP-guided refinement rather than in the interval arithmetic itself.",
+          "Vasco Vasconcelos": "Appreciates the clean formalization but considers the main theoretical novelty to be the Borell-TIS coverage bound rather than the Krawczyk application."
+        }
+      },
+      {
+        "topic": "Adequacy of the coverage metric",
+        "positions": {
+          "Roderick Bloem": "Concerned that 81% coverage on FitzHugh-Nagumo leaves the most dynamically interesting regions (near canard explosion) uncertified, but treats coverage as a volumetric engineering metric to be improved.",
+          "Vasco Vasconcelos": "Raises a deeper measure-theoretic objection: volumetric coverage overstates utility if uncertified regions concentrate along bifurcation curves, which have positive (d-1)-dimensional Hausdorff measure. Proposes bifurcation-boundary proximity as a more informative metric."
+        }
+      },
+      {
+        "topic": "Scope of MiniCheck's assurance",
+        "positions": {
+          "Cesar Sanchez": "Critically notes that MiniCheck only covers Tier 1 (interval containment), while the full certification TCB includes Z3 and 1,260 LoC of SMT encoding logic, making the 1,188 LoC TCB figure somewhat misleading.",
+          "Roderick Bloem": "Accepts MiniCheck at face value as a credible independent checker and considers it a positive design decision without questioning its scope limitations.",
+          "Vasco Vasconcelos": "Acknowledges MiniCheck's value but is more interested in whether the tier structure could be formalized type-theoretically to provide structural rather than bespoke composition guarantees."
+        }
+      }
+    ],
+    "critical_questions": [
+      "Can the authors provide a formal bound on accumulated δ error across an entire atlas, as a function of the cell adjacency graph and per-cell δ_solver values? Without this, the compositional certification claim (Theorem 3) may be weaker than stated.",
+      "What dynamical phenomena occur in the uncertified parameter regions (e.g., 19% of FitzHugh-Nagumo)? Are these regions systematically correlated with bifurcation boundaries, and does this represent a fundamental limitation of the Krawczyk approach near non-hyperbolic equilibria?",
+      "Which GP kernel is used, and do its sample path regularity properties satisfy the assumptions required by the Borell-TIS inequality? If a Matérn kernel is used, what is the smoothness parameter ν?",
+      "Have the authors compared their certified phase diagrams against those produced by MATCONT or AUTO? Can they demonstrate a concrete instance where an uncertified tool produces an incorrect regime classification?",
+      "What is the maximum parameter dimension tested, and at what dimension does the octree-based approach become impractical? Have sparse grid or dimensionality reduction alternatives been explored?",
+      "For the 26/60 stability certification failures: how many arise from genuine non-hyperbolicity versus engineering limitations such as Z3 timeouts?"
+    ],
+    "recommended_revisions": [
+      {
+        "priority": "essential",
+        "revision": "Provide a formal bound on accumulated δ error across composed cells, accounting for shared boundaries in the octree partition. Clarify how boundary equilibria are handled and whether the current implementation can miss or double-count equilibria at cell interfaces."
+      },
+      {
+        "priority": "essential",
+        "revision": "Analyze and report the 26 stability certification failures in detail. Classify each as fundamental (non-hyperbolic equilibrium) or engineering (timeout/encoding limitation). For non-hyperbolic cases, discuss whether center manifold or normal form methods could extend the tool's reach."
+      },
+      {
+        "priority": "essential",
+        "revision": "Explicitly state the GP kernel used and verify that the sample path regularity conditions required by the Borell-TIS inequality are satisfied. If using Matérn-ν/2, provide the value of ν and confirm the bound's validity."
+      },
+      {
+        "priority": "important",
+        "revision": "Add a comparison against at least one established bifurcation tool (MATCONT or AUTO) on a subset of the 15 models. Report whether uncertified tools produce incorrect regime classifications in any parameter region, or whether formal certification primarily adds assurance to already-correct numerical results."
+      },
+      {
+        "priority": "important",
+        "revision": "Discuss the limitation of certifying only equilibria and local stability, not limit cycles or global dynamics. Acknowledge this gap explicitly and outline what additional formal machinery (e.g., validated Poincaré map computation via CAPD) would be needed to certify oscillatory regimes."
+      },
+      {
+        "priority": "important",
+        "revision": "Characterize the uncertified parameter regions geometrically. Report the proximity of uncertified regions to the true bifurcation set and discuss whether the volumetric coverage metric adequately captures the tool's practical utility."
+      },
+      {
+        "priority": "suggested",
+        "revision": "Test on at least one model with 4+ parameter dimensions to establish practical scaling limits. Report runtime, cell count, and coverage as a function of parameter dimension."
+      },
+      {
+        "priority": "suggested",
+        "revision": "Clarify MiniCheck's scope by explicitly stating which certification claims it covers (Tier 1 only) and which remain dependent on Z3 and the SMT encoding logic. Report the full TCB size for each tier."
+      }
+    ]
+  }
+}

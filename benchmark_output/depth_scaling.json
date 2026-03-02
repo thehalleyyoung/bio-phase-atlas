@@ -5,7 +5,7 @@
       "max_depth": 2,
       "certified_cells": 0,
       "coverage_fraction": 0.0,
-      "total_time_s": 10.515,
+      "total_time_s": 11.285,
       "cells_per_second": 0.0
     },
     {
@@ -13,92 +13,24 @@
       "max_depth": 3,
       "certified_cells": 3,
       "coverage_fraction": 0.375,
-      "total_time_s": 20.401,
-      "cells_per_second": 0.15
+      "total_time_s": 21.964,
+      "cells_per_second": 0.14
     },
     {
       "model_name": "brusselator",
       "max_depth": 4,
       "certified_cells": 5,
       "coverage_fraction": 0.5,
-      "total_time_s": 33.269,
-      "cells_per_second": 0.15
+      "total_time_s": 36.752,
+      "cells_per_second": 0.14
     },
     {
       "model_name": "brusselator",
       "max_depth": 5,
       "certified_cells": 16,
       "coverage_fraction": 0.84375,
-      "total_time_s": 52.689,
-      "cells_per_second": 0.3
-    }
-  ],
-  "selkov": [
-    {
-      "model_name": "selkov",
-      "max_depth": 2,
-      "certified_cells": 1,
-      "coverage_fraction": 1.0,
-      "total_time_s": 0.809,
-      "cells_per_second": 1.24
-    },
-    {
-      "model_name": "selkov",
-      "max_depth": 3,
-      "certified_cells": 1,
-      "coverage_fraction": 1.0,
-      "total_time_s": 0.772,
-      "cells_per_second": 1.3
-    },
-    {
-      "model_name": "selkov",
-      "max_depth": 4,
-      "certified_cells": 1,
-      "coverage_fraction": 1.0,
-      "total_time_s": 0.776,
-      "cells_per_second": 1.29
-    },
-    {
-      "model_name": "selkov",
-      "max_depth": 5,
-      "certified_cells": 1,
-      "coverage_fraction": 1.0,
-      "total_time_s": 0.777,
-      "cells_per_second": 1.29
-    }
-  ],
-  "fitzhugh_nagumo": [
-    {
-      "model_name": "fitzhugh_nagumo",
-      "max_depth": 2,
-      "certified_cells": 1,
-      "coverage_fraction": 0.5,
-      "total_time_s": 2.201,
-      "cells_per_second": 0.45
-    },
-    {
-      "model_name": "fitzhugh_nagumo",
-      "max_depth": 3,
-      "certified_cells": 1,
-      "coverage_fraction": 0.5,
-      "total_time_s": 4.324,
-      "cells_per_second": 0.23
-    },
-    {
-      "model_name": "fitzhugh_nagumo",
-      "max_depth": 4,
-      "certified_cells": 3,
-      "coverage_fraction": 0.625,
-      "total_time_s": 6.83,
-      "cells_per_second": 0.44
-    },
-    {
-      "model_name": "fitzhugh_nagumo",
-      "max_depth": 5,
-      "certified_cells": 3,
-      "coverage_fraction": 0.625,
-      "total_time_s": 11.568,
-      "cells_per_second": 0.26
+      "total_time_s": 57.831,
+      "cells_per_second": 0.28
     }
   ]
 }

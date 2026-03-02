@@ -1,0 +1,287 @@
+{
+  "toggle_switch": {
+    "kernel_name": "matern52",
+    "nu": 2.5,
+    "dimension": 2,
+    "satisfies_continuity": true,
+    "satisfies_centred": true,
+    "satisfies_compact_domain": true,
+    "borell_tis_applicable": true,
+    "sigma_max_sq": 1.0,
+    "expected_supremum_bound": 4.985823,
+    "details": {
+      "ms_derivatives": 2,
+      "kolmogorov_chentsov_condition": "\u03bd=2.5 > d/2=1.0",
+      "domain_diameter": 2.828427,
+      "effective_length_scale": 0.565685,
+      "borell_tis_tail_bound": "P(sup f > u) \u2264 2\u00b7exp(-u\u00b2/(2\u00b71.0000)) for u \u2265 4.9858",
+      "regularity_class": "C^2"
+    }
+  },
+  "brusselator": {
+    "kernel_name": "matern52",
+    "nu": 2.5,
+    "dimension": 2,
+    "satisfies_continuity": true,
+    "satisfies_centred": true,
+    "satisfies_compact_domain": true,
+    "borell_tis_applicable": true,
+    "sigma_max_sq": 1.0,
+    "expected_supremum_bound": 4.985823,
+    "details": {
+      "ms_derivatives": 2,
+      "kolmogorov_chentsov_condition": "\u03bd=2.5 > d/2=1.0",
+      "domain_diameter": 2.332381,
+      "effective_length_scale": 0.466476,
+      "borell_tis_tail_bound": "P(sup f > u) \u2264 2\u00b7exp(-u\u00b2/(2\u00b71.0000)) for u \u2265 4.9858",
+      "regularity_class": "C^2"
+    }
+  },
+  "selkov": {
+    "kernel_name": "matern52",
+    "nu": 2.5,
+    "dimension": 2,
+    "satisfies_continuity": true,
+    "satisfies_centred": true,
+    "satisfies_compact_domain": true,
+    "borell_tis_applicable": true,
+    "sigma_max_sq": 1.0,
+    "expected_supremum_bound": 4.985823,
+    "details": {
+      "ms_derivatives": 2,
+      "kolmogorov_chentsov_condition": "\u03bd=2.5 > d/2=1.0",
+      "domain_diameter": 0.412311,
+      "effective_length_scale": 0.082462,
+      "borell_tis_tail_bound": "P(sup f > u) \u2264 2\u00b7exp(-u\u00b2/(2\u00b71.0000)) for u \u2265 4.9858",
+      "regularity_class": "C^2"
+    }
+  },
+  "repressilator": {
+    "kernel_name": "matern52",
+    "nu": 2.5,
+    "dimension": 1,
+    "satisfies_continuity": true,
+    "satisfies_centred": true,
+    "satisfies_compact_domain": true,
+    "borell_tis_applicable": true,
+    "sigma_max_sq": 1.0,
+    "expected_supremum_bound": 3.525509,
+    "details": {
+      "ms_derivatives": 2,
+      "kolmogorov_chentsov_condition": "\u03bd=2.5 > d/2=0.5",
+      "domain_diameter": 2.0,
+      "effective_length_scale": 0.4,
+      "borell_tis_tail_bound": "P(sup f > u) \u2264 2\u00b7exp(-u\u00b2/(2\u00b71.0000)) for u \u2265 3.5255",
+      "regularity_class": "C^2"
+    }
+  },
+  "goodwin": {
+    "kernel_name": "matern52",
+    "nu": 2.5,
+    "dimension": 2,
+    "satisfies_continuity": true,
+    "satisfies_centred": true,
+    "satisfies_compact_domain": true,
+    "borell_tis_applicable": true,
+    "sigma_max_sq": 1.0,
+    "expected_supremum_bound": 4.985823,
+    "details": {
+      "ms_derivatives": 2,
+      "kolmogorov_chentsov_condition": "\u03bd=2.5 > d/2=1.0",
+      "domain_diameter": 5.015974,
+      "effective_length_scale": 1.003195,
+      "borell_tis_tail_bound": "P(sup f > u) \u2264 2\u00b7exp(-u\u00b2/(2\u00b71.0000)) for u \u2265 4.9858",
+      "regularity_class": "C^2"
+    }
+  },
+  "lotka_volterra": {
+    "kernel_name": "matern52",
+    "nu": 2.5,
+    "dimension": 2,
+    "satisfies_continuity": true,
+    "satisfies_centred": true,
+    "satisfies_compact_domain": true,
+    "borell_tis_applicable": true,
+    "sigma_max_sq": 1.0,
+    "expected_supremum_bound": 4.985823,
+    "details": {
+      "ms_derivatives": 2,
+      "kolmogorov_chentsov_condition": "\u03bd=2.5 > d/2=1.0",
+      "domain_diameter": 1.077033,
+      "effective_length_scale": 0.215407,
+      "borell_tis_tail_bound": "P(sup f > u) \u2264 2\u00b7exp(-u\u00b2/(2\u00b71.0000)) for u \u2265 4.9858",
+      "regularity_class": "C^2"
+    }
+  },
+  "fitzhugh_nagumo": {
+    "kernel_name": "matern52",
+    "nu": 2.5,
+    "dimension": 2,
+    "satisfies_continuity": true,
+    "satisfies_centred": true,
+    "satisfies_compact_domain": true,
+    "borell_tis_applicable": true,
+    "sigma_max_sq": 1.0,
+    "expected_supremum_bound": 4.985823,
+    "details": {
+      "ms_derivatives": 2,
+      "kolmogorov_chentsov_condition": "\u03bd=2.5 > d/2=1.0",
+      "domain_diameter": 1.011187,
+      "effective_length_scale": 0.202237,
+      "borell_tis_tail_bound": "P(sup f > u) \u2264 2\u00b7exp(-u\u00b2/(2\u00b71.0000)) for u \u2265 4.9858",
+      "regularity_class": "C^2"
+    }
+  },
+  "tyson_cell_cycle": {
+    "kernel_name": "matern52",
+    "nu": 2.5,
+    "dimension": 2,
+    "satisfies_continuity": true,
+    "satisfies_centred": true,
+    "satisfies_compact_domain": true,
+    "borell_tis_applicable": true,
+    "sigma_max_sq": 1.0,
+    "expected_supremum_bound": 4.985823,
+    "details": {
+      "ms_derivatives": 2,
+      "kolmogorov_chentsov_condition": "\u03bd=2.5 > d/2=1.0",
+      "domain_diameter": 1.655295,
+      "effective_length_scale": 0.331059,
+      "borell_tis_tail_bound": "P(sup f > u) \u2264 2\u00b7exp(-u\u00b2/(2\u00b71.0000)) for u \u2265 4.9858",
+      "regularity_class": "C^2"
+    }
+  },
+  "mapk_cascade": {
+    "kernel_name": "matern52",
+    "nu": 2.5,
+    "dimension": 2,
+    "satisfies_continuity": true,
+    "satisfies_centred": true,
+    "satisfies_compact_domain": true,
+    "borell_tis_applicable": true,
+    "sigma_max_sq": 1.0,
+    "expected_supremum_bound": 4.985823,
+    "details": {
+      "ms_derivatives": 2,
+      "kolmogorov_chentsov_condition": "\u03bd=2.5 > d/2=1.0",
+      "domain_diameter": 2.545584,
+      "effective_length_scale": 0.509117,
+      "borell_tis_tail_bound": "P(sup f > u) \u2264 2\u00b7exp(-u\u00b2/(2\u00b71.0000)) for u \u2265 4.9858",
+      "regularity_class": "C^2"
+    }
+  },
+  "p53_mdm2": {
+    "kernel_name": "matern52",
+    "nu": 2.5,
+    "dimension": 2,
+    "satisfies_continuity": true,
+    "satisfies_centred": true,
+    "satisfies_compact_domain": true,
+    "borell_tis_applicable": true,
+    "sigma_max_sq": 1.0,
+    "expected_supremum_bound": 4.985823,
+    "details": {
+      "ms_derivatives": 2,
+      "kolmogorov_chentsov_condition": "\u03bd=2.5 > d/2=1.0",
+      "domain_diameter": 2.12132,
+      "effective_length_scale": 0.424264,
+      "borell_tis_tail_bound": "P(sup f > u) \u2264 2\u00b7exp(-u\u00b2/(2\u00b71.0000)) for u \u2265 4.9858",
+      "regularity_class": "C^2"
+    }
+  },
+  "calcium_oscillator": {
+    "kernel_name": "matern52",
+    "nu": 2.5,
+    "dimension": 2,
+    "satisfies_continuity": true,
+    "satisfies_centred": true,
+    "satisfies_compact_domain": true,
+    "borell_tis_applicable": true,
+    "sigma_max_sq": 1.0,
+    "expected_supremum_bound": 4.985823,
+    "details": {
+      "ms_derivatives": 2,
+      "kolmogorov_chentsov_condition": "\u03bd=2.5 > d/2=1.0",
+      "domain_diameter": 3.354102,
+      "effective_length_scale": 0.67082,
+      "borell_tis_tail_bound": "P(sup f > u) \u2264 2\u00b7exp(-u\u00b2/(2\u00b71.0000)) for u \u2265 4.9858",
+      "regularity_class": "C^2"
+    }
+  },
+  "circadian_clock": {
+    "kernel_name": "matern52",
+    "nu": 2.5,
+    "dimension": 2,
+    "satisfies_continuity": true,
+    "satisfies_centred": true,
+    "satisfies_compact_domain": true,
+    "borell_tis_applicable": true,
+    "sigma_max_sq": 1.0,
+    "expected_supremum_bound": 4.985823,
+    "details": {
+      "ms_derivatives": 2,
+      "kolmogorov_chentsov_condition": "\u03bd=2.5 > d/2=1.0",
+      "domain_diameter": 4.272002,
+      "effective_length_scale": 0.8544,
+      "borell_tis_tail_bound": "P(sup f > u) \u2264 2\u00b7exp(-u\u00b2/(2\u00b71.0000)) for u \u2265 4.9858",
+      "regularity_class": "C^2"
+    }
+  },
+  "genetic_oscillator": {
+    "kernel_name": "matern52",
+    "nu": 2.5,
+    "dimension": 2,
+    "satisfies_continuity": true,
+    "satisfies_centred": true,
+    "satisfies_compact_domain": true,
+    "borell_tis_applicable": true,
+    "sigma_max_sq": 1.0,
+    "expected_supremum_bound": 4.985823,
+    "details": {
+      "ms_derivatives": 2,
+      "kolmogorov_chentsov_condition": "\u03bd=2.5 > d/2=1.0",
+      "domain_diameter": 6.082763,
+      "effective_length_scale": 1.216553,
+      "borell_tis_tail_bound": "P(sup f > u) \u2264 2\u00b7exp(-u\u00b2/(2\u00b71.0000)) for u \u2265 4.9858",
+      "regularity_class": "C^2"
+    }
+  },
+  "mutual_activation_switch": {
+    "kernel_name": "matern52",
+    "nu": 2.5,
+    "dimension": 2,
+    "satisfies_continuity": true,
+    "satisfies_centred": true,
+    "satisfies_compact_domain": true,
+    "borell_tis_applicable": true,
+    "sigma_max_sq": 1.0,
+    "expected_supremum_bound": 4.985823,
+    "details": {
+      "ms_derivatives": 2,
+      "kolmogorov_chentsov_condition": "\u03bd=2.5 > d/2=1.0",
+      "domain_diameter": 2.12132,
+      "effective_length_scale": 0.424264,
+      "borell_tis_tail_bound": "P(sup f > u) \u2264 2\u00b7exp(-u\u00b2/(2\u00b71.0000)) for u \u2265 4.9858",
+      "regularity_class": "C^2"
+    }
+  },
+  "van_der_pol": {
+    "kernel_name": "matern52",
+    "nu": 2.5,
+    "dimension": 2,
+    "satisfies_continuity": true,
+    "satisfies_centred": true,
+    "satisfies_compact_domain": true,
+    "borell_tis_applicable": true,
+    "sigma_max_sq": 1.0,
+    "expected_supremum_bound": 4.985823,
+    "details": {
+      "ms_derivatives": 2,
+      "kolmogorov_chentsov_condition": "\u03bd=2.5 > d/2=1.0",
+      "domain_diameter": 2.692582,
+      "effective_length_scale": 0.538516,
+      "borell_tis_tail_bound": "P(sup f > u) \u2264 2\u00b7exp(-u\u00b2/(2\u00b71.0000)) for u \u2265 4.9858",
+      "regularity_class": "C^2"
+    }
+  }
+}

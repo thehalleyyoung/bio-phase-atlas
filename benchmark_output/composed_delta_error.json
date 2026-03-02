@@ -1,0 +1,159 @@
+{
+  "toggle_switch": {
+    "n_cells": 2,
+    "max_composed_delta": 0.30476994,
+    "max_enclosure_width": 0.15238497,
+    "min_eigenvalue_gap": 0.0,
+    "overall_sound": false,
+    "n_sound_cells": 0,
+    "n_unsound_cells": 2,
+    "boundary_error": 0.30476994,
+    "soundness_rate": 0.0
+  },
+  "brusselator": {
+    "error": "no cells"
+  },
+  "selkov": {
+    "n_cells": 1,
+    "max_composed_delta": 0.0497759,
+    "max_enclosure_width": 0.02488795,
+    "min_eigenvalue_gap": 0.0,
+    "overall_sound": false,
+    "n_sound_cells": 0,
+    "n_unsound_cells": 1,
+    "boundary_error": 0.0497759,
+    "soundness_rate": 0.0
+  },
+  "repressilator": {
+    "n_cells": 1,
+    "max_composed_delta": 0.12668409,
+    "max_enclosure_width": 0.06334205,
+    "min_eigenvalue_gap": 0.0,
+    "overall_sound": false,
+    "n_sound_cells": 0,
+    "n_unsound_cells": 1,
+    "boundary_error": 0.12668409,
+    "soundness_rate": 0.0
+  },
+  "goodwin": {
+    "n_cells": 2,
+    "max_composed_delta": 0.33797727,
+    "max_enclosure_width": 0.09574058,
+    "min_eigenvalue_gap": 0.26541077,
+    "overall_sound": false,
+    "n_sound_cells": 2,
+    "n_unsound_cells": 0,
+    "boundary_error": 0.19148116,
+    "soundness_rate": 1.0
+  },
+  "lotka_volterra": {
+    "n_cells": 1,
+    "max_composed_delta": 0.47879351,
+    "max_enclosure_width": 0.23939676,
+    "min_eigenvalue_gap": 0.0,
+    "overall_sound": false,
+    "n_sound_cells": 0,
+    "n_unsound_cells": 1,
+    "boundary_error": 0.47879351,
+    "soundness_rate": 0.0
+  },
+  "fitzhugh_nagumo": {
+    "n_cells": 1,
+    "max_composed_delta": 0.41045859,
+    "max_enclosure_width": 0.18437867,
+    "min_eigenvalue_gap": 0.08340249,
+    "overall_sound": false,
+    "n_sound_cells": 1,
+    "n_unsound_cells": 0,
+    "boundary_error": 0.36875735,
+    "soundness_rate": 1.0
+  },
+  "tyson_cell_cycle": {
+    "n_cells": 1,
+    "max_composed_delta": 0.54708743,
+    "max_enclosure_width": 0.03541284,
+    "min_eigenvalue_gap": 0.95252351,
+    "overall_sound": true,
+    "n_sound_cells": 1,
+    "n_unsound_cells": 0,
+    "boundary_error": 0.07082568,
+    "soundness_rate": 1.0
+  },
+  "mapk_cascade": {
+    "n_cells": 1,
+    "max_composed_delta": 1.16823372,
+    "max_enclosure_width": 0.58411686,
+    "min_eigenvalue_gap": 0.0,
+    "overall_sound": false,
+    "n_sound_cells": 0,
+    "n_unsound_cells": 1,
+    "boundary_error": 1.16823372,
+    "soundness_rate": 0.0
+  },
+  "p53_mdm2": {
+    "n_cells": 2,
+    "max_composed_delta": 0.11158293,
+    "max_enclosure_width": 0.03563431,
+    "min_eigenvalue_gap": 0.0,
+    "overall_sound": false,
+    "n_sound_cells": 1,
+    "n_unsound_cells": 1,
+    "boundary_error": 0.07126863,
+    "soundness_rate": 0.5
+  },
+  "calcium_oscillator": {
+    "n_cells": 3,
+    "max_composed_delta": 0.70910362,
+    "max_enclosure_width": 0.06397265,
+    "min_eigenvalue_gap": 0.55591059,
+    "overall_sound": false,
+    "n_sound_cells": 3,
+    "n_unsound_cells": 0,
+    "boundary_error": 0.1279453,
+    "soundness_rate": 1.0
+  },
+  "circadian_clock": {
+    "n_cells": 2,
+    "max_composed_delta": 0.10440307,
+    "max_enclosure_width": 0.05220154,
+    "min_eigenvalue_gap": 0.0,
+    "overall_sound": false,
+    "n_sound_cells": 0,
+    "n_unsound_cells": 2,
+    "boundary_error": 0.10440307,
+    "soundness_rate": 0.0
+  },
+  "genetic_oscillator": {
+    "n_cells": 2,
+    "max_composed_delta": 0.41228778,
+    "max_enclosure_width": 0.09104195,
+    "min_eigenvalue_gap": 0.43012865,
+    "overall_sound": true,
+    "n_sound_cells": 2,
+    "n_unsound_cells": 0,
+    "boundary_error": 0.1820839,
+    "soundness_rate": 1.0
+  },
+  "mutual_activation_switch": {
+    "n_cells": 1,
+    "max_composed_delta": 0.07458679,
+    "max_enclosure_width": 0.03729339,
+    "min_eigenvalue_gap": 0.0,
+    "overall_sound": false,
+    "n_sound_cells": 0,
+    "n_unsound_cells": 1,
+    "boundary_error": 0.07458679,
+    "soundness_rate": 0.0
+  },
+  "van_der_pol": {
+    "n_cells": 1,
+    "max_composed_delta": 0.0,
+    "max_enclosure_width": 0.0,
+    "min_eigenvalue_gap": 0.0,
+    "overall_sound": false,
+    "n_sound_cells": 0,
+    "n_unsound_cells": 1,
+    "boundary_error": 0.0,
+    "soundness_rate": 0.0
+  }
+}

@@ -1,5 +1,0 @@
-{
-  "category": "B",
-  "key_quote": "Only 34/60 equilibria receive stability certification via Routh-Hurwitz + Z3. The 26 failures are not adequately explained—whether they arise from non-hyperbolicity near bifurcation boundaries or from engineering limitations.",
-  "rationale": "All reviewers acknowledge the three-tiered certification architecture and Krawczyk operator as genuine contributions. The primary blockers are execution gaps: incomplete stability certification, missing limit cycle analysis, no baselines against established tools, and unverified mathematical assumptions. If the implementation were made perfect, reviewers would not say 'not novel'."
-}

@@ -192,7 +192,7 @@ class TestNewModels:
         models = list_benchmarks()
         assert 'lotka_volterra' in models
         assert 'fitzhugh_nagumo' in models
-        assert len(models) == 15
+        assert len(models) == 18
 
 
 class TestConfidenceLayer:

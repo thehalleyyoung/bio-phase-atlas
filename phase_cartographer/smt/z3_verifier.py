@@ -66,6 +66,7 @@ def _sympy_to_z3(expr, z3_vars: Dict[str, Any]) -> Any:
     """Convert a SymPy expression to a Z3 expression.
 
     Supports: Add, Mul, Pow (integer exponents), Number, Symbol, rational numbers.
+    Also handles rational expressions (a/b) common in Hill functions.
     """
     if not Z3_AVAILABLE:
         raise RuntimeError("Z3 not available")
@@ -91,6 +92,12 @@ def _sympy_to_z3(expr, z3_vars: Dict[str, Any]) -> Any:
         return result
 
     if isinstance(expr, sp.Mul):
+        # Separate numerator and denominator to handle rational expressions
+        numer, denom = expr.as_numer_denom()
+        if denom != sp.Integer(1):
+            n_z3 = _sympy_to_z3(numer, z3_vars)
+            d_z3 = _sympy_to_z3(denom, z3_vars)
+            return n_z3 / d_z3
         factors = [_sympy_to_z3(a, z3_vars) for a in expr.args]
         result = factors[0]
         for f in factors[1:]:
@@ -108,17 +115,29 @@ def _sympy_to_z3(expr, z3_vars: Dict[str, Any]) -> Any:
                 # x^(-n) = 1 / x^n
                 return z3.RealVal(1) / (base ** (-n))
         if isinstance(exp_val, sp.Rational):
-            # Only handle simple cases
             if exp_val == sp.Rational(1, 2):
                 raise NotImplementedError("sqrt not directly supported in QF_NRA")
         raise NotImplementedError(
             f"Non-integer power {exp_val} not supported for Z3 QF_NRA encoding"
         )
 
+    # Handle rational expressions explicitly
+    if hasattr(expr, 'as_numer_denom'):
+        numer, denom = expr.as_numer_denom()
+        if denom != sp.Integer(1):
+            n_z3 = _sympy_to_z3(numer, z3_vars)
+            d_z3 = _sympy_to_z3(denom, z3_vars)
+            return n_z3 / d_z3
+
     # Try to expand and convert
     expanded = sp.expand(expr)
     if expanded != expr:
         return _sympy_to_z3(expanded, z3_vars)
+
+    # Try cancel to simplify rational expressions
+    cancelled = sp.cancel(expr)
+    if cancelled != expr:
+        return _sympy_to_z3(cancelled, z3_vars)
 
     raise NotImplementedError(f"Cannot convert {type(expr)}: {expr} to Z3")
 
@@ -194,13 +213,26 @@ def verify_equilibrium_z3(
         # Convert RHS expressions to Z3
         f_z3 = []
         for expr in expressions:
-            # Expand and simplify for polynomial form
-            expanded = sp.expand(sp.nsimplify(expr, rational=True))
-            f_z3.append(_sympy_to_z3(expanded, z3_vars))
+            # Use cancel to get clean rational form (handles Hill functions)
+            try:
+                cleaned = sp.cancel(sp.nsimplify(expr, rational=True))
+            except Exception:
+                cleaned = expr
+            f_z3.append(_sympy_to_z3(cleaned, z3_vars))
 
-        # Assert equilibrium: f(x, μ) = 0
+        # For rational expressions f = p/q, equilibrium means p = 0 (assuming q ≠ 0)
+        # Extract numerators for cleaner Z3 encoding
         for i in range(n):
-            solver.add(f_z3[i] == 0)
+            numer, denom = sp.cancel(expressions[i]).as_numer_denom()
+            if denom != sp.Integer(1):
+                # Use numerator = 0 instead of f = 0 for better Z3 performance
+                try:
+                    numer_z3 = _sympy_to_z3(sp.expand(numer), z3_vars)
+                    solver.add(numer_z3 == 0)
+                except NotImplementedError:
+                    solver.add(f_z3[i] == 0)
+            else:
+                solver.add(f_z3[i] == 0)
 
         # Check satisfiability
         result = solver.check()
@@ -336,25 +368,17 @@ def verify_stability_z3(
                 solver.add(z3.Or(tr_J >= 0, det_J <= 0))
             elif n == 3:
                 # Routh-Hurwitz 3D
-                # Characteristic polynomial: λ³ + p·λ² + q·λ + r = 0
-                # p = -(J[0,0] + J[1,1] + J[2,2])  (negative trace)
-                # q = cofactor sum
-                # r = -det(J)
-                # Stable iff p > 0, r > 0, p*q - r > 0
-
                 p_rh = -(J_z3[0][0] + J_z3[1][1] + J_z3[2][2])
 
                 q_rh = (J_z3[0][0] * J_z3[1][1] - J_z3[0][1] * J_z3[1][0]
                         + J_z3[0][0] * J_z3[2][2] - J_z3[0][2] * J_z3[2][0]
                         + J_z3[1][1] * J_z3[2][2] - J_z3[1][2] * J_z3[2][1])
 
-                # det(J) for 3×3
                 det_J = (J_z3[0][0] * (J_z3[1][1] * J_z3[2][2] - J_z3[1][2] * J_z3[2][1])
                          - J_z3[0][1] * (J_z3[1][0] * J_z3[2][2] - J_z3[1][2] * J_z3[2][0])
                          + J_z3[0][2] * (J_z3[1][0] * J_z3[2][1] - J_z3[1][1] * J_z3[2][0]))
                 r_rh = -det_J
 
-                # Negation of all three conditions
                 solver.add(z3.Or(p_rh <= 0, r_rh <= 0, p_rh * q_rh - r_rh <= 0))
             else:
                 return Z3VerificationResult(
@@ -370,11 +394,59 @@ def verify_stability_z3(
                 # Negation: tr(J) <= 0 AND det(J) >= 0
                 solver.add(tr_J <= 0)
                 solver.add(det_J >= 0)
+            elif n == 3:
+                # Unstable 3D: negation of Routh-Hurwitz conditions holds
+                p_rh = -(J_z3[0][0] + J_z3[1][1] + J_z3[2][2])
+                q_rh = (J_z3[0][0] * J_z3[1][1] - J_z3[0][1] * J_z3[1][0]
+                        + J_z3[0][0] * J_z3[2][2] - J_z3[0][2] * J_z3[2][0]
+                        + J_z3[1][1] * J_z3[2][2] - J_z3[1][2] * J_z3[2][1])
+                det_J = (J_z3[0][0] * (J_z3[1][1] * J_z3[2][2] - J_z3[1][2] * J_z3[2][1])
+                         - J_z3[0][1] * (J_z3[1][0] * J_z3[2][2] - J_z3[1][2] * J_z3[2][0])
+                         + J_z3[0][2] * (J_z3[1][0] * J_z3[2][1] - J_z3[1][1] * J_z3[2][0]))
+                r_rh = -det_J
+                # Unstable: at least one RH condition fails
+                # Negation of "at least one fails" = "all hold" → stable
+                solver.add(p_rh > 0)
+                solver.add(r_rh > 0)
+                solver.add(p_rh * q_rh - r_rh > 0)
             else:
                 return Z3VerificationResult(
                     verified=False, tier="tier3_exact", status="error",
                     time_s=time.time() - t0,
                     message=f"Unstable check not implemented for n={n}"
+                )
+        elif stability_type == "saddle":
+            if n == 2:
+                # Saddle: det(J) < 0 (one positive, one negative eigenvalue)
+                det_J = J_z3[0][0] * J_z3[1][1] - J_z3[0][1] * J_z3[1][0]
+                # Negation: det(J) >= 0
+                solver.add(det_J >= 0)
+            elif n == 3:
+                # Saddle in 3D: eigenvalues with mixed signs
+                # A sufficient condition: det(J) > 0 AND trace(J) > 0
+                # (means odd number of negative eigenvalues with positive product)
+                # Negation is complex; use trace/det conditions
+                tr_J = J_z3[0][0] + J_z3[1][1] + J_z3[2][2]
+                det_J = (J_z3[0][0] * (J_z3[1][1] * J_z3[2][2] - J_z3[1][2] * J_z3[2][1])
+                         - J_z3[0][1] * (J_z3[1][0] * J_z3[2][2] - J_z3[1][2] * J_z3[2][0])
+                         + J_z3[0][2] * (J_z3[1][0] * J_z3[2][1] - J_z3[1][1] * J_z3[2][0]))
+                # For saddle: not all eigenvalues same sign
+                p_rh = -tr_J
+                q_rh = (J_z3[0][0] * J_z3[1][1] - J_z3[0][1] * J_z3[1][0]
+                        + J_z3[0][0] * J_z3[2][2] - J_z3[0][2] * J_z3[2][0]
+                        + J_z3[1][1] * J_z3[2][2] - J_z3[1][2] * J_z3[2][1])
+                r_rh = -det_J
+                # Saddle means RH conditions don't all hold AND not all unstable
+                # Negation: all RH hold (stable) OR all eigenvalues positive
+                solver.add(z3.Or(
+                    z3.And(p_rh > 0, r_rh > 0, p_rh * q_rh - r_rh > 0),
+                    z3.And(p_rh < 0, r_rh < 0),
+                ))
+            else:
+                return Z3VerificationResult(
+                    verified=False, tier="tier3_exact", status="error",
+                    time_s=time.time() - t0,
+                    message=f"Saddle check not implemented for n={n}"
                 )
         else:
             return Z3VerificationResult(
@@ -580,9 +652,12 @@ def verify_cell_z3(
         results[f'eq_{eq_idx}_existence'] = eq_result
 
         # 2. Verify stability
-        stab_type = "stable" if stab in (
-            "stable_node", "stable_focus", "stable_spiral"
-        ) else "unstable"
+        if stab == "saddle":
+            stab_type = "saddle"
+        elif stab in ("stable_node", "stable_focus", "stable_spiral"):
+            stab_type = "stable"
+        else:
+            stab_type = "unstable"
 
         stab_result = verify_stability_z3(
             expressions, state_symbols, param_symbols,

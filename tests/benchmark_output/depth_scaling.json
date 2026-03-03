@@ -1,0 +1,36 @@
+{
+  "brusselator": [
+    {
+      "model_name": "brusselator",
+      "max_depth": 2,
+      "certified_cells": 0,
+      "coverage_fraction": 0.0,
+      "total_time_s": 12.051,
+      "cells_per_second": 0.0
+    },
+    {
+      "model_name": "brusselator",
+      "max_depth": 3,
+      "certified_cells": 3,
+      "coverage_fraction": 0.375,
+      "total_time_s": 23.602,
+      "cells_per_second": 0.13
+    },
+    {
+      "model_name": "brusselator",
+      "max_depth": 4,
+      "certified_cells": 5,
+      "coverage_fraction": 0.5,
+      "total_time_s": 38.314,
+      "cells_per_second": 0.13
+    },
+    {
+      "model_name": "brusselator",
+      "max_depth": 5,
+      "certified_cells": 16,
+      "coverage_fraction": 0.84375,
+      "total_time_s": 63.065,
+      "cells_per_second": 0.25
+    }
+  ]
+}

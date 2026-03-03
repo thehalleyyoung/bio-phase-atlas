@@ -154,7 +154,13 @@ def tier3_verify(cell: CertifiedCell, timeout_s: float = 120.0) -> Tuple[bool, s
                 all_verified = False
 
             # Verify stability
-            stab_type = "stable" if eq.is_stable() else "unstable"
+            from ..tiered.certificate import StabilityType as _ST
+            if eq.stability == _ST.SADDLE:
+                stab_type = "saddle"
+            elif eq.is_stable():
+                stab_type = "stable"
+            else:
+                stab_type = "unstable"
             stab_result = verify_stability_z3(
                 rhs.expressions, rhs.state_symbols, rhs.param_symbols,
                 eq.state_enclosure, cell.parameter_box,

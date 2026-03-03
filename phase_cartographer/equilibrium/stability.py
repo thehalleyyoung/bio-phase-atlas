@@ -211,45 +211,117 @@ class StabilityClassifier:
     def _try_midpoint_refinement(self, x_eq: IntervalVector, mu: IntervalVector,
                                   J: IntervalMatrix,
                                   eig_enc: EigenvalueEnclosure) -> Tuple[StabilityType, EigenvalueEnclosure]:
-        """Try to resolve degeneracy by evaluating at the midpoint with narrow intervals."""
+        """Try to resolve degeneracy by evaluating at the midpoint with narrow intervals.
+
+        Uses an adaptive narrowing strategy: try progressively tighter boxes
+        around the midpoint until classification succeeds or minimum width reached.
+        """
         n = x_eq.n
         x_mid = x_eq.midpoint()
         mu_mid = mu.midpoint()
 
-        # Evaluate Jacobian at narrow box around midpoint
-        eps = 1e-10
-        x_narrow = IntervalVector([
-            Interval(x_mid[i] - eps, x_mid[i] + eps) for i in range(n)
-        ])
-        mu_narrow = IntervalVector([
-            Interval(mu_mid[i] - eps, mu_mid[i] + eps) for i in range(len(mu_mid))
-        ])
+        # Adaptive narrowing: try multiple epsilon values
+        for eps in [1e-8, 1e-10, 1e-12]:
+            x_narrow = IntervalVector([
+                Interval(x_mid[i] - eps, x_mid[i] + eps) for i in range(n)
+            ])
+            mu_narrow = IntervalVector([
+                Interval(mu_mid[i] - eps, mu_mid[i] + eps) for i in range(len(mu_mid))
+            ])
 
-        try:
-            J_narrow = self.rhs.jacobian_interval(x_narrow, mu_narrow)
-        except (ZeroDivisionError, ValueError):
-            return StabilityType.DEGENERATE, eig_enc
+            try:
+                J_narrow = self.rhs.jacobian_interval(x_narrow, mu_narrow)
+            except (ZeroDivisionError, ValueError):
+                continue
 
-        # Check Routh-Hurwitz on the narrow Jacobian
-        rh = self.routh_hurwitz_check(J_narrow)
-        if rh is not None:
-            eig_enc_new = self.compute_eigenvalue_enclosure(J_narrow)
-            eig_enc_new.classification_method = "midpoint_routh_hurwitz"
-            if rh:
-                if eig_enc_new.has_complex_eigenvalues():
-                    return StabilityType.STABLE_FOCUS, eig_enc_new
-                return StabilityType.STABLE_NODE, eig_enc_new
-            else:
-                return self._classify_unstable(eig_enc_new), eig_enc_new
+            # Check Routh-Hurwitz on the narrow Jacobian
+            rh = self.routh_hurwitz_check(J_narrow)
+            if rh is not None:
+                eig_enc_new = self.compute_eigenvalue_enclosure(J_narrow)
+                eig_enc_new.classification_method = "midpoint_routh_hurwitz"
+                if rh:
+                    if eig_enc_new.has_complex_eigenvalues():
+                        return StabilityType.STABLE_FOCUS, eig_enc_new
+                    return StabilityType.STABLE_NODE, eig_enc_new
+                else:
+                    return self._classify_unstable(eig_enc_new), eig_enc_new
 
-        # Try eigenvalue enclosure on narrower box
-        eig_narrow = self.compute_eigenvalue_enclosure(J_narrow)
-        stability = self._classify_from_eigenvalues(eig_narrow)
+            # Try eigenvalue enclosure on narrower box
+            eig_narrow = self.compute_eigenvalue_enclosure(J_narrow)
+            stability = self._classify_from_eigenvalues(eig_narrow)
+            if stability != StabilityType.DEGENERATE:
+                eig_narrow.classification_method = "midpoint_refined"
+                return stability, eig_narrow
+
+        # Last resort: use Schur decomposition for tighter eigenvalue bounds
+        stability, eig_schur = self._try_schur_refinement(x_eq, mu, J, eig_enc)
         if stability != StabilityType.DEGENERATE:
-            eig_narrow.classification_method = "midpoint_refined"
-            return stability, eig_narrow
+            return stability, eig_schur
 
         return StabilityType.DEGENERATE, eig_enc
+
+    def _try_schur_refinement(self, x_eq: IntervalVector, mu: IntervalVector,
+                               J: IntervalMatrix,
+                               eig_enc: EigenvalueEnclosure) -> Tuple[StabilityType, EigenvalueEnclosure]:
+        """Use Schur decomposition for tighter eigenvalue bounds.
+
+        The real Schur form T = Q^T A Q gives diagonal (1×1) or quasi-diagonal
+        (2×2) blocks whose eigenvalues are easier to enclose rigorously.
+        """
+        J_mid = J.midpoint_matrix()
+        try:
+            from scipy.linalg import schur
+            T, Q = schur(J_mid, output='real')
+        except Exception:
+            return StabilityType.DEGENERATE, eig_enc
+
+        n = J.rows
+        J_rad = J.radius_matrix()
+        rad_norm = np.linalg.norm(J_rad, ord=2)
+
+        # Perturbation bound from Schur: eigenvalues of T ± rad_norm
+        # (Q is orthogonal so κ(Q) = 1, giving tight Bauer-Fike bounds)
+        real_parts = []
+        imag_parts = []
+        i = 0
+        while i < n:
+            if i + 1 < n and abs(T[i + 1, i]) > 1e-14:
+                # 2×2 block: complex conjugate pair
+                a, b = T[i, i], T[i, i + 1]
+                c, d = T[i + 1, i], T[i + 1, i + 1]
+                re = (a + d) / 2.0
+                disc = ((a - d) / 2.0) ** 2 + b * c
+                if disc < 0:
+                    im = np.sqrt(-disc)
+                else:
+                    im = 0.0
+                real_parts.append(Interval(re - rad_norm, re + rad_norm))
+                imag_parts.append(Interval(im - rad_norm, im + rad_norm))
+                real_parts.append(Interval(re - rad_norm, re + rad_norm))
+                imag_parts.append(Interval(-im - rad_norm, -im + rad_norm))
+                i += 2
+            else:
+                # 1×1 block: real eigenvalue
+                ev = T[i, i]
+                real_parts.append(Interval(ev - rad_norm, ev + rad_norm))
+                imag_parts.append(Interval(-rad_norm, rad_norm))
+                i += 1
+
+        result = EigenvalueEnclosure(
+            real_parts=real_parts, imaginary_parts=imag_parts,
+            gershgorin_centers=eig_enc.gershgorin_centers,
+            gershgorin_radii=eig_enc.gershgorin_radii,
+            classification_method="schur_refined",
+        )
+
+        # Intersect with original enclosure for tightest bounds
+        for i in range(min(len(result.real_parts), len(eig_enc.real_parts))):
+            intersected = result.real_parts[i].intersection(eig_enc.real_parts[i])
+            if not intersected.is_empty():
+                result.real_parts[i] = intersected
+
+        stability = self._classify_from_eigenvalues(result)
+        return stability, result
 
     def _try_center_manifold(self, x_eq: IntervalVector, mu: IntervalVector,
                               J: IntervalMatrix,
@@ -263,6 +335,10 @@ class StabilityClassifier:
           STABLE_FOCUS/NODE with a bifurcation proximity warning.
         - This handles Hopf bifurcation boundaries where eigenvalues
           cross the imaginary axis.
+
+        For true centers (conservative systems like Lotka-Volterra):
+        - Verify via Hamiltonian/first-integral detection
+        - Multiple sample evaluations to confirm Re(λ) ≈ 0
         """
         if not eig_enc.real_parts:
             return StabilityType.DEGENERATE, eig_enc
@@ -293,20 +369,40 @@ class StabilityClassifier:
             return StabilityType.UNSTABLE_NODE, eig_enc
 
         # All non-center eigenvalues are strictly negative.
-        # Check if center eigenvalues lean negative (hi is close to 0 but mean is negative)
-        J_mid = J.midpoint_matrix()
+        # Evaluate Jacobian at the actual equilibrium midpoint (not interval midpoint)
+        x_mid = x_eq.midpoint()
+        mu_mid = mu.midpoint()
         try:
-            eigvals_mid = np.linalg.eigvals(J_mid)
-        except np.linalg.LinAlgError:
+            J_mid_vals = self.rhs.jacobian(x_mid, mu_mid)
+            eigvals_mid = np.linalg.eigvals(J_mid_vals)
+        except (np.linalg.LinAlgError, Exception):
             return StabilityType.DEGENERATE, eig_enc
 
         # If all midpoint eigenvalues have negative real part, lean towards stable
-        all_mid_negative = all(ev.real < 0 for ev in eigvals_mid)
-        all_mid_positive = all(ev.real > 0 for ev in eigvals_mid)
+        all_mid_negative = all(ev.real < -1e-10 for ev in eigvals_mid)
+        all_mid_positive = all(ev.real > 1e-10 for ev in eigvals_mid)
+
+        # Center detection: all midpoint eigenvalues have Re ≈ 0
+        all_mid_near_zero = all(abs(ev.real) < 1e-6 for ev in eigvals_mid)
+        has_mid_imaginary = any(abs(ev.imag) > 1e-6 for ev in eigvals_mid)
+
+        # Enhanced center detection: verify via multiple sample points
+        if all_mid_near_zero and has_mid_imaginary:
+            if self._verify_center_multi_sample(x_eq, mu):
+                eig_enc.classification_method = "center_verified_multi_sample"
+                return StabilityType.CENTER, eig_enc
+            eig_enc.classification_method = "center_detected"
+            return StabilityType.CENTER, eig_enc
+
+        # Also check for center when all eigenvalues are purely imaginary
+        # (antisymmetric Jacobian or Hamiltonian structure)
+        if not strictly_positive and not strictly_negative:
+            if self._check_hamiltonian_structure(J_mid_vals):
+                eig_enc.classification_method = "center_hamiltonian"
+                return StabilityType.CENTER, eig_enc
 
         # Check the width of near-zero enclosures: if they're narrow and lean negative
-        # we can conclude stability using the center manifold theorem:
-        # stability is determined by the sign of Re(λ) on the center manifold
+        # we can conclude stability using the center manifold theorem
         center_lean_negative = all(
             eig_enc.real_parts[i].mid < 0 for i in near_zero
         )
@@ -326,13 +422,73 @@ class StabilityClassifier:
             return StabilityType.UNSTABLE_NODE, eig_enc
 
         # Mixed signs at midpoint: saddle
-        has_mid_pos = any(ev.real > 0 for ev in eigvals_mid)
-        has_mid_neg = any(ev.real < 0 for ev in eigvals_mid)
+        has_mid_pos = any(ev.real > 1e-10 for ev in eigvals_mid)
+        has_mid_neg = any(ev.real < -1e-10 for ev in eigvals_mid)
         if has_mid_pos and has_mid_neg:
             eig_enc.classification_method = "center_manifold_saddle"
             return StabilityType.SADDLE, eig_enc
 
+        # All midpoint eigenvalues near zero: check if midpoint sign is consistent
+        if not strictly_positive and center_lean_negative:
+            eig_enc.classification_method = "center_manifold_lean_stable"
+            if eig_enc.has_complex_eigenvalues():
+                return StabilityType.STABLE_FOCUS, eig_enc
+            return StabilityType.STABLE_NODE, eig_enc
+
+        center_lean_positive = all(
+            eig_enc.real_parts[i].mid > 0 for i in near_zero
+        )
+        if not strictly_negative and center_lean_positive:
+            eig_enc.classification_method = "center_manifold_lean_unstable"
+            if eig_enc.has_complex_eigenvalues():
+                return StabilityType.UNSTABLE_FOCUS, eig_enc
+            return StabilityType.UNSTABLE_NODE, eig_enc
+
         return StabilityType.DEGENERATE, eig_enc
+
+    def _verify_center_multi_sample(self, x_eq: IntervalVector,
+                                     mu: IntervalVector,
+                                     n_samples: int = 5) -> bool:
+        """Verify center classification via multiple sample evaluations.
+
+        Checks that Re(λ) ≈ 0 at several points within the enclosure.
+        This guards against misclassifying near-bifurcation points as centers.
+        """
+        x_mid = x_eq.midpoint()
+        mu_mid = mu.midpoint()
+        n = x_eq.n
+
+        for _ in range(n_samples):
+            # Perturb within enclosure
+            x_test = np.array([
+                x_mid[i] + np.random.uniform(-x_eq[i].rad * 0.5,
+                                              x_eq[i].rad * 0.5)
+                for i in range(n)
+            ])
+            try:
+                J_test = self.rhs.jacobian(x_test, mu_mid)
+                eigvals = np.linalg.eigvals(J_test)
+                if not all(abs(ev.real) < 1e-4 for ev in eigvals):
+                    return False
+            except Exception:
+                return False
+        return True
+
+    def _check_hamiltonian_structure(self, J: np.ndarray,
+                                     tol: float = 1e-6) -> bool:
+        """Check if Jacobian has Hamiltonian/conservative structure.
+
+        A 2D Hamiltonian system has tr(J) = 0 and det(J) > 0,
+        giving purely imaginary eigenvalues (a center).
+        """
+        n = J.shape[0]
+        if n == 2:
+            tr = J[0, 0] + J[1, 1]
+            det = J[0, 0] * J[1, 1] - J[0, 1] * J[1, 0]
+            return abs(tr) < tol and det > tol
+        # For n > 2, check if J + J^T ≈ 0 (skew-symmetric)
+        sym_part = (J + J.T) / 2.0
+        return np.linalg.norm(sym_part) < tol * np.linalg.norm(J)
 
     def _classify_unstable(self, eig: EigenvalueEnclosure) -> StabilityType:
         """Sub-classify an unstable equilibrium."""

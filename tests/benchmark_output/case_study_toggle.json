@@ -1,0 +1,202 @@
+{
+  "scenario": "Synthetic biology toggle switch design",
+  "question": "What alpha1 x alpha2 region guarantees bistability?",
+  "grid_size": 20,
+  "parameter_ranges": {
+    "alpha1": [
+      2.0,
+      4.0
+    ],
+    "alpha2": [
+      2.0,
+      4.0
+    ]
+  },
+  "results": {
+    "certified_bistable_count": 104,
+    "certified_monostable_count": 292,
+    "certified_unknown_count": 4,
+    "numerical_bistable_count": 125,
+    "numerical_monostable_count": 275,
+    "gap_count": 21,
+    "gap_fraction": 0.168,
+    "safe_bistable_count": 13
+  },
+  "gap_cells": [
+    {
+      "alpha1": 2.105,
+      "alpha2": 2.105,
+      "numerical_stable_roots": 2,
+      "certified_regime": "uncertified"
+    },
+    {
+      "alpha1": 2.211,
+      "alpha2": 2.211,
+      "numerical_stable_roots": 2,
+      "certified_regime": "uncertified"
+    },
+    {
+      "alpha1": 2.316,
+      "alpha2": 2.316,
+      "numerical_stable_roots": 2,
+      "certified_regime": "uncertified"
+    },
+    {
+      "alpha1": 2.421,
+      "alpha2": 2.526,
+      "numerical_stable_roots": 2,
+      "certified_regime": "monostable"
+    },
+    {
+      "alpha1": 2.526,
+      "alpha2": 2.421,
+      "numerical_stable_roots": 2,
+      "certified_regime": "monostable"
+    },
+    {
+      "alpha1": 2.526,
+      "alpha2": 2.632,
+      "numerical_stable_roots": 2,
+      "certified_regime": "monostable"
+    },
+    {
+      "alpha1": 2.632,
+      "alpha2": 2.526,
+      "numerical_stable_roots": 2,
+      "certified_regime": "monostable"
+    },
+    {
+      "alpha1": 2.632,
+      "alpha2": 2.842,
+      "numerical_stable_roots": 2,
+      "certified_regime": "monostable"
+    },
+    {
+      "alpha1": 2.737,
+      "alpha2": 2.947,
+      "numerical_stable_roots": 2,
+      "certified_regime": "monostable"
+    },
+    {
+      "alpha1": 2.737,
+      "alpha2": 3.053,
+      "numerical_stable_roots": 2,
+      "certified_regime": "monostable"
+    },
+    {
+      "alpha1": 2.842,
+      "alpha2": 2.632,
+      "numerical_stable_roots": 2,
+      "certified_regime": "monostable"
+    },
+    {
+      "alpha1": 2.842,
+      "alpha2": 3.158,
+      "numerical_stable_roots": 2,
+      "certified_regime": "monostable"
+    },
+    {
+      "alpha1": 2.947,
+      "alpha2": 2.737,
+      "numerical_stable_roots": 2,
+      "certified_regime": "monostable"
+    },
+    {
+      "alpha1": 2.947,
+      "alpha2": 3.368,
+      "numerical_stable_roots": 2,
+      "certified_regime": "monostable"
+    },
+    {
+      "alpha1": 3.053,
+      "alpha2": 2.737,
+      "numerical_stable_roots": 2,
+      "certified_regime": "monostable"
+    },
+    {
+      "alpha1": 3.158,
+      "alpha2": 2.842,
+      "numerical_stable_roots": 2,
+      "certified_regime": "monostable"
+    },
+    {
+      "alpha1": 3.158,
+      "alpha2": 3.789,
+      "numerical_stable_roots": 2,
+      "certified_regime": "monostable"
+    },
+    {
+      "alpha1": 3.263,
+      "alpha2": 4.0,
+      "numerical_stable_roots": 2,
+      "certified_regime": "monostable"
+    },
+    {
+      "alpha1": 3.368,
+      "alpha2": 2.947,
+      "numerical_stable_roots": 2,
+      "certified_regime": "monostable"
+    },
+    {
+      "alpha1": 3.789,
+      "alpha2": 3.158,
+      "numerical_stable_roots": 2,
+      "certified_regime": "monostable"
+    }
+  ],
+  "safe_design_region": [
+    {
+      "alpha1": 2.947,
+      "alpha2": 2.947
+    },
+    {
+      "alpha1": 3.263,
+      "alpha2": 3.263
+    },
+    {
+      "alpha1": 3.263,
+      "alpha2": 3.579
+    },
+    {
+      "alpha1": 3.579,
+      "alpha2": 3.263
+    },
+    {
+      "alpha1": 3.579,
+      "alpha2": 3.579
+    },
+    {
+      "alpha1": 3.579,
+      "alpha2": 3.684
+    },
+    {
+      "alpha1": 3.579,
+      "alpha2": 3.789
+    },
+    {
+      "alpha1": 3.684,
+      "alpha2": 3.579
+    },
+    {
+      "alpha1": 3.684,
+      "alpha2": 3.684
+    },
+    {
+      "alpha1": 3.684,
+      "alpha2": 3.789
+    },
+    {
+      "alpha1": 3.789,
+      "alpha2": 3.579
+    },
+    {
+      "alpha1": 3.789,
+      "alpha2": 3.684
+    },
+    {
+      "alpha1": 3.789,
+      "alpha2": 3.789
+    }
+  ],
+  "insight": "Numerical methods predict bistability at 125 grid points, but only 104 receive machine-checkable bistability certificates. The 21 gap points represent parameter choices where a designer relying on numerics alone might incorrectly assume bistability. Safe design region: 13 points with certified bistability AND certified bistable neighbors (margin from boundary)."
+}

@@ -55,14 +55,14 @@ def _check_timeout(label=""):
 
 
 # ---------------------------------------------------------------------------
-# All 15 model names
+# All 18 model names
 # ---------------------------------------------------------------------------
 ALL_MODEL_NAMES = [
     "toggle_switch", "brusselator", "selkov", "repressilator", "goodwin",
     "lotka_volterra", "fitzhugh_nagumo",
     "tyson_cell_cycle", "mapk_cascade", "p53_mdm2", "calcium_oscillator",
     "circadian_clock", "genetic_oscillator", "mutual_activation_switch",
-    "van_der_pol",
+    "van_der_pol", "michaelis_menten_switch", "erk_bistable", "apoptosis_switch",
 ]
 
 ABLATION_MODELS = [
@@ -517,6 +517,153 @@ def print_summary_table(benchmark_results, ablation_results, gp_results,
 
 
 # ---------------------------------------------------------------------------
+# Toggle switch design case study
+# ---------------------------------------------------------------------------
+
+def run_toggle_design_case_study():
+    """
+    Biological case study: toggle switch parameter design.
+
+    Scenario: A synthetic biologist wants to design a genetic toggle switch
+    that is guaranteed to be bistable. They need to know the exact parameter
+    regions where bistability is certified vs. where numerical methods might
+    give misleading answers.
+
+    We show:
+    1. Certified bistability boundary (where PhaseCartographer proves bistable)
+    2. Numerical boundary (where scipy/fsolve says bistable)
+    3. Gap region: where numerical says bistable but certificates fail
+       (potential design error if relying on numerics alone)
+    4. Design recommendation: safe parameter region with certified margin
+    """
+    from phase_cartographer.models.benchmark_models import get_benchmark
+    from phase_cartographer.benchmarks.runner import certify_box
+    from phase_cartographer.benchmarks.numerical_baseline import (
+        numerical_continuation, _classify_eigenvalues,
+    )
+    from scipy.optimize import fsolve
+
+    bm = get_benchmark("toggle_switch")
+    rhs = bm.rhs
+
+    # Scan alpha1 x alpha2 grid (n1=n2=2 fixed)
+    n_grid = 20
+    a1_range = np.linspace(2.0, 4.0, n_grid)
+    a2_range = np.linspace(2.0, 4.0, n_grid)
+
+    certified_bistable = []
+    certified_monostable = []
+    certified_unknown = []
+    numerical_bistable = []
+    numerical_monostable = []
+    gap_cells = []  # numerical says bistable, certified says not
+
+    for a1 in a1_range:
+        for a2 in a2_range:
+            # Certified analysis
+            box = [(a1, a1), (a2, a2), (2.0, 2.0), (2.0, 2.0)]
+            cell = certify_box(bm.rhs, box, bm.state_domain,
+                             bm.name, bm.n_states, bm.n_params, bm.rhs_type)
+
+            cert_bistable = False
+            if cell and cell.regime.value == "bistable":
+                certified_bistable.append((a1, a2))
+                cert_bistable = True
+            elif cell and cell.regime.value == "monostable":
+                certified_monostable.append((a1, a2))
+            else:
+                certified_unknown.append((a1, a2))
+
+            # Numerical analysis (scipy fsolve from multiple starts)
+            mu = np.array([a1, a2, 2.0, 2.0])
+            roots = []
+            for x0 in [(0.5, 3.5), (3.5, 0.5), (2.0, 2.0), (0.2, 0.2), (4.0, 4.0)]:
+                try:
+                    sol, _, ier, _ = fsolve(
+                        lambda x: rhs.evaluate(x, mu), np.array(x0), full_output=True)
+                    if ier == 1 and np.all(np.isfinite(sol)) and np.all(sol > 0):
+                        residual = np.linalg.norm(rhs.evaluate(sol, mu))
+                        if residual < 1e-8:
+                            is_dup = any(np.linalg.norm(sol - r) < 0.1 for r in roots)
+                            if not is_dup:
+                                roots.append(sol.copy())
+                except Exception:
+                    continue
+
+            # Count stable roots numerically
+            n_stable_num = 0
+            for root in roots:
+                try:
+                    J = rhs.jacobian(root, mu)
+                    eigvals = np.linalg.eigvals(J)
+                    if all(ev.real < -1e-10 for ev in eigvals):
+                        n_stable_num += 1
+                except Exception:
+                    pass
+
+            num_bistable = n_stable_num >= 2
+            if num_bistable:
+                numerical_bistable.append((a1, a2))
+            else:
+                numerical_monostable.append((a1, a2))
+
+            # Identify gap: numerical says bistable but certified doesn't
+            if num_bistable and not cert_bistable:
+                gap_cells.append({
+                    "alpha1": round(a1, 3), "alpha2": round(a2, 3),
+                    "numerical_stable_roots": n_stable_num,
+                    "certified_regime": cell.regime.value if cell else "uncertified",
+                })
+
+    # Design recommendation
+    # Safe bistable region: certified bistable with margin from boundary
+    safe_region = []
+    for a1, a2 in certified_bistable:
+        # Check if all neighbors are also certified bistable
+        neighbors_bistable = True
+        da = (a1_range[1] - a1_range[0]) if len(a1_range) > 1 else 0.1
+        for da1 in [-da, 0, da]:
+            for da2 in [-da, 0, da]:
+                if (da1, da2) == (0, 0):
+                    continue
+                if (a1 + da1, a2 + da2) not in certified_bistable:
+                    neighbors_bistable = False
+                    break
+            if not neighbors_bistable:
+                break
+        if neighbors_bistable:
+            safe_region.append({"alpha1": round(a1, 3), "alpha2": round(a2, 3)})
+
+    return {
+        "scenario": "Synthetic biology toggle switch design",
+        "question": "What alpha1 x alpha2 region guarantees bistability?",
+        "grid_size": n_grid,
+        "parameter_ranges": {"alpha1": [2.0, 4.0], "alpha2": [2.0, 4.0]},
+        "results": {
+            "certified_bistable_count": len(certified_bistable),
+            "certified_monostable_count": len(certified_monostable),
+            "certified_unknown_count": len(certified_unknown),
+            "numerical_bistable_count": len(numerical_bistable),
+            "numerical_monostable_count": len(numerical_monostable),
+            "gap_count": len(gap_cells),
+            "gap_fraction": round(len(gap_cells) / max(len(numerical_bistable), 1), 4),
+            "safe_bistable_count": len(safe_region),
+        },
+        "gap_cells": gap_cells[:20],
+        "safe_design_region": safe_region[:20],
+        "insight": (
+            f"Numerical methods predict bistability at {len(numerical_bistable)} "
+            f"grid points, but only {len(certified_bistable)} receive machine-checkable "
+            f"bistability certificates. The {len(gap_cells)} gap points represent "
+            f"parameter choices where a designer relying on numerics alone might "
+            f"incorrectly assume bistability. "
+            f"Safe design region: {len(safe_region)} points with certified bistability "
+            f"AND certified bistable neighbors (margin from boundary)."
+        ),
+    }
+
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 
@@ -564,6 +711,46 @@ if __name__ == "__main__":
         print(f"\n  TIMEOUT: {e}")
         delta_results = {}
 
+    # Phase 6: Numerical baseline comparison
+    print("\n[Phase 6] Running numerical baseline comparison...")
+    baseline_results = {}
+    try:
+        from phase_cartographer.benchmarks.numerical_baseline import run_full_baseline_comparison
+        _check_timeout("baseline")
+        BASELINE_MODELS = ["toggle_switch", "brusselator", "selkov", "fitzhugh_nagumo",
+                          "van_der_pol", "calcium_oscillator"]
+        baseline_results = run_full_baseline_comparison(BASELINE_MODELS, n_steps=80)
+        out_path = os.path.join(OUTPUT_DIR, "numerical_baseline.json")
+        with open(out_path, "w") as f:
+            json.dump(baseline_results, f, indent=2, default=str)
+        print(f"  Saved: {out_path}")
+        for name, res in baseline_results.items():
+            if "error" in res:
+                print(f"  [{name}] ERROR: {res['error']}")
+            else:
+                comp = res.get("comparison", {})
+                print(f"  [{name}] agree={comp.get('n_agreements',0)}/{comp.get('n_comparisons',0)}, "
+                      f"bifs={res.get('numerical',{}).get('n_bifurcations',0)}")
+    except TimeoutError:
+        print("  TIMEOUT")
+    except Exception as e:
+        print(f"  ERROR: {e}")
+
+    # Phase 7: Toggle switch design case study
+    print("\n[Phase 7] Toggle switch design case study...")
+    case_study = {}
+    try:
+        _check_timeout("case_study")
+        case_study = run_toggle_design_case_study()
+        out_path = os.path.join(OUTPUT_DIR, "case_study_toggle.json")
+        with open(out_path, "w") as f:
+            json.dump(case_study, f, indent=2, default=str)
+        print(f"  Saved: {out_path}")
+    except TimeoutError:
+        print("  TIMEOUT")
+    except Exception as e:
+        print(f"  ERROR: {e}")
+
     total_elapsed = time.time() - _start_time
     print(f"\nTotal time: {total_elapsed:.1f}s")
 
@@ -577,3 +764,5 @@ if __name__ == "__main__":
     print("  - gp_calibration.json")
     print("  - depth_scaling.json")
     print("  - delta_validation.json")
+    print("  - numerical_baseline.json")
+    print("  - case_study_toggle.json")

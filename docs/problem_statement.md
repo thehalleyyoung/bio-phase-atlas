@@ -167,4 +167,4 @@ This system is designed to run on a single multi-core laptop CPU. Every computat
 
 ---
 
-**Slug:** `certified-bio-phase-cartographer`
+**Slug:** `bio-phase-atlas`

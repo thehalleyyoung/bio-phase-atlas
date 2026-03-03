@@ -1,5 +1,107 @@
 # PhaseCartographer API Reference
 
+## CLI Commands
+
+### Run analysis on a user-defined model
+```bash
+python3 -m phase_cartographer --file MODEL.yaml [--depth N] [--max-cells N]
+python3 -m phase_cartographer --file MODEL.sbml [--depth N] [--max-cells N]
+```
+
+### Run analysis on a built-in benchmark
+```bash
+python3 -m phase_cartographer toggle_switch [--depth N] [--max-cells N]
+python3 -m phase_cartographer                 # Run all 18 benchmarks
+```
+
+### Validate a model file (parse-only, no computation)
+```bash
+python3 -m phase_cartographer check MODEL.yaml
+python3 -m phase_cartographer check MODEL.sbml
+```
+
+### Generate a starter template
+```bash
+python3 -m phase_cartographer init-model [-o OUTPUT.yaml] [--template 2d|3d|oscillator]
+```
+
+### Special reports
+```bash
+python3 -m phase_cartographer --case-study    # Toggle switch design case study
+python3 -m phase_cartographer --delta-table   # δ-soundness parameter table
+python3 -m phase_cartographer --baseline      # Numerical continuation comparison
+```
+
+## YAML Model File Format
+
+```yaml
+name: my_model               # Model identifier
+description: My ODE system   # Optional description
+
+states: [x, y]               # State variable names (used in equations)
+
+parameters:                   # Parameters with search bounds
+  - name: a
+    bounds: [0.5, 3.0]
+  - name: b
+    bounds: [1.0, 5.0]
+
+equations:                    # SymPy-parseable RHS expressions, one per state
+  - "a / (1 + y**2) - x"
+  - "b / (1 + x**2) - y"
+
+state_domain:                 # Bounding box for equilibrium search
+  - [0.1, 5.0]
+  - [0.1, 5.0]
+
+rhs_type: hill               # Optional: hill, polynomial, rational, general
+expected_regimes: [bistable]  # Optional: for validation only
+```
+
+### Programmatic model loading
+```python
+from phase_cartographer.models.benchmark_models import load_model_file, validate_model_file
+bm = load_model_file("my_model.yaml")        # Returns BenchmarkModel
+bm = load_model_file("my_model.sbml")        # SBML auto-detected by extension
+issues = validate_model_file("my_model.yaml") # Returns list of issues (empty = valid)
+
+from phase_cartographer.benchmarks.runner import run_model
+result = run_model(bm, max_depth=5, max_cells=500)
+```
+
+## SBML Model File Format
+
+[SBML](http://sbml.org) (Systems Biology Markup Language) files are supported via
+`load_model_file()` or `load_sbml_file()`.  Both SBML Level 2 and Level 3 are
+handled using only `xml.etree.ElementTree` (no `libsbml` dependency).
+
+The importer extracts species names, initial concentrations, compartment volumes,
+global/local parameters, and MathML kinetic rate laws.  Supported MathML operators:
+`plus`, `minus`, `times`, `divide`, `power`, `exp`, `ln`, `sqrt`, `sin`, `cos`,
+`cn`, `ci`, `csymbol`.
+
+By default all parameters are substituted as constants.  To sweep parameters across
+a range, add a `<phaseCartographer>` annotation in the `<model>` element:
+
+```xml
+<annotation>
+  <phaseCartographer xmlns="http://phasecartographer.example.org">
+    <parameterBounds id="alpha" lower="0.5" upper="1.5"/>
+    <rhsType>polynomial</rhsType>
+    <stateDomain>
+      <bound lower="0.1" upper="3.0"/>
+      <bound lower="0.1" upper="3.0"/>
+    </stateDomain>
+  </phaseCartographer>
+</annotation>
+```
+
+### Programmatic SBML loading
+```python
+from phase_cartographer.models.benchmark_models import load_sbml_file
+bm = load_sbml_file("model.sbml")  # Returns BenchmarkModel
+```
+
 ## Core Pipeline
 
 ### `equilibrium.KrawczykOperator`

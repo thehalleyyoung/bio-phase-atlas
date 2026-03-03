@@ -1564,4 +1564,28 @@ The calcium oscillator achieves the largest margins, with all 3 cells satisfying
 For FitzHugh-Nagumo, 1 of 3 tested cells satisfies the bound; the other 2 are near the excitable-oscillatory transition where eigenvalue enclosures approach zero.
 In all cases, no cell with a positive gap produces an incorrect stability classification, confirming that the bound from Theorem~\ref{thm:delta} is both sufficient and practically useful.
 
+\section{User-Defined Model Input}
+\label{sec:user-input}
+
+While the evaluation in Section~\ref{sec:eval} uses 18 built-in benchmark models, the certification pipeline is fully generic: any ODE system $\dot{x} = f(x, \mu)$ expressible as a symbolic right-hand side can be analyzed. To make this accessible without Python programming, we provide a YAML-based model file format and corresponding CLI commands.
+
+\subsection{Model File Format}
+
+A user-defined model specifies state variable names, parameter names with search bounds, SymPy-parseable RHS expressions (one per state), state-space bounds for equilibrium search, and optional metadata (RHS type, expected regimes, description). The parser constructs a \texttt{SymbolicRHS} instance and wraps it in a \texttt{BenchmarkModel} dataclass, making user models indistinguishable from built-in benchmarks in the certification pipeline.
+
+\subsection{CLI Workflow}
+
+Three commands support the user-defined model workflow:
+\begin{enumerate}
+    \item \texttt{init-model}: generates a starter YAML template (2D, 3D, or oscillator).
+    \item \texttt{check}: parses and validates a model file without running analysis, reporting any issues (missing fields, undeclared symbols, dimension mismatches).
+    \item \texttt{-{}-file}: runs the full certification pipeline on a user-defined model, producing the same certified phase atlas, Z3 verification, and $\delta$-soundness analysis as built-in benchmarks.
+\end{enumerate}
+
+\subsection{SBML Import}
+
+In addition to the YAML/JSON format, the tool accepts SBML (Systems Biology Markup Language) files---the standard exchange format used by BioModels, COPASI, and CellDesigner. The importer parses SBML Level~2 and Level~3 files using only \texttt{xml.etree.ElementTree} (Python standard library, no \texttt{libsbml} dependency), extracting species, parameters, and MathML kinetic rate laws. An optional \texttt{<phaseCartographer>} annotation block in the SBML \texttt{<model>} element specifies which parameters to sweep and their bounds; by default, all parameters are substituted as constants.
+
+The \texttt{check} command enables a fast edit-validate loop before committing to the full (potentially expensive) certification run. All CLI commands, the YAML format, the SBML import, and the programmatic \texttt{load\_model\_file()} and \texttt{run\_model()} APIs are documented in \texttt{API.md}.
+
 \end{document}

@@ -1,0 +1,118 @@
+{
+  "toggle_switch": {
+    "numerical": {
+      "n_equilibria_found": 38,
+      "n_bifurcations": 0,
+      "bifurcation_types": {},
+      "continuation_time_s": 0.1434
+    },
+    "certified": {
+      "n_cells": 10,
+      "n_equilibria": 11
+    },
+    "comparison": {
+      "n_comparisons": 10,
+      "n_agreements": 10,
+      "n_disagreements": 0,
+      "agreement_rate": 1.0,
+      "disagreement_details": [],
+      "numerical_errors_caught": [],
+      "n_errors_caught": 0
+    },
+    "total_time_s": 9.56
+  },
+  "brusselator": {
+    "numerical": {
+      "n_equilibria_found": 50,
+      "n_bifurcations": 1,
+      "bifurcation_types": {
+        "hopf": 1
+      },
+      "continuation_time_s": 0.082
+    },
+    "certified": {
+      "n_cells": 0,
+      "n_equilibria": 0
+    },
+    "comparison": {
+      "n_comparisons": 0,
+      "n_agreements": 0,
+      "n_disagreements": 0,
+      "agreement_rate": 0.0,
+      "disagreement_details": [],
+      "numerical_errors_caught": [],
+      "n_errors_caught": 0
+    },
+    "total_time_s": 20.65
+  },
+  "selkov": {
+    "numerical": {
+      "n_equilibria_found": 50,
+      "n_bifurcations": 1,
+      "bifurcation_types": {
+        "hopf": 1
+      },
+      "continuation_time_s": 0.0663
+    },
+    "certified": {
+      "n_cells": 10,
+      "n_equilibria": 10
+    },
+    "comparison": {
+      "n_comparisons": 10,
+      "n_agreements": 10,
+      "n_disagreements": 0,
+      "agreement_rate": 1.0,
+      "disagreement_details": [],
+      "numerical_errors_caught": [],
+      "n_errors_caught": 0
+    },
+    "total_time_s": 8.64
+  },
+  "fitzhugh_nagumo": {
+    "numerical": {
+      "n_equilibria_found": 50,
+      "n_bifurcations": 1,
+      "bifurcation_types": {
+        "hopf": 1
+      },
+      "continuation_time_s": 0.045
+    },
+    "certified": {
+      "n_cells": 3,
+      "n_equilibria": 3
+    },
+    "comparison": {
+      "n_comparisons": 3,
+      "n_agreements": 3,
+      "n_disagreements": 0,
+      "agreement_rate": 1.0,
+      "disagreement_details": [],
+      "numerical_errors_caught": [],
+      "n_errors_caught": 0
+    },
+    "total_time_s": 4.29
+  },
+  "van_der_pol": {
+    "numerical": {
+      "n_equilibria_found": 50,
+      "n_bifurcations": 0,
+      "bifurcation_types": {},
+      "continuation_time_s": 0.0718
+    },
+    "certified": {
+      "n_cells": 10,
+      "n_equilibria": 10
+    },
+    "comparison": {
+      "n_comparisons": 10,
+      "n_agreements": 10,
+      "n_disagreements": 0,
+      "agreement_rate": 1.0,
+      "disagreement_details": [],
+      "numerical_errors_caught": [],
+      "n_errors_caught": 0
+    },
+    "total_time_s": 0.18
+  }
+}

@@ -1,0 +1,28 @@
+# Three-gene repressilator ring oscillator
+# A synthetic biology circuit that produces sustained oscillations.
+name: three_gene_ring
+description: Repressilator-like ring of three mutual repressors
+
+states: [g1, g2, g3]
+
+parameters:
+  - name: alpha
+    bounds: [3.0, 12.0]
+  - name: n
+    bounds: [2.0, 2.0]
+
+# dg1/dt = alpha / (1 + g3^n) - g1
+# dg2/dt = alpha / (1 + g1^n) - g2
+# dg3/dt = alpha / (1 + g2^n) - g3
+equations:
+  - "alpha / (1 + g3**n) - g1"
+  - "alpha / (1 + g1**n) - g2"
+  - "alpha / (1 + g2**n) - g3"
+
+state_domain:
+  - [0.01, 15.0]
+  - [0.01, 15.0]
+  - [0.01, 15.0]
+
+rhs_type: hill
+expected_regimes: [oscillatory]

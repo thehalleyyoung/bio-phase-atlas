@@ -90,6 +90,25 @@ class PhaseAtlas:
             return 0.0
         return min(1.0, self.certified_volume() / dv)
 
+    def uncertified_volume(self) -> float:
+        """Volume of uncertified parameter boxes."""
+        v = 0.0
+        for box, _ in self.uncertified_boxes:
+            bv = 1.0
+            for lo, hi in box:
+                w = hi - lo
+                if w > 0:
+                    bv *= w
+            v += bv
+        return v
+
+    def unknown_fraction(self) -> float:
+        """Fraction of parameter domain that is uncertified (explicitly unknown)."""
+        dv = self.domain_volume()
+        if dv <= 0:
+            return 0.0
+        return min(1.0, self.uncertified_volume() / dv)
+
     def stats(self) -> AtlasStats:
         regime_counts: Dict[str, int] = {}
         n_minicheck = 0
@@ -98,6 +117,10 @@ class PhaseAtlas:
             regime_counts[label] = regime_counts.get(label, 0) + 1
             if c.minicheck_passed:
                 n_minicheck += 1
+
+        # Count uncertified boxes as "unknown" regime
+        if self.uncertified_boxes:
+            regime_counts["unknown"] = len(self.uncertified_boxes)
 
         return AtlasStats(
             total_cells=len(self.cells) + len(self.uncertified_boxes),
@@ -120,6 +143,11 @@ class PhaseAtlas:
             "stats": self.stats().to_dict(),
             "cells": [c.to_dict() for c in self.cells],
             "uncertified_count": len(self.uncertified_boxes),
+            "uncertified_boxes": [
+                {"box": list(box), "depth": depth}
+                for box, depth in self.uncertified_boxes
+            ],
+            "unknown_fraction": round(self.unknown_fraction(), 6),
         }
 
     def save(self, path: str) -> None:

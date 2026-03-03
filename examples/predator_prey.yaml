@@ -1,0 +1,29 @@
+# Lotka–Volterra predator-prey with carrying capacity
+# Demonstrates oscillatory and stable coexistence regimes.
+name: predator_prey
+description: Predator-prey with logistic prey growth
+
+states: [prey, predator]
+
+parameters:
+  - name: r
+    bounds: [0.5, 3.0]
+  - name: K
+    bounds: [5.0, 20.0]
+  - name: a
+    bounds: [0.1, 1.0]
+  - name: d
+    bounds: [0.1, 1.0]
+
+# d(prey)/dt = r * prey * (1 - prey/K) - a * prey * predator
+# d(predator)/dt = a * prey * predator - d * predator
+equations:
+  - "r * prey * (1 - prey / K) - a * prey * predator"
+  - "a * prey * predator - d * predator"
+
+state_domain:
+  - [0.01, 25.0]
+  - [0.01, 25.0]
+
+rhs_type: polynomial
+expected_regimes: [monostable, oscillatory]

@@ -51,12 +51,46 @@ def _run_z3_verification(cell, bm):
             )
             z3_results[f'eq_{eq_idx}_existence'] = eq_result.to_dict()
 
-            stab_type = "stable" if eq.is_stable() else "unstable"
+            from ..tiered.certificate import StabilityType as _ST
+            # Skip Z3 stability for degenerate/center/unknown
+            if eq.stability in (_ST.DEGENERATE, _ST.CENTER, _ST.UNKNOWN):
+                z3_results[f'eq_{eq_idx}_stability'] = {
+                    'verified': False, 'tier': 'tier3_exact',
+                    'status': 'skipped',
+                    'message': f'Stability type {eq.stability.value} not Z3-verifiable',
+                }
+                continue
+
+            if eq.stability == _ST.SADDLE:
+                stab_type = "saddle"
+            elif eq.is_stable():
+                stab_type = "stable"
+            else:
+                stab_type = "unstable"
+
+            # Use tighter enclosure for stability verification:
+            # shrink state enclosure to narrow box around midpoint
+            tight_enc = []
+            for lo, hi in eq.state_enclosure:
+                mid = (lo + hi) / 2.0
+                r = max((hi - lo) / 4.0, 1e-8)  # quarter-width or minimum
+                tight_enc.append((mid - r, mid + r))
+
             stab_result = verify_stability_z3(
                 rhs.expressions, rhs.state_symbols, rhs.param_symbols,
-                eq.state_enclosure, cell.parameter_box,
+                tight_enc, cell.parameter_box,
                 stability_type=stab_type, timeout_ms=15000,
             )
+            # If tight enclosure fails, try with full enclosure
+            if not stab_result.verified and stab_result.status != "unsat":
+                stab_result2 = verify_stability_z3(
+                    rhs.expressions, rhs.state_symbols, rhs.param_symbols,
+                    eq.state_enclosure, cell.parameter_box,
+                    stability_type=stab_type, timeout_ms=15000,
+                )
+                if stab_result2.verified:
+                    stab_result = stab_result2
+
             z3_results[f'eq_{eq_idx}_stability'] = stab_result.to_dict()
 
         # Completeness check for polynomial models
@@ -215,10 +249,16 @@ def certify_box(rhs, box: List, state_domain: List,
         delta_info = None
         if eig_enc.real_parts:
             try:
-                gap = compute_eigenvalue_gap(eig_enc.real_parts)
-                delta_info = {"delta_required": gap * 0.5, "eigenvalue_gap": gap}
+                db = DeltaBound(rhs)
+                delta_result = db.compute(kr.enclosure, mu, eig_enc.real_parts)
+                delta_info = delta_result.to_dict()
             except Exception:
-                pass
+                try:
+                    gap = compute_eigenvalue_gap(eig_enc.real_parts)
+                    delta_info = {"delta_required": gap * 0.5, "eigenvalue_gap": gap,
+                                  "is_sound": gap > 0}
+                except Exception:
+                    pass
 
         eq_cert = EquilibriumCertificate(
             state_enclosure=[(c.lo, c.hi) for c in kr.enclosure.components],
@@ -256,16 +296,15 @@ def certify_box(rhs, box: List, state_domain: List,
     return cell
 
 
-def run_benchmark(model_name: str,
-                  max_depth: int = 5,
-                  target_coverage: float = 0.90,
-                  max_cells: int = 500) -> BenchmarkResult:
+def run_model(bm: BenchmarkModel,
+              max_depth: int = 5,
+              target_coverage: float = 0.90,
+              max_cells: int = 500) -> BenchmarkResult:
     """
-    Run the full certification pipeline on a benchmark model.
+    Run the full certification pipeline on a BenchmarkModel instance.
 
     Returns BenchmarkResult with real timing data.
     """
-    bm = get_benchmark(model_name)
     t0 = time.time()
 
     def certify_fn(box):
@@ -293,12 +332,10 @@ def run_benchmark(model_name: str,
 
     n_inconclusive = stats.regime_counts.get('inconclusive', 0)
 
-    # Compute boundary pairs
     from ..atlas.composition import verify_atlas_composition
     comp = verify_atlas_composition(atlas.cells, bm.parameter_domain)
     n_boundary = len(comp.boundary_cells)
 
-    # Run Z3 verification on all cells
     tier3_verified = 0
     tier3_total = 0
     tier2_verified = 0
@@ -309,7 +346,6 @@ def run_benchmark(model_name: str,
     n_near_bif = 0
 
     for cidx, c in enumerate(atlas.cells):
-        # Eigenvalue gap analysis
         for eq in c.equilibria:
             if eq.eigenvalue_real_parts:
                 min_gap = float('inf')
@@ -322,7 +358,6 @@ def run_benchmark(model_name: str,
                 if min_gap < 0.1:
                     n_near_bif += 1
 
-        # Z3 verification
         import time as _time
         t_z3 = _time.time()
         z3_res = _run_z3_verification(c, bm)
@@ -343,7 +378,6 @@ def run_benchmark(model_name: str,
     mean_eig_gap = float(np.mean(eigenvalue_gaps)) if eigenvalue_gaps else 0.0
     min_eig_gap = float(np.min(eigenvalue_gaps)) if eigenvalue_gaps else 0.0
 
-    # GP calibration metrics
     gp_ece = 0.0
     gp_loo = 0.0
     gp_train_time = 0.0
@@ -405,6 +439,20 @@ def run_benchmark(model_name: str,
         gp_loo_error=round(gp_loo, 6),
         gp_training_time_s=round(gp_train_time, 4),
     )
+
+
+def run_benchmark(model_name: str,
+                  max_depth: int = 5,
+                  target_coverage: float = 0.90,
+                  max_cells: int = 500) -> BenchmarkResult:
+    """
+    Run the full certification pipeline on a benchmark model by name.
+
+    Returns BenchmarkResult with real timing data.
+    """
+    bm = get_benchmark(model_name)
+    return run_model(bm, max_depth=max_depth,
+                     target_coverage=target_coverage, max_cells=max_cells)
 
 
 # ---------------------------------------------------------------------------

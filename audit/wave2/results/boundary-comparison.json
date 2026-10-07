@@ -1,0 +1,2208 @@
+{
+  "rows": [
+    {
+      "family": "affine",
+      "box": [
+        -2,
+        -1
+      ],
+      "vectorized": false,
+      "truth": {
+        "uniform": true,
+        "count": 1,
+        "signature": [
+          1
+        ]
+      },
+      "sturm_checks": [
+        {
+          "p": "-2",
+          "count": 1
+        },
+        {
+          "p": "-3/2",
+          "count": 1
+        },
+        {
+          "p": "-1",
+          "count": 1
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            -2,
+            -1
+          ]
+        ],
+        "count_status": "incomplete",
+        "count": 0,
+        "n_unresolved_tiles": 0,
+        "unresolved_volume_fraction": 0.0,
+        "tiles": 3,
+        "equilibria": [],
+        "certified": false,
+        "symbolic_precondition": false,
+        "time_s": 0.018348666999372654,
+        "signature": null,
+        "regime": null,
+        "failure": "count_incomplete"
+      },
+      "wall_s": 0.018383750000793952,
+      "valid": true
+    },
+    {
+      "family": "affine",
+      "box": [
+        -2,
+        -1
+      ],
+      "vectorized": true,
+      "truth": {
+        "uniform": true,
+        "count": 1,
+        "signature": [
+          1
+        ]
+      },
+      "sturm_checks": [
+        {
+          "p": "-2",
+          "count": 1
+        },
+        {
+          "p": "-3/2",
+          "count": 1
+        },
+        {
+          "p": "-1",
+          "count": 1
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            -2,
+            -1
+          ]
+        ],
+        "count_status": "incomplete",
+        "count": 0,
+        "n_unresolved_tiles": 0,
+        "unresolved_volume_fraction": 0.0,
+        "tiles": 3,
+        "equilibria": [],
+        "certified": false,
+        "symbolic_precondition": false,
+        "time_s": 0.03175266600010218,
+        "signature": null,
+        "regime": null,
+        "failure": "count_incomplete"
+      },
+      "wall_s": 0.03178579199993692,
+      "valid": true
+    },
+    {
+      "family": "affine",
+      "box": [
+        -1,
+        -0.5
+      ],
+      "vectorized": false,
+      "truth": {
+        "uniform": true,
+        "count": 1,
+        "signature": [
+          1
+        ]
+      },
+      "sturm_checks": [
+        {
+          "p": "-1",
+          "count": 1
+        },
+        {
+          "p": "-3/4",
+          "count": 1
+        },
+        {
+          "p": "-1/2",
+          "count": 1
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            -1,
+            -0.5
+          ]
+        ],
+        "count_status": "complete",
+        "count": 1,
+        "n_unresolved_tiles": 0,
+        "unresolved_volume_fraction": 0.0,
+        "tiles": 1,
+        "equilibria": [
+          {
+            "enclosure": [
+              [
+                -1.0000000000000009,
+                -0.49999999999999956
+              ]
+            ],
+            "max_width": 0.5000000000000013,
+            "inertia": {
+              "status": "certified",
+              "n_unstable": 1,
+              "n_stable": 0,
+              "hyperbolic": true
+            },
+            "stability": "source"
+          }
+        ],
+        "certified": true,
+        "symbolic_precondition": false,
+        "time_s": 0.01220433399976173,
+        "signature": [
+          1
+        ],
+        "regime": "unique_unstable"
+      },
+      "wall_s": 0.01746133300002839,
+      "valid": true
+    },
+    {
+      "family": "affine",
+      "box": [
+        -1,
+        -0.5
+      ],
+      "vectorized": true,
+      "truth": {
+        "uniform": true,
+        "count": 1,
+        "signature": [
+          1
+        ]
+      },
+      "sturm_checks": [
+        {
+          "p": "-1",
+          "count": 1
+        },
+        {
+          "p": "-3/4",
+          "count": 1
+        },
+        {
+          "p": "-1/2",
+          "count": 1
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            -1,
+            -0.5
+          ]
+        ],
+        "count_status": "complete",
+        "count": 1,
+        "n_unresolved_tiles": 0,
+        "unresolved_volume_fraction": 0.0,
+        "tiles": 1,
+        "equilibria": [
+          {
+            "enclosure": [
+              [
+                -1.0000000000000009,
+                -0.49999999999999956
+              ]
+            ],
+            "max_width": 0.5000000000000013,
+            "inertia": {
+              "status": "certified",
+              "n_unstable": 1,
+              "n_stable": 0,
+              "hyperbolic": true
+            },
+            "stability": "source"
+          }
+        ],
+        "certified": true,
+        "symbolic_precondition": false,
+        "time_s": 0.009278375000576489,
+        "signature": [
+          1
+        ],
+        "regime": "unique_unstable"
+      },
+      "wall_s": 0.009637458999350201,
+      "valid": true
+    },
+    {
+      "family": "affine",
+      "box": [
+        -0.1,
+        -0.01
+      ],
+      "vectorized": false,
+      "truth": {
+        "uniform": true,
+        "count": 1,
+        "signature": [
+          1
+        ]
+      },
+      "sturm_checks": [
+        {
+          "p": "-3602879701896397/36028797018963968",
+          "count": 1
+        },
+        {
+          "p": "-63410682753376587/1152921504606846976",
+          "count": 1
+        },
+        {
+          "p": "-5764607523034235/576460752303423488",
+          "count": 1
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            -0.1,
+            -0.01
+          ]
+        ],
+        "count_status": "complete",
+        "count": 1,
+        "n_unresolved_tiles": 0,
+        "unresolved_volume_fraction": 0.0,
+        "tiles": 1,
+        "equilibria": [
+          {
+            "enclosure": [
+              [
+                -0.10000000000000007,
+                -0.009999999999999957
+              ]
+            ],
+            "max_width": 0.09000000000000012,
+            "inertia": {
+              "status": "certified",
+              "n_unstable": 1,
+              "n_stable": 0,
+              "hyperbolic": true
+            },
+            "stability": "source"
+          }
+        ],
+        "certified": true,
+        "symbolic_precondition": false,
+        "time_s": 0.00744666600076016,
+        "signature": [
+          1
+        ],
+        "regime": "unique_unstable"
+      },
+      "wall_s": 0.007751458000711864,
+      "valid": true
+    },
+    {
+      "family": "affine",
+      "box": [
+        -0.1,
+        -0.01
+      ],
+      "vectorized": true,
+      "truth": {
+        "uniform": true,
+        "count": 1,
+        "signature": [
+          1
+        ]
+      },
+      "sturm_checks": [
+        {
+          "p": "-3602879701896397/36028797018963968",
+          "count": 1
+        },
+        {
+          "p": "-63410682753376587/1152921504606846976",
+          "count": 1
+        },
+        {
+          "p": "-5764607523034235/576460752303423488",
+          "count": 1
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            -0.1,
+            -0.01
+          ]
+        ],
+        "count_status": "complete",
+        "count": 1,
+        "n_unresolved_tiles": 0,
+        "unresolved_volume_fraction": 0.0,
+        "tiles": 1,
+        "equilibria": [
+          {
+            "enclosure": [
+              [
+                -0.10000000000000007,
+                -0.009999999999999957
+              ]
+            ],
+            "max_width": 0.09000000000000012,
+            "inertia": {
+              "status": "certified",
+              "n_unstable": 1,
+              "n_stable": 0,
+              "hyperbolic": true
+            },
+            "stability": "source"
+          }
+        ],
+        "certified": true,
+        "symbolic_precondition": false,
+        "time_s": 0.009312792000855552,
+        "signature": [
+          1
+        ],
+        "regime": "unique_unstable"
+      },
+      "wall_s": 0.009632041999793728,
+      "valid": true
+    },
+    {
+      "family": "affine",
+      "box": [
+        -0.01,
+        0.01
+      ],
+      "vectorized": false,
+      "truth": {
+        "uniform": true,
+        "count": 1,
+        "signature": [
+          1
+        ]
+      },
+      "sturm_checks": [
+        {
+          "p": "-5764607523034235/576460752303423488",
+          "count": 1
+        },
+        {
+          "p": "0",
+          "count": 1
+        },
+        {
+          "p": "5764607523034235/576460752303423488",
+          "count": 1
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            -0.01,
+            0.01
+          ]
+        ],
+        "count_status": "complete",
+        "count": 1,
+        "n_unresolved_tiles": 0,
+        "unresolved_volume_fraction": 0.0,
+        "tiles": 1,
+        "equilibria": [
+          {
+            "enclosure": [
+              [
+                -0.010000000000000016,
+                0.010000000000000016
+              ]
+            ],
+            "max_width": 0.02000000000000003,
+            "inertia": {
+              "status": "certified",
+              "n_unstable": 1,
+              "n_stable": 0,
+              "hyperbolic": true
+            },
+            "stability": "source"
+          }
+        ],
+        "certified": true,
+        "symbolic_precondition": false,
+        "time_s": 0.006696291000480414,
+        "signature": [
+          1
+        ],
+        "regime": "unique_unstable"
+      },
+      "wall_s": 0.007058333998429589,
+      "valid": true
+    },
+    {
+      "family": "affine",
+      "box": [
+        -0.01,
+        0.01
+      ],
+      "vectorized": true,
+      "truth": {
+        "uniform": true,
+        "count": 1,
+        "signature": [
+          1
+        ]
+      },
+      "sturm_checks": [
+        {
+          "p": "-5764607523034235/576460752303423488",
+          "count": 1
+        },
+        {
+          "p": "0",
+          "count": 1
+        },
+        {
+          "p": "5764607523034235/576460752303423488",
+          "count": 1
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            -0.01,
+            0.01
+          ]
+        ],
+        "count_status": "complete",
+        "count": 1,
+        "n_unresolved_tiles": 0,
+        "unresolved_volume_fraction": 0.0,
+        "tiles": 1,
+        "equilibria": [
+          {
+            "enclosure": [
+              [
+                -0.010000000000000016,
+                0.010000000000000016
+              ]
+            ],
+            "max_width": 0.02000000000000003,
+            "inertia": {
+              "status": "certified",
+              "n_unstable": 1,
+              "n_stable": 0,
+              "hyperbolic": true
+            },
+            "stability": "source"
+          }
+        ],
+        "certified": true,
+        "symbolic_precondition": false,
+        "time_s": 0.018867832999603706,
+        "signature": [
+          1
+        ],
+        "regime": "unique_unstable"
+      },
+      "wall_s": 0.019273875001090346,
+      "valid": true
+    },
+    {
+      "family": "affine",
+      "box": [
+        0,
+        0
+      ],
+      "vectorized": false,
+      "truth": {
+        "uniform": true,
+        "count": 1,
+        "signature": [
+          1
+        ]
+      },
+      "sturm_checks": [
+        {
+          "p": "0",
+          "count": 1
+        },
+        {
+          "p": "0",
+          "count": 1
+        },
+        {
+          "p": "0",
+          "count": 1
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            0,
+            0
+          ]
+        ],
+        "count_status": "complete",
+        "count": 1,
+        "n_unresolved_tiles": 0,
+        "unresolved_volume_fraction": 0.0,
+        "tiles": 1,
+        "equilibria": [
+          {
+            "enclosure": [
+              [
+                -1.727233711018898e-83,
+                1.727233711018898e-83
+              ]
+            ],
+            "max_width": 3.454467422037796e-83,
+            "inertia": {
+              "status": "certified",
+              "n_unstable": 1,
+              "n_stable": 0,
+              "hyperbolic": true
+            },
+            "stability": "source"
+          }
+        ],
+        "certified": true,
+        "symbolic_precondition": false,
+        "time_s": 0.009861290998742334,
+        "signature": [
+          1
+        ],
+        "regime": "unique_unstable"
+      },
+      "wall_s": 0.01031741599945235,
+      "valid": true
+    },
+    {
+      "family": "affine",
+      "box": [
+        0,
+        0
+      ],
+      "vectorized": true,
+      "truth": {
+        "uniform": true,
+        "count": 1,
+        "signature": [
+          1
+        ]
+      },
+      "sturm_checks": [
+        {
+          "p": "0",
+          "count": 1
+        },
+        {
+          "p": "0",
+          "count": 1
+        },
+        {
+          "p": "0",
+          "count": 1
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            0,
+            0
+          ]
+        ],
+        "count_status": "complete",
+        "count": 1,
+        "n_unresolved_tiles": 0,
+        "unresolved_volume_fraction": 0.0,
+        "tiles": 1,
+        "equilibria": [
+          {
+            "enclosure": [
+              [
+                -1.727233711018898e-83,
+                1.727233711018898e-83
+              ]
+            ],
+            "max_width": 3.454467422037796e-83,
+            "inertia": {
+              "status": "certified",
+              "n_unstable": 1,
+              "n_stable": 0,
+              "hyperbolic": true
+            },
+            "stability": "source"
+          }
+        ],
+        "certified": true,
+        "symbolic_precondition": false,
+        "time_s": 0.012979167000594316,
+        "signature": [
+          1
+        ],
+        "regime": "unique_unstable"
+      },
+      "wall_s": 0.013313708999703522,
+      "valid": true
+    },
+    {
+      "family": "affine",
+      "box": [
+        0.01,
+        0.1
+      ],
+      "vectorized": false,
+      "truth": {
+        "uniform": true,
+        "count": 1,
+        "signature": [
+          1
+        ]
+      },
+      "sturm_checks": [
+        {
+          "p": "5764607523034235/576460752303423488",
+          "count": 1
+        },
+        {
+          "p": "63410682753376587/1152921504606846976",
+          "count": 1
+        },
+        {
+          "p": "3602879701896397/36028797018963968",
+          "count": 1
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            0.01,
+            0.1
+          ]
+        ],
+        "count_status": "complete",
+        "count": 1,
+        "n_unresolved_tiles": 0,
+        "unresolved_volume_fraction": 0.0,
+        "tiles": 1,
+        "equilibria": [
+          {
+            "enclosure": [
+              [
+                0.009999999999999957,
+                0.10000000000000007
+              ]
+            ],
+            "max_width": 0.09000000000000012,
+            "inertia": {
+              "status": "certified",
+              "n_unstable": 1,
+              "n_stable": 0,
+              "hyperbolic": true
+            },
+            "stability": "source"
+          }
+        ],
+        "certified": true,
+        "symbolic_precondition": false,
+        "time_s": 0.008079082999756793,
+        "signature": [
+          1
+        ],
+        "regime": "unique_unstable"
+      },
+      "wall_s": 0.008515415998772369,
+      "valid": true
+    },
+    {
+      "family": "affine",
+      "box": [
+        0.01,
+        0.1
+      ],
+      "vectorized": true,
+      "truth": {
+        "uniform": true,
+        "count": 1,
+        "signature": [
+          1
+        ]
+      },
+      "sturm_checks": [
+        {
+          "p": "5764607523034235/576460752303423488",
+          "count": 1
+        },
+        {
+          "p": "63410682753376587/1152921504606846976",
+          "count": 1
+        },
+        {
+          "p": "3602879701896397/36028797018963968",
+          "count": 1
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            0.01,
+            0.1
+          ]
+        ],
+        "count_status": "complete",
+        "count": 1,
+        "n_unresolved_tiles": 0,
+        "unresolved_volume_fraction": 0.0,
+        "tiles": 1,
+        "equilibria": [
+          {
+            "enclosure": [
+              [
+                0.009999999999999957,
+                0.10000000000000007
+              ]
+            ],
+            "max_width": 0.09000000000000012,
+            "inertia": {
+              "status": "certified",
+              "n_unstable": 1,
+              "n_stable": 0,
+              "hyperbolic": true
+            },
+            "stability": "source"
+          }
+        ],
+        "certified": true,
+        "symbolic_precondition": false,
+        "time_s": 0.018067709001115873,
+        "signature": [
+          1
+        ],
+        "regime": "unique_unstable"
+      },
+      "wall_s": 0.01840591700056393,
+      "valid": true
+    },
+    {
+      "family": "affine",
+      "box": [
+        0.5,
+        1
+      ],
+      "vectorized": false,
+      "truth": {
+        "uniform": true,
+        "count": 1,
+        "signature": [
+          1
+        ]
+      },
+      "sturm_checks": [
+        {
+          "p": "1/2",
+          "count": 1
+        },
+        {
+          "p": "3/4",
+          "count": 1
+        },
+        {
+          "p": "1",
+          "count": 1
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            0.5,
+            1
+          ]
+        ],
+        "count_status": "complete",
+        "count": 1,
+        "n_unresolved_tiles": 0,
+        "unresolved_volume_fraction": 0.0,
+        "tiles": 1,
+        "equilibria": [
+          {
+            "enclosure": [
+              [
+                0.49999999999999956,
+                1.0000000000000009
+              ]
+            ],
+            "max_width": 0.5000000000000013,
+            "inertia": {
+              "status": "certified",
+              "n_unstable": 1,
+              "n_stable": 0,
+              "hyperbolic": true
+            },
+            "stability": "source"
+          }
+        ],
+        "certified": true,
+        "symbolic_precondition": false,
+        "time_s": 0.007097916999555309,
+        "signature": [
+          1
+        ],
+        "regime": "unique_unstable"
+      },
+      "wall_s": 0.007442959000400151,
+      "valid": true
+    },
+    {
+      "family": "affine",
+      "box": [
+        0.5,
+        1
+      ],
+      "vectorized": true,
+      "truth": {
+        "uniform": true,
+        "count": 1,
+        "signature": [
+          1
+        ]
+      },
+      "sturm_checks": [
+        {
+          "p": "1/2",
+          "count": 1
+        },
+        {
+          "p": "3/4",
+          "count": 1
+        },
+        {
+          "p": "1",
+          "count": 1
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            0.5,
+            1
+          ]
+        ],
+        "count_status": "complete",
+        "count": 1,
+        "n_unresolved_tiles": 0,
+        "unresolved_volume_fraction": 0.0,
+        "tiles": 1,
+        "equilibria": [
+          {
+            "enclosure": [
+              [
+                0.49999999999999956,
+                1.0000000000000009
+              ]
+            ],
+            "max_width": 0.5000000000000013,
+            "inertia": {
+              "status": "certified",
+              "n_unstable": 1,
+              "n_stable": 0,
+              "hyperbolic": true
+            },
+            "stability": "source"
+          }
+        ],
+        "certified": true,
+        "symbolic_precondition": false,
+        "time_s": 0.012783542000761372,
+        "signature": [
+          1
+        ],
+        "regime": "unique_unstable"
+      },
+      "wall_s": 0.01330795899957593,
+      "valid": true
+    },
+    {
+      "family": "affine",
+      "box": [
+        1,
+        2
+      ],
+      "vectorized": false,
+      "truth": {
+        "uniform": true,
+        "count": 1,
+        "signature": [
+          1
+        ]
+      },
+      "sturm_checks": [
+        {
+          "p": "1",
+          "count": 1
+        },
+        {
+          "p": "3/2",
+          "count": 1
+        },
+        {
+          "p": "2",
+          "count": 1
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            1,
+            2
+          ]
+        ],
+        "count_status": "incomplete",
+        "count": 0,
+        "n_unresolved_tiles": 0,
+        "unresolved_volume_fraction": 0.0,
+        "tiles": 3,
+        "equilibria": [],
+        "certified": false,
+        "symbolic_precondition": false,
+        "time_s": 0.01016620900009002,
+        "signature": null,
+        "regime": null,
+        "failure": "count_incomplete"
+      },
+      "wall_s": 0.010195333999945433,
+      "valid": true
+    },
+    {
+      "family": "affine",
+      "box": [
+        1,
+        2
+      ],
+      "vectorized": true,
+      "truth": {
+        "uniform": true,
+        "count": 1,
+        "signature": [
+          1
+        ]
+      },
+      "sturm_checks": [
+        {
+          "p": "1",
+          "count": 1
+        },
+        {
+          "p": "3/2",
+          "count": 1
+        },
+        {
+          "p": "2",
+          "count": 1
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            1,
+            2
+          ]
+        ],
+        "count_status": "incomplete",
+        "count": 0,
+        "n_unresolved_tiles": 0,
+        "unresolved_volume_fraction": 0.0,
+        "tiles": 3,
+        "equilibria": [],
+        "certified": false,
+        "symbolic_precondition": false,
+        "time_s": 0.01404358299987507,
+        "signature": null,
+        "regime": null,
+        "failure": "count_incomplete"
+      },
+      "wall_s": 0.014068915999814635,
+      "valid": true
+    },
+    {
+      "family": "affine",
+      "box": [
+        -1,
+        1
+      ],
+      "vectorized": false,
+      "truth": {
+        "uniform": true,
+        "count": 1,
+        "signature": [
+          1
+        ]
+      },
+      "sturm_checks": [
+        {
+          "p": "-1",
+          "count": 1
+        },
+        {
+          "p": "0",
+          "count": 1
+        },
+        {
+          "p": "1",
+          "count": 1
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            -1,
+            1
+          ]
+        ],
+        "count_status": "complete",
+        "count": 1,
+        "n_unresolved_tiles": 0,
+        "unresolved_volume_fraction": 0.0,
+        "tiles": 1,
+        "equilibria": [
+          {
+            "enclosure": [
+              [
+                -1.0000000000000018,
+                1.0000000000000018
+              ]
+            ],
+            "max_width": 2.0000000000000036,
+            "inertia": {
+              "status": "certified",
+              "n_unstable": 1,
+              "n_stable": 0,
+              "hyperbolic": true
+            },
+            "stability": "source"
+          }
+        ],
+        "certified": true,
+        "symbolic_precondition": false,
+        "time_s": 0.0060790000006818445,
+        "signature": [
+          1
+        ],
+        "regime": "unique_unstable"
+      },
+      "wall_s": 0.006374749998940388,
+      "valid": true
+    },
+    {
+      "family": "affine",
+      "box": [
+        -1,
+        1
+      ],
+      "vectorized": true,
+      "truth": {
+        "uniform": true,
+        "count": 1,
+        "signature": [
+          1
+        ]
+      },
+      "sturm_checks": [
+        {
+          "p": "-1",
+          "count": 1
+        },
+        {
+          "p": "0",
+          "count": 1
+        },
+        {
+          "p": "1",
+          "count": 1
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            -1,
+            1
+          ]
+        ],
+        "count_status": "complete",
+        "count": 1,
+        "n_unresolved_tiles": 0,
+        "unresolved_volume_fraction": 0.0,
+        "tiles": 1,
+        "equilibria": [
+          {
+            "enclosure": [
+              [
+                -1.0000000000000018,
+                1.0000000000000018
+              ]
+            ],
+            "max_width": 2.0000000000000036,
+            "inertia": {
+              "status": "certified",
+              "n_unstable": 1,
+              "n_stable": 0,
+              "hyperbolic": true
+            },
+            "stability": "source"
+          }
+        ],
+        "certified": true,
+        "symbolic_precondition": false,
+        "time_s": 0.007968583000547369,
+        "signature": [
+          1
+        ],
+        "regime": "unique_unstable"
+      },
+      "wall_s": 0.00824066700079129,
+      "valid": true
+    },
+    {
+      "family": "fold",
+      "box": [
+        -2,
+        -1
+      ],
+      "vectorized": false,
+      "truth": {
+        "uniform": true,
+        "count": 0,
+        "signature": []
+      },
+      "sturm_checks": [
+        {
+          "p": "-2",
+          "count": 0
+        },
+        {
+          "p": "-3/2",
+          "count": 0
+        },
+        {
+          "p": "-1",
+          "count": 0
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            -2,
+            -1
+          ]
+        ],
+        "count_status": "complete",
+        "count": 0,
+        "n_unresolved_tiles": 0,
+        "unresolved_volume_fraction": 0.0,
+        "tiles": 1,
+        "equilibria": [],
+        "certified": true,
+        "symbolic_precondition": false,
+        "time_s": 0.009683249998488463,
+        "signature": [],
+        "regime": "no_equilibrium_in_D"
+      },
+      "wall_s": 0.00970904200039513,
+      "valid": true
+    },
+    {
+      "family": "fold",
+      "box": [
+        -2,
+        -1
+      ],
+      "vectorized": true,
+      "truth": {
+        "uniform": true,
+        "count": 0,
+        "signature": []
+      },
+      "sturm_checks": [
+        {
+          "p": "-2",
+          "count": 0
+        },
+        {
+          "p": "-3/2",
+          "count": 0
+        },
+        {
+          "p": "-1",
+          "count": 0
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            -2,
+            -1
+          ]
+        ],
+        "count_status": "complete",
+        "count": 0,
+        "n_unresolved_tiles": 0,
+        "unresolved_volume_fraction": 0.0,
+        "tiles": 1,
+        "equilibria": [],
+        "certified": true,
+        "symbolic_precondition": false,
+        "time_s": 0.007679000000280212,
+        "signature": [],
+        "regime": "no_equilibrium_in_D"
+      },
+      "wall_s": 0.0077033329998812405,
+      "valid": true
+    },
+    {
+      "family": "fold",
+      "box": [
+        -1,
+        -0.5
+      ],
+      "vectorized": false,
+      "truth": {
+        "uniform": true,
+        "count": 0,
+        "signature": []
+      },
+      "sturm_checks": [
+        {
+          "p": "-1",
+          "count": 0
+        },
+        {
+          "p": "-3/4",
+          "count": 0
+        },
+        {
+          "p": "-1/2",
+          "count": 0
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            -1,
+            -0.5
+          ]
+        ],
+        "count_status": "complete",
+        "count": 0,
+        "n_unresolved_tiles": 0,
+        "unresolved_volume_fraction": 0.0,
+        "tiles": 1,
+        "equilibria": [],
+        "certified": true,
+        "symbolic_precondition": false,
+        "time_s": 0.011920499999177991,
+        "signature": [],
+        "regime": "no_equilibrium_in_D"
+      },
+      "wall_s": 0.011951292000958347,
+      "valid": true
+    },
+    {
+      "family": "fold",
+      "box": [
+        -1,
+        -0.5
+      ],
+      "vectorized": true,
+      "truth": {
+        "uniform": true,
+        "count": 0,
+        "signature": []
+      },
+      "sturm_checks": [
+        {
+          "p": "-1",
+          "count": 0
+        },
+        {
+          "p": "-3/4",
+          "count": 0
+        },
+        {
+          "p": "-1/2",
+          "count": 0
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            -1,
+            -0.5
+          ]
+        ],
+        "count_status": "complete",
+        "count": 0,
+        "n_unresolved_tiles": 0,
+        "unresolved_volume_fraction": 0.0,
+        "tiles": 1,
+        "equilibria": [],
+        "certified": true,
+        "symbolic_precondition": false,
+        "time_s": 0.014476583999567083,
+        "signature": [],
+        "regime": "no_equilibrium_in_D"
+      },
+      "wall_s": 0.014506792000247515,
+      "valid": true
+    },
+    {
+      "family": "fold",
+      "box": [
+        -0.1,
+        -0.01
+      ],
+      "vectorized": false,
+      "truth": {
+        "uniform": true,
+        "count": 0,
+        "signature": []
+      },
+      "sturm_checks": [
+        {
+          "p": "-3602879701896397/36028797018963968",
+          "count": 0
+        },
+        {
+          "p": "-63410682753376587/1152921504606846976",
+          "count": 0
+        },
+        {
+          "p": "-5764607523034235/576460752303423488",
+          "count": 0
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            -0.1,
+            -0.01
+          ]
+        ],
+        "count_status": "complete",
+        "count": 0,
+        "n_unresolved_tiles": 0,
+        "unresolved_volume_fraction": 0.0,
+        "tiles": 1,
+        "equilibria": [],
+        "certified": true,
+        "symbolic_precondition": false,
+        "time_s": 0.007385082999462611,
+        "signature": [],
+        "regime": "no_equilibrium_in_D"
+      },
+      "wall_s": 0.007417083999825991,
+      "valid": true
+    },
+    {
+      "family": "fold",
+      "box": [
+        -0.1,
+        -0.01
+      ],
+      "vectorized": true,
+      "truth": {
+        "uniform": true,
+        "count": 0,
+        "signature": []
+      },
+      "sturm_checks": [
+        {
+          "p": "-3602879701896397/36028797018963968",
+          "count": 0
+        },
+        {
+          "p": "-63410682753376587/1152921504606846976",
+          "count": 0
+        },
+        {
+          "p": "-5764607523034235/576460752303423488",
+          "count": 0
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            -0.1,
+            -0.01
+          ]
+        ],
+        "count_status": "complete",
+        "count": 0,
+        "n_unresolved_tiles": 0,
+        "unresolved_volume_fraction": 0.0,
+        "tiles": 1,
+        "equilibria": [],
+        "certified": true,
+        "symbolic_precondition": false,
+        "time_s": 0.013411500000074739,
+        "signature": [],
+        "regime": "no_equilibrium_in_D"
+      },
+      "wall_s": 0.013439749998724437,
+      "valid": true
+    },
+    {
+      "family": "fold",
+      "box": [
+        -0.01,
+        0.01
+      ],
+      "vectorized": false,
+      "truth": {
+        "uniform": false,
+        "count": null,
+        "signature": null
+      },
+      "sturm_checks": [
+        {
+          "p": "-5764607523034235/576460752303423488",
+          "count": 0
+        },
+        {
+          "p": "0",
+          "count": 1
+        },
+        {
+          "p": "5764607523034235/576460752303423488",
+          "count": 2
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            -0.01,
+            0.01
+          ]
+        ],
+        "count_status": "incomplete",
+        "count": 0,
+        "n_unresolved_tiles": 55,
+        "unresolved_volume_fraction": 0.40125000000004113,
+        "tiles": 115,
+        "equilibria": [],
+        "certified": false,
+        "symbolic_precondition": false,
+        "time_s": 0.0629568329986796,
+        "signature": null,
+        "regime": null,
+        "failure": "count_incomplete"
+      },
+      "wall_s": 0.06299941699944611,
+      "valid": true
+    },
+    {
+      "family": "fold",
+      "box": [
+        -0.01,
+        0.01
+      ],
+      "vectorized": true,
+      "truth": {
+        "uniform": false,
+        "count": null,
+        "signature": null
+      },
+      "sturm_checks": [
+        {
+          "p": "-5764607523034235/576460752303423488",
+          "count": 0
+        },
+        {
+          "p": "0",
+          "count": 1
+        },
+        {
+          "p": "5764607523034235/576460752303423488",
+          "count": 2
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            -0.01,
+            0.01
+          ]
+        ],
+        "count_status": "incomplete",
+        "count": 0,
+        "n_unresolved_tiles": 64,
+        "unresolved_volume_fraction": 0.05000564128079403,
+        "tiles": 139,
+        "equilibria": [],
+        "certified": false,
+        "symbolic_precondition": false,
+        "time_s": 0.05816179200155602,
+        "signature": null,
+        "regime": null,
+        "failure": "count_incomplete"
+      },
+      "wall_s": 0.05820908300120209,
+      "valid": true
+    },
+    {
+      "family": "fold",
+      "box": [
+        0,
+        0
+      ],
+      "vectorized": false,
+      "truth": {
+        "uniform": false,
+        "count": null,
+        "signature": null
+      },
+      "sturm_checks": [
+        {
+          "p": "0",
+          "count": 1
+        },
+        {
+          "p": "0",
+          "count": 1
+        },
+        {
+          "p": "0",
+          "count": 1
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            0,
+            0
+          ]
+        ],
+        "count_status": "incomplete",
+        "count": 0,
+        "n_unresolved_tiles": 2,
+        "unresolved_volume_fraction": 1.146995058931601e-07,
+        "tiles": 67,
+        "equilibria": [],
+        "certified": false,
+        "symbolic_precondition": false,
+        "time_s": 0.053553708999970695,
+        "signature": null,
+        "regime": null,
+        "failure": "count_incomplete"
+      },
+      "wall_s": 0.05357995899976231,
+      "valid": true
+    },
+    {
+      "family": "fold",
+      "box": [
+        0,
+        0
+      ],
+      "vectorized": true,
+      "truth": {
+        "uniform": false,
+        "count": null,
+        "signature": null
+      },
+      "sturm_checks": [
+        {
+          "p": "0",
+          "count": 1
+        },
+        {
+          "p": "0",
+          "count": 1
+        },
+        {
+          "p": "0",
+          "count": 1
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            0,
+            0
+          ]
+        ],
+        "count_status": "incomplete",
+        "count": 0,
+        "n_unresolved_tiles": 2,
+        "unresolved_volume_fraction": 1.1469950589315981e-07,
+        "tiles": 67,
+        "equilibria": [],
+        "certified": false,
+        "symbolic_precondition": false,
+        "time_s": 0.12921258299866167,
+        "signature": null,
+        "regime": null,
+        "failure": "count_incomplete"
+      },
+      "wall_s": 0.12923833400054718,
+      "valid": true
+    },
+    {
+      "family": "fold",
+      "box": [
+        0.01,
+        0.1
+      ],
+      "vectorized": false,
+      "truth": {
+        "uniform": true,
+        "count": 2,
+        "signature": [
+          0,
+          1
+        ]
+      },
+      "sturm_checks": [
+        {
+          "p": "5764607523034235/576460752303423488",
+          "count": 2
+        },
+        {
+          "p": "63410682753376587/1152921504606846976",
+          "count": 2
+        },
+        {
+          "p": "3602879701896397/36028797018963968",
+          "count": 2
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            0.01,
+            0.1
+          ]
+        ],
+        "count_status": "incomplete",
+        "count": 0,
+        "n_unresolved_tiles": 56,
+        "unresolved_volume_fraction": 0.4421500764907555,
+        "tiles": 115,
+        "equilibria": [],
+        "certified": false,
+        "symbolic_precondition": false,
+        "time_s": 0.07698641699971631,
+        "signature": null,
+        "regime": null,
+        "failure": "count_incomplete"
+      },
+      "wall_s": 0.07702024999889545,
+      "valid": true
+    },
+    {
+      "family": "fold",
+      "box": [
+        0.01,
+        0.1
+      ],
+      "vectorized": true,
+      "truth": {
+        "uniform": true,
+        "count": 2,
+        "signature": [
+          0,
+          1
+        ]
+      },
+      "sturm_checks": [
+        {
+          "p": "5764607523034235/576460752303423488",
+          "count": 2
+        },
+        {
+          "p": "63410682753376587/1152921504606846976",
+          "count": 2
+        },
+        {
+          "p": "3602879701896397/36028797018963968",
+          "count": 2
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            0.01,
+            0.1
+          ]
+        ],
+        "count_status": "incomplete",
+        "count": 0,
+        "n_unresolved_tiles": 64,
+        "unresolved_volume_fraction": 0.10814625815349038,
+        "tiles": 135,
+        "equilibria": [],
+        "certified": false,
+        "symbolic_precondition": false,
+        "time_s": 0.05490658300004725,
+        "signature": null,
+        "regime": null,
+        "failure": "count_incomplete"
+      },
+      "wall_s": 0.054946416999882786,
+      "valid": true
+    },
+    {
+      "family": "fold",
+      "box": [
+        0.5,
+        1
+      ],
+      "vectorized": false,
+      "truth": {
+        "uniform": true,
+        "count": 2,
+        "signature": [
+          0,
+          1
+        ]
+      },
+      "sturm_checks": [
+        {
+          "p": "1/2",
+          "count": 2
+        },
+        {
+          "p": "3/4",
+          "count": 2
+        },
+        {
+          "p": "1",
+          "count": 2
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            0.5,
+            1
+          ]
+        ],
+        "count_status": "incomplete",
+        "count": 2,
+        "n_unresolved_tiles": 2,
+        "unresolved_volume_fraction": 3.139622894998695e-09,
+        "tiles": 11,
+        "equilibria": [
+          {
+            "enclosure": [
+              [
+                0.6820389703857169,
+                1.0500118371831606
+              ]
+            ],
+            "max_width": 0.3679728667974437,
+            "inertia": {
+              "status": "certified",
+              "n_unstable": 1,
+              "n_stable": 0,
+              "hyperbolic": true
+            },
+            "stability": "source"
+          },
+          {
+            "enclosure": [
+              [
+                -1.0500118371831606,
+                -0.6820389703857169
+              ]
+            ],
+            "max_width": 0.3679728667974437,
+            "inertia": {
+              "status": "certified",
+              "n_unstable": 0,
+              "n_stable": 1,
+              "hyperbolic": true
+            },
+            "stability": "stable"
+          }
+        ],
+        "certified": false,
+        "symbolic_precondition": false,
+        "time_s": 0.013033541999902809,
+        "signature": null,
+        "regime": null,
+        "failure": "count_incomplete"
+      },
+      "wall_s": 0.013578041998698609,
+      "valid": true
+    },
+    {
+      "family": "fold",
+      "box": [
+        0.5,
+        1
+      ],
+      "vectorized": true,
+      "truth": {
+        "uniform": true,
+        "count": 2,
+        "signature": [
+          0,
+          1
+        ]
+      },
+      "sturm_checks": [
+        {
+          "p": "1/2",
+          "count": 2
+        },
+        {
+          "p": "3/4",
+          "count": 2
+        },
+        {
+          "p": "1",
+          "count": 2
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            0.5,
+            1
+          ]
+        ],
+        "count_status": "complete",
+        "count": 2,
+        "n_unresolved_tiles": 0,
+        "unresolved_volume_fraction": 0.0,
+        "tiles": 15,
+        "equilibria": [
+          {
+            "enclosure": [
+              [
+                0.6820389703857169,
+                1.0500118371831606
+              ]
+            ],
+            "max_width": 0.3679728667974437,
+            "inertia": {
+              "status": "certified",
+              "n_unstable": 1,
+              "n_stable": 0,
+              "hyperbolic": true
+            },
+            "stability": "source"
+          },
+          {
+            "enclosure": [
+              [
+                -1.0500118371831606,
+                -0.6820389703857169
+              ]
+            ],
+            "max_width": 0.3679728667974437,
+            "inertia": {
+              "status": "certified",
+              "n_unstable": 0,
+              "n_stable": 1,
+              "hyperbolic": true
+            },
+            "stability": "stable"
+          }
+        ],
+        "certified": true,
+        "symbolic_precondition": false,
+        "time_s": 0.022996625000814674,
+        "signature": [
+          0,
+          1
+        ],
+        "regime": "one_stable_of_2"
+      },
+      "wall_s": 0.023782709000442992,
+      "valid": true
+    },
+    {
+      "family": "fold",
+      "box": [
+        1,
+        2
+      ],
+      "vectorized": false,
+      "truth": {
+        "uniform": true,
+        "count": 2,
+        "signature": [
+          0,
+          1
+        ]
+      },
+      "sturm_checks": [
+        {
+          "p": "1",
+          "count": 2
+        },
+        {
+          "p": "3/2",
+          "count": 2
+        },
+        {
+          "p": "2",
+          "count": 2
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            1,
+            2
+          ]
+        ],
+        "count_status": "incomplete",
+        "count": 2,
+        "n_unresolved_tiles": 2,
+        "unresolved_volume_fraction": 3.638145340545407e-12,
+        "tiles": 11,
+        "equilibria": [
+          {
+            "enclosure": [
+              [
+                0.9645487712659994,
+                1.4849409715171789
+              ]
+            ],
+            "max_width": 0.5203922002511795,
+            "inertia": {
+              "status": "certified",
+              "n_unstable": 1,
+              "n_stable": 0,
+              "hyperbolic": true
+            },
+            "stability": "source"
+          },
+          {
+            "enclosure": [
+              [
+                -1.4849409715171789,
+                -0.9645487712659994
+              ]
+            ],
+            "max_width": 0.5203922002511795,
+            "inertia": {
+              "status": "certified",
+              "n_unstable": 0,
+              "n_stable": 1,
+              "hyperbolic": true
+            },
+            "stability": "stable"
+          }
+        ],
+        "certified": false,
+        "symbolic_precondition": false,
+        "time_s": 0.012129417000323883,
+        "signature": null,
+        "regime": null,
+        "failure": "count_incomplete"
+      },
+      "wall_s": 0.013013125000725267,
+      "valid": true
+    },
+    {
+      "family": "fold",
+      "box": [
+        1,
+        2
+      ],
+      "vectorized": true,
+      "truth": {
+        "uniform": true,
+        "count": 2,
+        "signature": [
+          0,
+          1
+        ]
+      },
+      "sturm_checks": [
+        {
+          "p": "1",
+          "count": 2
+        },
+        {
+          "p": "3/2",
+          "count": 2
+        },
+        {
+          "p": "2",
+          "count": 2
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            1,
+            2
+          ]
+        ],
+        "count_status": "complete",
+        "count": 2,
+        "n_unresolved_tiles": 0,
+        "unresolved_volume_fraction": 0.0,
+        "tiles": 15,
+        "equilibria": [
+          {
+            "enclosure": [
+              [
+                0.9645487712659994,
+                1.4849409715171789
+              ]
+            ],
+            "max_width": 0.5203922002511795,
+            "inertia": {
+              "status": "certified",
+              "n_unstable": 1,
+              "n_stable": 0,
+              "hyperbolic": true
+            },
+            "stability": "source"
+          },
+          {
+            "enclosure": [
+              [
+                -1.4849409715171789,
+                -0.9645487712659994
+              ]
+            ],
+            "max_width": 0.5203922002511795,
+            "inertia": {
+              "status": "certified",
+              "n_unstable": 0,
+              "n_stable": 1,
+              "hyperbolic": true
+            },
+            "stability": "stable"
+          }
+        ],
+        "certified": true,
+        "symbolic_precondition": false,
+        "time_s": 0.020015916999909678,
+        "signature": [
+          0,
+          1
+        ],
+        "regime": "one_stable_of_2"
+      },
+      "wall_s": 0.02054241699988779,
+      "valid": true
+    },
+    {
+      "family": "fold",
+      "box": [
+        -1,
+        1
+      ],
+      "vectorized": false,
+      "truth": {
+        "uniform": false,
+        "count": null,
+        "signature": null
+      },
+      "sturm_checks": [
+        {
+          "p": "-1",
+          "count": 0
+        },
+        {
+          "p": "0",
+          "count": 1
+        },
+        {
+          "p": "1",
+          "count": 2
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            -1,
+            1
+          ]
+        ],
+        "count_status": "incomplete",
+        "count": 0,
+        "n_unresolved_tiles": 60,
+        "unresolved_volume_fraction": 0.7500000015698114,
+        "tiles": 119,
+        "equilibria": [],
+        "certified": false,
+        "symbolic_precondition": false,
+        "time_s": 0.08640429099978064,
+        "signature": null,
+        "regime": null,
+        "failure": "count_incomplete"
+      },
+      "wall_s": 0.08644204200027161,
+      "valid": true
+    },
+    {
+      "family": "fold",
+      "box": [
+        -1,
+        1
+      ],
+      "vectorized": true,
+      "truth": {
+        "uniform": false,
+        "count": null,
+        "signature": null
+      },
+      "sturm_checks": [
+        {
+          "p": "-1",
+          "count": 0
+        },
+        {
+          "p": "0",
+          "count": 1
+        },
+        {
+          "p": "1",
+          "count": 2
+        }
+      ],
+      "result": {
+        "param_box": [
+          [
+            -1,
+            1
+          ]
+        ],
+        "count_status": "incomplete",
+        "count": 0,
+        "n_unresolved_tiles": 66,
+        "unresolved_volume_fraction": 0.5000000002017777,
+        "tiles": 135,
+        "equilibria": [],
+        "certified": false,
+        "symbolic_precondition": false,
+        "time_s": 0.0647874589994899,
+        "signature": null,
+        "regime": null,
+        "failure": "count_incomplete"
+      },
+      "wall_s": 0.06482312499974796,
+      "valid": true
+    }
+  ],
+  "total": 36,
+  "certified": 22,
+  "wrong": 0,
+  "unknown": 14
+}
